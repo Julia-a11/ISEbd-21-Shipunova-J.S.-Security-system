@@ -73,7 +73,7 @@ namespace SecuritySystemView
             CalcSum();
         }
 
-        private void comboBoxOrder_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBoxSecure_SelectedIndexChanged(object sender, EventArgs e)
         {
             CalcSum();
         }
