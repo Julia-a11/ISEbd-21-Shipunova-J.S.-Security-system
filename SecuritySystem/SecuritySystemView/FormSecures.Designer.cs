@@ -33,8 +33,8 @@ namespace SecuritySystemView
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
-            this.dataGridViewSecures = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecures)).BeginInit();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonRefresh
@@ -81,17 +81,17 @@ namespace SecuritySystemView
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
-            // dataGridViewSecures
+            // dataGridView
             // 
-            this.dataGridViewSecures.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridViewSecures.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewSecures.Location = new System.Drawing.Point(2, 2);
-            this.dataGridViewSecures.Name = "dataGridViewSecures";
-            this.dataGridViewSecures.ReadOnly = true;
-            this.dataGridViewSecures.RowHeadersVisible = false;
-            this.dataGridViewSecures.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewSecures.Size = new System.Drawing.Size(429, 356);
-            this.dataGridViewSecures.TabIndex = 5;
+            this.dataGridView.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Location = new System.Drawing.Point(2, 2);
+            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.ReadOnly = true;
+            this.dataGridView.RowHeadersVisible = false;
+            this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView.Size = new System.Drawing.Size(429, 356);
+            this.dataGridView.TabIndex = 5;
             // 
             // FormSecures
             // 
@@ -102,11 +102,11 @@ namespace SecuritySystemView
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonUpdate);
             this.Controls.Add(this.buttonAdd);
-            this.Controls.Add(this.dataGridViewSecures);
+            this.Controls.Add(this.dataGridView);
             this.Name = "FormSecures";
             this.Text = "Комплектации";
             this.Load += new System.EventHandler(this.FormSecures_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecures)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -117,6 +117,6 @@ namespace SecuritySystemView
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonUpdate;
         private System.Windows.Forms.Button buttonAdd;
-        private System.Windows.Forms.DataGridView dataGridViewSecures;
+        private System.Windows.Forms.DataGridView dataGridView;
     }
 }

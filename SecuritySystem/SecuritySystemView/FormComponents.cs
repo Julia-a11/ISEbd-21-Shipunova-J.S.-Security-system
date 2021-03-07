@@ -4,6 +4,7 @@ using System;
 using System.Windows.Forms;
 using Unity;
 
+
 namespace SecuritySystemView
 {
     public partial class FormComponents : Form
@@ -31,9 +32,9 @@ namespace SecuritySystemView
                 var list = logic.Read(null);
                 if (list != null)
                 {
-                    dataGridViewComponents.DataSource = list;
-                    dataGridViewComponents.Columns[0].Visible = false;
-                    dataGridViewComponents.Columns[1].AutoSizeMode =
+                    dataGridView.DataSource = list;
+                    dataGridView.Columns[0].Visible = false;
+                    dataGridView.Columns[1].AutoSizeMode =
                     DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
@@ -55,10 +56,10 @@ namespace SecuritySystemView
 
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
-            if (dataGridViewComponents.SelectedRows.Count == 1)
+            if (dataGridView.SelectedRows.Count == 1)
             {
                 var form = Container.Resolve<FormComponent>();
-                form.Id = Convert.ToInt32(dataGridViewComponents.SelectedRows[0].Cells[0].Value);
+                form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     LoadData();
@@ -68,13 +69,13 @@ namespace SecuritySystemView
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            if (dataGridViewComponents.SelectedRows.Count == 1)
+            if (dataGridView.SelectedRows.Count == 1)
             {
                 if (MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButtons.YesNo,
                MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     int id =
-                   Convert.ToInt32(dataGridViewComponents.SelectedRows[0].Cells[0].Value);
+                   Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
                         logic.Delete(new ComponentBindingModel { Id = id });

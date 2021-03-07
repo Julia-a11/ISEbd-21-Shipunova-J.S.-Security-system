@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using SecuritySystemBusinessLogic.BindingModels;
 using SecuritySystemBusinessLogic.BusinessLogics;
+using System;
 using System.Windows.Forms;
 using Unity;
 
@@ -31,10 +36,10 @@ namespace SecuritySystemView
                 var list = _orderLogic.Read(null);
                 if (list != null)
                 {
-                    dataGridViewOrders.DataSource = list;
-                    dataGridViewOrders.Columns[0].Visible = false;
-                    dataGridViewOrders.Columns[1].Visible = false;
-                    dataGridViewOrders.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView.DataSource = list;
+                    dataGridView.Columns[0].Visible = false;
+                    dataGridView.Columns[1].Visible = false;
+                    dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
             catch (Exception ex)
@@ -50,7 +55,7 @@ namespace SecuritySystemView
             form.ShowDialog();
         }
 
-        private void комплектацииToolStripMenuItem_Click(object sender, EventArgs e)
+        private void изделияToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormSecures>();
             form.ShowDialog();
@@ -65,9 +70,9 @@ namespace SecuritySystemView
 
         private void buttonTakeOrderInWork_Click(object sender, EventArgs e)
         {
-            if (dataGridViewOrders.SelectedRows.Count == 1)
+            if (dataGridView.SelectedRows.Count == 1)
             {
-                int id = Convert.ToInt32(dataGridViewOrders.SelectedRows[0].Cells[0].Value);
+                int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
                     _orderLogic.TakeOrderInWork(new ChangeStatusBindingModel
@@ -87,7 +92,7 @@ namespace SecuritySystemView
         private void buttonOrderReady_Click(object sender, EventArgs e)
         {
             {
-                int id = Convert.ToInt32(dataGridViewOrders.SelectedRows[0].Cells[0].Value);
+                int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
                     _orderLogic.FinishOrder(new ChangeStatusBindingModel
@@ -106,9 +111,9 @@ namespace SecuritySystemView
 
         private void buttonOrderPayed_Click(object sender, EventArgs e)
         {
-            if (dataGridViewOrders.SelectedRows.Count == 1)
+            if (dataGridView.SelectedRows.Count == 1)
             {
-                int id = Convert.ToInt32(dataGridViewOrders.SelectedRows[0].Cells[0].Value);
+                int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
                     _orderLogic.PayOrder(new ChangeStatusBindingModel { OrderId = id });

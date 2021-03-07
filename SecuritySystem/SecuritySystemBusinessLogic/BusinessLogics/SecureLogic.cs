@@ -9,7 +9,6 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
     public class SecureLogic
     {
         private readonly ISecureStorage _secureStorage;
-
         public SecureLogic(ISecureStorage secureStorage)
         {
             _secureStorage = secureStorage;
@@ -23,7 +22,8 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             }
             if (model.Id.HasValue)
             {
-                return new List<SecureViewModel> { _secureStorage.GetElement(model) };
+                return new List<SecureViewModel> { _secureStorage.GetElement(model)
+};
             }
             return _secureStorage.GetFilteredList(model);
         }
@@ -32,9 +32,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
         {
             var element = _secureStorage.GetElement(new SecureBindingModel
             {
-                SecureName = model.SecureName,
-                Price = model.Price,
-                SecureComponents = model.SecureComponents
+                SecureName = model.SecureName
             });
             if (element != null && element.Id != model.Id)
             {
@@ -58,9 +56,10 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             });
             if (element == null)
             {
-                throw new Exception("Комплектация не найдена");
+                throw new Exception("Элемент не найден");
             }
             _secureStorage.Delete(model);
         }
     }
 }
+

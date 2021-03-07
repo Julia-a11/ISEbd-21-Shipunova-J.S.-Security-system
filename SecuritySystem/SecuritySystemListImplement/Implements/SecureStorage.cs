@@ -1,13 +1,13 @@
 ﻿using SecuritySystemBusinessLogic.BindingModels;
 using SecuritySystemBusinessLogic.Interfaces;
 using SecuritySystemBusinessLogic.ViewModels;
-using SecuritySystemListImplement.Models;
+using SecuritySystemFileImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 
-namespace SecuritySystemListImplement.Implements
+namespace SecuritySystemFileImplement.Implements
 {
     public class SecureStorage : ISecureStorage
     {
@@ -91,7 +91,7 @@ namespace SecuritySystemListImplement.Implements
             }
             if (tempSecure == null)
             {
-                throw new Exception("Комплектация не найдена");
+                throw new Exception("Элемент не найден");
             }
             CreateModel(model, tempSecure);
         }
@@ -106,13 +106,14 @@ namespace SecuritySystemListImplement.Implements
                     return;
                 }
             }
-            throw new Exception("Комплектация не найдена");
+            throw new Exception("Элемент не найден");
         }
 
         private Secure CreateModel(SecureBindingModel model, Secure secure)
         {
             secure.SecureName = model.SecureName;
             secure.Price = model.Price;
+            // удаляем убранные
             foreach (var key in secure.SecureComponents.Keys.ToList())
             {
                 if (!model.SecureComponents.ContainsKey(key))
@@ -120,6 +121,7 @@ namespace SecuritySystemListImplement.Implements
                     secure.SecureComponents.Remove(key);
                 }
             }
+            // обновляем существуюущие и добавляем новые
             foreach (var component in model.SecureComponents)
             {
                 if (secure.SecureComponents.ContainsKey(component.Key))
@@ -138,6 +140,7 @@ namespace SecuritySystemListImplement.Implements
 
         private SecureViewModel CreateModel(Secure secure)
         {
+            // требуется дополнительно получить список компонентов для изделия с названиями и их количество
             Dictionary<int, (string, int)> secureComponents = new Dictionary<int, (string, int)>();
           
             foreach (var secureComponent in secure.SecureComponents)

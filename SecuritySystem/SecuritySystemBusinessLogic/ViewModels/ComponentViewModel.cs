@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 
+
 namespace SecuritySystemBusinessLogic.ViewModels
 {
     // Компонент, требуемый для изготовления изделия

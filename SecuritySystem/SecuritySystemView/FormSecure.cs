@@ -22,10 +22,10 @@ namespace SecuritySystemView
         
         private Dictionary<int, (string, int)> secureComponents;
        
-        public FormSecure(SecureLogic logic)
+        public FormSecure(SecureLogic service)
         {
             InitializeComponent();
-            this.logic = logic;
+            this.logic = service;
         }
 
         private void FormSecure_Load(object sender, EventArgs e)
@@ -64,10 +64,10 @@ namespace SecuritySystemView
             {
                 if (secureComponents != null)
                 {
-                    dataGridViewComponents.Rows.Clear();
+                    dataGridView.Rows.Clear();
                     foreach (var pc in secureComponents)
                     {
-                        dataGridViewComponents.Rows.Add(new object[] { pc.Key, pc.Value.Item1, pc.Value.Item2 });
+                        dataGridView.Rows.Add(new object[] { pc.Key, pc.Value.Item1, pc.Value.Item2 });
                     }
                 }
             }
@@ -97,10 +97,10 @@ namespace SecuritySystemView
 
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
-            if (dataGridViewComponents.SelectedRows.Count == 1)
+            if (dataGridView.SelectedRows.Count == 1)
             {
                 var form = Container.Resolve<FormSecureComponent>();
-                int id = Convert.ToInt32(dataGridViewComponents.SelectedRows[0].Cells[0].Value);
+                int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 form.Id = id;
                 form.Count = secureComponents[id].Item2;
                 if (form.ShowDialog() == DialogResult.OK)
@@ -113,14 +113,15 @@ namespace SecuritySystemView
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            if (dataGridViewComponents.SelectedRows.Count == 1)
+            if (dataGridView.SelectedRows.Count == 1)
             {
                 if (MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButtons.YesNo,
                MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     try
                     {
-                        secureComponents.Remove(Convert.ToInt32(dataGridViewComponents.SelectedRows[0].Cells[0].Value));
+
+                        secureComponents.Remove(Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value));
                     }
                     catch (Exception ex)
                     {
