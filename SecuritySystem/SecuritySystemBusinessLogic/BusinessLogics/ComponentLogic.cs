@@ -4,12 +4,12 @@ using SecuritySystemBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 
+
 namespace SecuritySystemBusinessLogic.BusinessLogics
 {
     public class ComponentLogic
     {
         private readonly IComponentStorage _componentStorage;
-
         public ComponentLogic(IComponentStorage componentStorage)
         {
             _componentStorage = componentStorage;
@@ -23,7 +23,8 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             }
             if (model.Id.HasValue)
             {
-                return new List<ComponentViewModel> { _componentStorage.GetElement(model) };
+                return new List<ComponentViewModel> { _componentStorage.GetElement(model)
+};
             }
             return _componentStorage.GetFilteredList(model);
         }
@@ -52,11 +53,12 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
         {
             var element = _componentStorage.GetElement(new ComponentBindingModel
             {
-                Id = model.Id
+                Id =
+           model.Id
             });
             if (element == null)
             {
-                throw new Exception("Компонент не найден");
+                throw new Exception("Элемент не найден");
             }
             _componentStorage.Delete(model);
         }

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 
+
 namespace SecuritySystemBusinessLogic.BindingModels
 {
-    // Комплектация, изготавливаемая в магазине
+    // Изделие, изготавливаемое в магазине
     public class SecureBindingModel
     {
         public int? Id { get; set; }
@@ -14,3 +15,4 @@ namespace SecuritySystemBusinessLogic.BindingModels
         public Dictionary<int, (string, int)> SecureComponents { get; set; }
     }
 }
+

@@ -47,7 +47,8 @@ namespace SecuritySystemView
 
         private void CalcSum()
         {
-            if (comboBoxSecure.SelectedValue != null && !string.IsNullOrEmpty(textBoxCount.Text))
+            if (comboBoxSecure.SelectedValue != null &&
+           !string.IsNullOrEmpty(textBoxCount.Text))
             {
                 try
                 {
@@ -66,6 +67,8 @@ namespace SecuritySystemView
                    MessageBoxIcon.Error);
                 }
             }
+
+
         }
 
         private void textBoxCount_TextChanged(object sender, EventArgs e)
@@ -73,7 +76,7 @@ namespace SecuritySystemView
             CalcSum();
         }
 
-        private void comboBoxSecure_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBoxOrder_SelectedIndexChanged(object sender, EventArgs e)
         {
             CalcSum();
         }

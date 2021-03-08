@@ -1,6 +1,7 @@
 ﻿using SecuritySystemBusinessLogic.Enums;
 using System;
 
+
 namespace SecuritySystemBusinessLogic.BindingModels
 {
     // Заказ
@@ -21,3 +22,5 @@ namespace SecuritySystemBusinessLogic.BindingModels
         public DateTime? DateImplement { get; set; }
     }
 }
+
+    

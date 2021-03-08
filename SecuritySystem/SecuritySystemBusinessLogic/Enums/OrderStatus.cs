@@ -1,4 +1,8 @@
-﻿namespace SecuritySystemBusinessLogic.Enums
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace SecuritySystemBusinessLogic.Enums
 {
     public enum  OrderStatus
     {

@@ -1,7 +1,7 @@
 ﻿
 namespace SecuritySystemView
 {
-    partial class FormSecures
+    partial class FormStoreHouses
     {
         /// <summary>
         /// Required designer variable.
@@ -40,7 +40,7 @@ namespace SecuritySystemView
             // buttonRefresh
             // 
             this.buttonRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonRefresh.Location = new System.Drawing.Point(464, 153);
+            this.buttonRefresh.Location = new System.Drawing.Point(464, 154);
             this.buttonRefresh.Name = "buttonRefresh";
             this.buttonRefresh.Size = new System.Drawing.Size(75, 23);
             this.buttonRefresh.TabIndex = 9;
@@ -51,7 +51,7 @@ namespace SecuritySystemView
             // buttonDelete
             // 
             this.buttonDelete.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonDelete.Location = new System.Drawing.Point(464, 114);
+            this.buttonDelete.Location = new System.Drawing.Point(464, 115);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(75, 23);
             this.buttonDelete.TabIndex = 8;
@@ -62,7 +62,7 @@ namespace SecuritySystemView
             // buttonUpdate
             // 
             this.buttonUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonUpdate.Location = new System.Drawing.Point(464, 70);
+            this.buttonUpdate.Location = new System.Drawing.Point(464, 71);
             this.buttonUpdate.Name = "buttonUpdate";
             this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
             this.buttonUpdate.TabIndex = 7;
@@ -73,7 +73,7 @@ namespace SecuritySystemView
             // buttonAdd
             // 
             this.buttonAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonAdd.Location = new System.Drawing.Point(464, 32);
+            this.buttonAdd.Location = new System.Drawing.Point(464, 33);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonAdd.TabIndex = 6;
@@ -85,7 +85,7 @@ namespace SecuritySystemView
             // 
             this.dataGridView.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(2, 2);
+            this.dataGridView.Location = new System.Drawing.Point(2, 3);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowHeadersVisible = false;
@@ -93,19 +93,19 @@ namespace SecuritySystemView
             this.dataGridView.Size = new System.Drawing.Size(429, 356);
             this.dataGridView.TabIndex = 5;
             // 
-            // FormSecures
+            // FormStoreHouses
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 370);
+            this.ClientSize = new System.Drawing.Size(581, 371);
             this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonUpdate);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.dataGridView);
-            this.Name = "FormSecures";
-            this.Text = "Комплектации";
-            this.Load += new System.EventHandler(this.FormSecures_Load);
+            this.Name = "FormStoreHouses";
+            this.Text = "Склады";
+            this.Load += new System.EventHandler(this.FormStoreHouses_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

@@ -6,20 +6,20 @@ using Unity;
 
 namespace SecuritySystemView
 {
-    public partial class FormSecures : Form
+    public partial class FormStoreHouses : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
 
-        private readonly SecureLogic logic;
+        private readonly StoreHouseLogic logic;
 
-        public FormSecures(SecureLogic logic)
+        public FormStoreHouses(StoreHouseLogic logic)
         {
             InitializeComponent();
             this.logic = logic;
         }
 
-        private void FormSecures_Load(object sender, EventArgs e)
+        private void FormStoreHouses_Load(object sender, EventArgs e)
         {
             LoadData();
         }
@@ -35,7 +35,7 @@ namespace SecuritySystemView
                     dataGridView.Columns[0].Visible = false;
                     dataGridView.Columns[1].AutoSizeMode =
                     DataGridViewAutoSizeColumnMode.Fill;
-                    dataGridView.Columns[3].Visible = false;
+                    dataGridView.Columns[4].Visible = false;
                 }
             }
             catch (Exception ex)
@@ -47,7 +47,7 @@ namespace SecuritySystemView
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormSecure>();
+            var form = Container.Resolve<FormStoreHouse>();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 LoadData();
@@ -58,7 +58,7 @@ namespace SecuritySystemView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                var form = Container.Resolve<FormSecure>();
+                var form = Container.Resolve<FormStoreHouse>();
                 form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
@@ -78,7 +78,7 @@ namespace SecuritySystemView
                    Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        logic.Delete(new SecureBindingModel { Id = id });
+                        logic.Delete(new StoreHouseBindingModel { Id = id });
                     }
                     catch (Exception ex)
                     {
@@ -96,5 +96,3 @@ namespace SecuritySystemView
         }
     }
 }
-
-

@@ -33,13 +33,17 @@ namespace SecuritySystemView
             currentContainer.RegisterType<IOrderStorage, OrderStorage>(new HierarchicalLifetimeManager());
            
             currentContainer.RegisterType<ISecureStorage, SecureStorage>(new HierarchicalLifetimeManager());
-           
+
+            currentContainer.RegisterType<IStoreHouseStorage, StoreHouseStorage>(new HierarchicalLifetimeManager());
+
             currentContainer.RegisterType<ComponentLogic>(new HierarchicalLifetimeManager());
             
             currentContainer.RegisterType<OrderLogic>(new HierarchicalLifetimeManager());
             
             currentContainer.RegisterType<SecureLogic>(new HierarchicalLifetimeManager());
-          
+
+            currentContainer.RegisterType<StoreHouseLogic>(new HierarchicalLifetimeManager());
+
             return currentContainer;
         }
     }

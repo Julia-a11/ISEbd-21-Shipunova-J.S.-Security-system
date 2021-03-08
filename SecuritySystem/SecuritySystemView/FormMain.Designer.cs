@@ -33,31 +33,35 @@ namespace SecuritySystemView
             this.справочникToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.компонентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.комплектацииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dataGridViewOrders = new System.Windows.Forms.DataGridView();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
             this.buttonCreateOrder = new System.Windows.Forms.Button();
             this.buttonTakeOrderInWork = new System.Windows.Forms.Button();
             this.buttonOrderReady = new System.Windows.Forms.Button();
             this.buttonOrderPayed = new System.Windows.Forms.Button();
             this.buttonRefresh = new System.Windows.Forms.Button();
+            this.складыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.пополнениеСкладаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrders)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.справочникToolStripMenuItem});
+            this.справочникToolStripMenuItem,
+            this.пополнениеСкладаToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(917, 24);
             this.menuStrip.TabIndex = 0;
-            this.menuStrip.Text = "menuStrip";
+            this.menuStrip.Text = "menuStrip1";
             // 
             // справочникToolStripMenuItem
             // 
             this.справочникToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.компонентыToolStripMenuItem,
-            this.комплектацииToolStripMenuItem});
+            this.комплектацииToolStripMenuItem,
+            this.складыToolStripMenuItem});
             this.справочникToolStripMenuItem.Name = "справочникToolStripMenuItem";
             this.справочникToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
             this.справочникToolStripMenuItem.Text = "Справочник";
@@ -76,17 +80,17 @@ namespace SecuritySystemView
             this.комплектацииToolStripMenuItem.Text = "Комплектации";
             this.комплектацииToolStripMenuItem.Click += new System.EventHandler(this.комплектацииToolStripMenuItem_Click);
             // 
-            // dataGridViewOrders
+            // dataGridView
             // 
-            this.dataGridViewOrders.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridViewOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewOrders.Location = new System.Drawing.Point(0, 27);
-            this.dataGridViewOrders.Name = "dataGridViewOrders";
-            this.dataGridViewOrders.ReadOnly = true;
-            this.dataGridViewOrders.RowHeadersVisible = false;
-            this.dataGridViewOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewOrders.Size = new System.Drawing.Size(685, 358);
-            this.dataGridViewOrders.TabIndex = 1;
+            this.dataGridView.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Location = new System.Drawing.Point(0, 27);
+            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.ReadOnly = true;
+            this.dataGridView.RowHeadersVisible = false;
+            this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView.Size = new System.Drawing.Size(685, 358);
+            this.dataGridView.TabIndex = 1;
             // 
             // buttonCreateOrder
             // 
@@ -143,6 +147,20 @@ namespace SecuritySystemView
             this.buttonRefresh.UseVisualStyleBackColor = true;
             this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
             // 
+            // складыToolStripMenuItem
+            // 
+            this.складыToolStripMenuItem.Name = "складыToolStripMenuItem";
+            this.складыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.складыToolStripMenuItem.Text = "Склады";
+            this.складыToolStripMenuItem.Click += new System.EventHandler(this.складыToolStripMenuItem_Click);
+            // 
+            // пополнениеСкладаToolStripMenuItem
+            // 
+            this.пополнениеСкладаToolStripMenuItem.Name = "пополнениеСкладаToolStripMenuItem";
+            this.пополнениеСкладаToolStripMenuItem.Size = new System.Drawing.Size(129, 20);
+            this.пополнениеСкладаToolStripMenuItem.Text = "Пополнение склада";
+            this.пополнениеСкладаToolStripMenuItem.Click += new System.EventHandler(this.пополнениеСкладаToolStripMenuItem_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -153,7 +171,7 @@ namespace SecuritySystemView
             this.Controls.Add(this.buttonOrderReady);
             this.Controls.Add(this.buttonTakeOrderInWork);
             this.Controls.Add(this.buttonCreateOrder);
-            this.Controls.Add(this.dataGridViewOrders);
+            this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
             this.Name = "FormMain";
@@ -161,7 +179,7 @@ namespace SecuritySystemView
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrders)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,11 +191,13 @@ namespace SecuritySystemView
         private System.Windows.Forms.ToolStripMenuItem справочникToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem компонентыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem комплектацииToolStripMenuItem;
-        private System.Windows.Forms.DataGridView dataGridViewOrders;
+        private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button buttonCreateOrder;
         private System.Windows.Forms.Button buttonTakeOrderInWork;
         private System.Windows.Forms.Button buttonOrderReady;
         private System.Windows.Forms.Button buttonOrderPayed;
         private System.Windows.Forms.Button buttonRefresh;
+        private System.Windows.Forms.ToolStripMenuItem складыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem пополнениеСкладаToolStripMenuItem;
     }
 }

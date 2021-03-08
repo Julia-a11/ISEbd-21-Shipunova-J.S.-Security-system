@@ -5,6 +5,8 @@ using SecuritySystemListImplement.Models;
 using System;
 using System.Collections.Generic;
 
+
+
 namespace SecuritySystemListImplement.Implements
 {
     public class ComponentStorage : IComponentStorage
@@ -85,7 +87,7 @@ namespace SecuritySystemListImplement.Implements
             }
             if (tempComponent == null)
             {
-                throw new Exception("Компонент не найден");
+                throw new Exception("Элемент не найден");
             }
             CreateModel(model, tempComponent);
         }
@@ -100,7 +102,7 @@ namespace SecuritySystemListImplement.Implements
                     return;
                 }
             }
-            throw new Exception("Компонент не найден");
+            throw new Exception("Элемент не найден");
         }
 
         private Component CreateModel(ComponentBindingModel model, Component component)
@@ -117,5 +119,6 @@ namespace SecuritySystemListImplement.Implements
                 ComponentName = component.ComponentName
             };
         }
+
     }
 }
