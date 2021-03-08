@@ -78,7 +78,7 @@ namespace SecuritySystemView
             this.комплектацииToolStripMenuItem.Name = "комплектацииToolStripMenuItem";
             this.комплектацииToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.комплектацииToolStripMenuItem.Text = "Комплектации";
-            this.комплектацииToolStripMenuItem.Click += new System.EventHandler(this.комплектацииToolStripMenuItem_Click);
+            this.комплектацииToolStripMenuItem.Click += new System.EventHandler(this.изделияToolStripMenuItem_Click);
             // 
             // dataGridView
             // 

@@ -1,9 +1,10 @@
 ﻿using SecuritySystemBusinessLogic.Enums;
 using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace SecuritySystemFileImplement.Models
 {
-    // Заказ
     public class Order
     {
         public int Id { get; set; }

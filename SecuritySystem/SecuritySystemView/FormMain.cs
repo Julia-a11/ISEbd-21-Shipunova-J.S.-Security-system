@@ -55,7 +55,7 @@ namespace SecuritySystemView
             form.ShowDialog();
         }
 
-        private void комплектацииToolStripMenuItem_Click(object sender, EventArgs e)
+        private void изделияToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormSecures>();
             form.ShowDialog();

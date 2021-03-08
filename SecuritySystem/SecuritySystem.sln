@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecuritySystemView", "SecuritySystemView\SecuritySystemView.csproj", "{D6A5D642-4B1E-4DED-B0DF-F66214FB09DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecuritySystemBusinessLogic", "SecuritySystemBusinessLogic\SecuritySystemBusinessLogic.csproj", "{BE0AA465-38A3-4CF7-8780-AF035D01416B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecuritySystemBusinessLogic", "SecuritySystemBusinessLogic\SecuritySystemBusinessLogic.csproj", "{BE0AA465-38A3-4CF7-8780-AF035D01416B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecuritySystemListImplement", "SecuritySystemListImplement\SecuritySystemListImplement.csproj", "{09D113C9-2B8C-46D8-BD01-B1C6F898831F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecuritySystemListImplement", "SecuritySystemListImplement\SecuritySystemListImplement.csproj", "{09D113C9-2B8C-46D8-BD01-B1C6F898831F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecuritySystemFileImplement", "SecuritySystemFileImplement\SecuritySystemFileImplement.csproj", "{F19940ED-5246-4B78-A4C4-68C681680552}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{09D113C9-2B8C-46D8-BD01-B1C6F898831F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09D113C9-2B8C-46D8-BD01-B1C6F898831F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09D113C9-2B8C-46D8-BD01-B1C6F898831F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F19940ED-5246-4B78-A4C4-68C681680552}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F19940ED-5246-4B78-A4C4-68C681680552}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F19940ED-5246-4B78-A4C4-68C681680552}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F19940ED-5246-4B78-A4C4-68C681680552}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
