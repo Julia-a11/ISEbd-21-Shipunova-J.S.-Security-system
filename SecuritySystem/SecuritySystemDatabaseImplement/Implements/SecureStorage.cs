@@ -16,8 +16,11 @@ namespace SecuritySystemDatabaseImplement.Implements
         {
             secure.SecureName = model.SecureName;
             secure.Price = model.Price;
-            context.Secures.Add(secure);
-            context.SaveChanges();
+            if (secure.Id == 0)
+            {
+                context.Secures.Add(secure);
+                context.SaveChanges();
+            }
 
             if (model.Id.HasValue)
             {
@@ -163,11 +166,11 @@ namespace SecuritySystemDatabaseImplement.Implements
                 {
                     try
                     {
-                        var Secure = context.Secures.FirstOrDefault(rec => rec.Id == model.Id);
+                        var secure = context.Secures.FirstOrDefault(rec => rec.Id == model.Id);
 
-                        if (Secure == null)
+                        if (secure == null)
                         {
-                            throw new Exception("Пицца не найдена");
+                            throw new Exception("Компонент не найден");
                         }
 
                         context.Secures.Add(CreateModel(model, new Secure(), context));
