@@ -64,10 +64,10 @@ namespace SecuritySystemView
             {
                 if (storeHouseComponents != null)
                 {
-                    dataGridView.Rows.Clear();
+                    dataGridViewComponents.Rows.Clear();
                     foreach (var storeHouseComponent in storeHouseComponents)
                     {
-                        dataGridView.Rows.Add(new object[] { storeHouseComponent.Key, storeHouseComponent.Value.Item1, storeHouseComponent.Value.Item2 });
+                        dataGridViewComponents.Rows.Add(new object[] { storeHouseComponent.Key, storeHouseComponent.Value.Item1, storeHouseComponent.Value.Item2 });
                     }
                 }
             }

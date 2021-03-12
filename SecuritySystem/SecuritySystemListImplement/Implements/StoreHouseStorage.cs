@@ -176,7 +176,15 @@ namespace SecuritySystemListImplement.Implements
                 Console.WriteLine(storehouse.StoreHouseName + " " + storehouse.ResponsiblePersonFCS + " " + storehouse.DateCreate);
                 foreach (KeyValuePair<int, int> keyValue in storehouse.StoreHouseComponents)
                 {
-                    string componentName = source.Components.FirstOrDefault(component => component.Id == keyValue.Key).ComponentName;
+                    string componentName = null;
+                    foreach (var component in source.Components)
+                    {
+                        if (component.Id == keyValue.Key)
+                        {
+                            componentName = component.ComponentName;
+                            break;
+                        }
+                    }
                     Console.WriteLine(componentName + " " + keyValue.Value);
                 }
             }

@@ -122,6 +122,7 @@ namespace SecuritySystemListImplement.Implements
                 if (secure.Id == order.SecureId)
                 {
                     secureName = secure.SecureName;
+                    break;
                 }
             }
             return new OrderViewModel
