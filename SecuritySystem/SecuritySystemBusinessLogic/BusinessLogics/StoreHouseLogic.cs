@@ -3,7 +3,6 @@ using SecuritySystemBusinessLogic.Interfaces;
 using SecuritySystemBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SecuritySystemBusinessLogic.BusinessLogics
 {
@@ -18,8 +17,6 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             _storeHouseStorage = storeHouseStorage;
             _componentStorage = componentStorage;
         }
-
-
 
         public List<StoreHouseViewModel> Read(StoreHouseBindingModel model)
         {
@@ -56,13 +53,13 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
 
         public void Delete(StoreHouseBindingModel model)
         {
-            var element = _storeHouseStorage.GetElement(new StoreHouseBindingModel
+            var storeHouse = _storeHouseStorage.GetElement(new StoreHouseBindingModel
             {
                 Id = model.Id
             });
-            if (element == null)
+            if (storeHouse == null)
             {
-                throw new Exception("Элемент не найден");
+                throw new Exception("Склад не найден");
             }
             _storeHouseStorage.Delete(model);
         }
@@ -78,14 +75,17 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             {
                 Id = model.ComponentId
             });
+
             if (storeHouse == null)
             {
                 throw new Exception("Не найден склад");
             }
+
             if (component == null)
             {
                 throw new Exception("Не найден компонент");
             }
+
             if (storeHouse.StoreHouseComponents.ContainsKey(model.ComponentId))
             {
                 storeHouse.StoreHouseComponents[model.ComponentId] = 
@@ -95,6 +95,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             {
                 storeHouse.StoreHouseComponents.Add(component.Id, (component.ComponentName, model.Count));
             }
+
             _storeHouseStorage.Update(new StoreHouseBindingModel
             {
                 Id = storeHouse.Id,

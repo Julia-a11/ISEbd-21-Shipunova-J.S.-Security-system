@@ -91,7 +91,7 @@ namespace SecuritySystemListImplement.Implements
             }
             if (tempSecure == null)
             {
-                throw new Exception("Элемент не найден");
+                throw new Exception("Комплектация не найдена");
             }
             CreateModel(model, tempSecure);
         }
@@ -106,14 +106,13 @@ namespace SecuritySystemListImplement.Implements
                     return;
                 }
             }
-            throw new Exception("Элемент не найден");
+            throw new Exception("Комплектация не найдена");
         }
 
         private Secure CreateModel(SecureBindingModel model, Secure secure)
         {
             secure.SecureName = model.SecureName;
             secure.Price = model.Price;
-            // удаляем убранные
             foreach (var key in secure.SecureComponents.Keys.ToList())
             {
                 if (!model.SecureComponents.ContainsKey(key))
@@ -121,7 +120,6 @@ namespace SecuritySystemListImplement.Implements
                     secure.SecureComponents.Remove(key);
                 }
             }
-            // обновляем существуюущие и добавляем новые
             foreach (var component in model.SecureComponents)
             {
                 if (secure.SecureComponents.ContainsKey(component.Key))
@@ -140,7 +138,6 @@ namespace SecuritySystemListImplement.Implements
 
         private SecureViewModel CreateModel(Secure secure)
         {
-            // требуется дополнительно получить список компонентов для изделия с названиями и их количество
             Dictionary<int, (string, int)> secureComponents = new Dictionary<int, (string, int)>();
           
             foreach (var secureComponent in secure.SecureComponents)

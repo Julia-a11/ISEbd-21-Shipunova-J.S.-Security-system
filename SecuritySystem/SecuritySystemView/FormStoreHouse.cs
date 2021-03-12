@@ -3,7 +3,6 @@ using SecuritySystemBusinessLogic.BusinessLogics;
 using SecuritySystemBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using Unity;
 
@@ -16,16 +15,16 @@ namespace SecuritySystemView
 
         public int Id { set { id = value; } }
 
-        private readonly StoreHouseLogic logic;
+        private readonly StoreHouseLogic storeHouseLogic;
 
         private int? id;
 
         private Dictionary<int, (string, int)> storeHouseComponents;
 
-        public FormStoreHouse(StoreHouseLogic storeHouselogic)
+        public FormStoreHouse(StoreHouseLogic storeHouseLogic)
         {
             InitializeComponent();
-            this.logic = storeHouselogic;
+            this.storeHouseLogic = storeHouseLogic;
         }
 
         private void FormStoreHouse_Load(object sender, EventArgs e)
@@ -34,10 +33,11 @@ namespace SecuritySystemView
             {
                 try
                 {
-                    StoreHouseViewModel view = logic.Read(new StoreHouseBindingModel
+                    StoreHouseViewModel view = storeHouseLogic.Read(new StoreHouseBindingModel
                     {
                         Id = id.Value
                     })?[0];
+
                     if (view != null)
                     {
                         textBoxName.Text = view.StoreHouseName;
@@ -78,7 +78,6 @@ namespace SecuritySystemView
             }
         }
 
-        
         private void buttonSave_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textBoxName.Text))
@@ -89,13 +88,13 @@ namespace SecuritySystemView
             }
             if (string.IsNullOrEmpty(textBoxFCS.Text))
             {
-                MessageBox.Show("Заполните цену", "Ошибка", MessageBoxButtons.OK,
+                MessageBox.Show("Заполните ФИО ответственного", "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
                 return;
             }
             try
             {
-                logic.CreateOrUpdate(new StoreHouseBindingModel
+                storeHouseLogic.CreateOrUpdate(new StoreHouseBindingModel
                 {
                     Id = id,
                     StoreHouseName = textBoxName.Text,

@@ -21,17 +21,14 @@ namespace SecuritySystemView
 
         public int StoreHouse
         {
-            get { return Convert.ToInt32(comboBoxComponent.SelectedValue); }
-            set { comboBoxComponent.SelectedValue = value; }
+            get { return Convert.ToInt32(comboBoxStoreHouse.SelectedValue); }
+            set { comboBoxStoreHouse.SelectedValue = value; }
         }
 
         public int Count
         {
             get { return Convert.ToInt32(textBoxCount.Text); }
-            set
-            {
-                textBoxCount.Text = value.ToString();
-            }
+            set { textBoxCount.Text = value.ToString(); }
         }
 
         private readonly StoreHouseLogic storeHouseLogic;
@@ -68,12 +65,14 @@ namespace SecuritySystemView
                MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             if (comboBoxComponent.SelectedValue == null)
             {
                 MessageBox.Show("Выберите компонент", "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
                 return;
             }
+
             if (comboBoxStoreHouse.SelectedValue == null)
             {
                 MessageBox.Show("Выберите склад", "Ошибка", MessageBoxButtons.OK,

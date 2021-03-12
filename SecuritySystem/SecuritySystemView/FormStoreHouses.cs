@@ -11,12 +11,12 @@ namespace SecuritySystemView
         [Dependency]
         public new IUnityContainer Container { get; set; }
 
-        private readonly StoreHouseLogic logic;
+        private readonly StoreHouseLogic storeHouseLogic;
 
-        public FormStoreHouses(StoreHouseLogic logic)
+        public FormStoreHouses(StoreHouseLogic storeHouseLogic)
         {
             InitializeComponent();
-            this.logic = logic;
+            this.storeHouseLogic = storeHouseLogic;
         }
 
         private void FormStoreHouses_Load(object sender, EventArgs e)
@@ -28,7 +28,7 @@ namespace SecuritySystemView
         {
             try
             {
-                var list = logic.Read(null);
+                var list = storeHouseLogic.Read(null);
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
@@ -78,7 +78,7 @@ namespace SecuritySystemView
                    Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        logic.Delete(new StoreHouseBindingModel { Id = id });
+                        storeHouseLogic.Delete(new StoreHouseBindingModel { Id = id });
                     }
                     catch (Exception ex)
                     {

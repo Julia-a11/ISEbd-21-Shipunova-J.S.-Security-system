@@ -91,7 +91,7 @@ namespace SecuritySystemView
             this.comboBoxSecure.Name = "comboBoxSecure";
             this.comboBoxSecure.Size = new System.Drawing.Size(240, 21);
             this.comboBoxSecure.TabIndex = 5;
-            this.comboBoxSecure.SelectedIndexChanged += new System.EventHandler(this.comboBoxOrder_SelectedIndexChanged);
+            this.comboBoxSecure.SelectedIndexChanged += new System.EventHandler(this.comboBoxSecure_SelectedIndexChanged);
             // 
             // buttonSave
             // 

@@ -4,7 +4,6 @@ using System;
 using System.Windows.Forms;
 using Unity;
 
-
 namespace SecuritySystemView
 {
     public partial class FormComponent : Form
