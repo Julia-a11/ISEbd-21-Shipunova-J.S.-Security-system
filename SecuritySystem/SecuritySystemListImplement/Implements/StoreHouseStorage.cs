@@ -178,6 +178,11 @@ namespace SecuritySystemListImplement.Implements
                 }
             }
         }
+
+        public bool CheckAndTake(int count, Dictionary<int, (string, int)> components)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

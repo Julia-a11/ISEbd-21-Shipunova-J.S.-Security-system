@@ -96,7 +96,7 @@ namespace SecuritySystemFileImplement.Implements
             {
                 Id = order.Id,
                 SecureId = order.SecureId,
-                SecureName = source.Secures.FirstOrDefault(secure => secure.Id == order.SecureId).SecureName,
+                SecureName = source.Secures.FirstOrDefault(secure => secure.Id == order.SecureId)?.SecureName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,
