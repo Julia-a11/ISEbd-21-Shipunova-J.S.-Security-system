@@ -4,7 +4,6 @@ using SecuritySystemBusinessLogic.ViewModels;
 using SecuritySystemFileImplement.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace SecuritySystemFileImplement.Implements
 {
@@ -116,6 +115,15 @@ namespace SecuritySystemFileImplement.Implements
 
         private OrderViewModel CreateModel(Order order)
         {
+            string secureName = null;
+            foreach (Secure secure in source.Secures)
+            {
+                if (secure.Id == order.SecureId)
+                {
+                    secureName = secure.SecureName;
+                    break;
+                }
+            }
             return new OrderViewModel
             {
                 Id = order.Id,
@@ -131,6 +139,3 @@ namespace SecuritySystemFileImplement.Implements
 
     }
 }
-
-
-
