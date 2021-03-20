@@ -30,6 +30,7 @@ namespace SecuritySystemFileImplement.Implements
             {
                 return null;
             }
+
             return source.Secures
                 .Where(rec => rec.SecureName.Contains(model.SecureName))
                 .Select(CreateModel)
@@ -51,35 +52,34 @@ namespace SecuritySystemFileImplement.Implements
         {
             int maxId = source.Secures.Count > 0 ? source.Components.Max(rec => rec.Id) : 0;
 
-            var element = new Secure
+            var secure = new Secure
             {
                 Id = maxId + 1,
-                SecureComponents = new
-                Dictionary<int, int>()
+                SecureComponents = new Dictionary<int, int>()
             };
-            source.Secures.Add(CreateModel(model, element));
+            source.Secures.Add(CreateModel(model, secure));
         }
 
         public void Update(SecureBindingModel model)
         {
-            var element = source.Secures.FirstOrDefault(rec => rec.Id == model.Id);
-            if (element != null)
+            var secure = source.Secures.FirstOrDefault(rec => rec.Id == model.Id);
+            if (secure == null)
             {
-                throw new Exception("Элемент не найден");
+                throw new Exception("Комплектация не найдена");
             }
-            CreateModel(model, element);
+            CreateModel(model, secure);
         }
 
         public void Delete(SecureBindingModel model)
         {
-            Secure element = source.Secures.FirstOrDefault(rec => rec.Id == model.Id);
-            if (element != null)
+            Secure secure = source.Secures.FirstOrDefault(rec => rec.Id == model.Id);
+            if (secure != null)
             {
-                source.Secures.Remove(element);
+                source.Secures.Remove(secure);
             }
             else
             {
-                throw new Exception("Элемент не найден");
+                throw new Exception("Комплектация не найдена");
             }
         }
 
@@ -87,7 +87,7 @@ namespace SecuritySystemFileImplement.Implements
         {
             secure.SecureName = model.SecureName;
             secure.Price = model.Price;
-            // удаляем убранные
+
             foreach (var key in secure.SecureComponents.Keys.ToList())
             {
                 if (!model.SecureComponents.ContainsKey(key))
@@ -95,7 +95,7 @@ namespace SecuritySystemFileImplement.Implements
                     secure.SecureComponents.Remove(key);
                 }
             }
-            // обновляем существующий и добавляем новые
+
             foreach (var component in model.SecureComponents)
             {
                 if (secure.SecureComponents.ContainsKey(component.Key))
@@ -118,8 +118,8 @@ namespace SecuritySystemFileImplement.Implements
                 SecureName = secure.SecureName,
                 Price = secure.Price,
                 SecureComponents = secure.SecureComponents
-                                .ToDictionary(recPc => recPc.Key, recPc =>
-                                (source.Components.FirstOrDefault(recC => recC.Id == recPc.Key)?.ComponentName, recPc.Value))
+                .ToDictionary(recPc => recPc.Key, recPc => (source.Components
+                .FirstOrDefault(recC => recC.Id == recPc.Key)?.ComponentName, recPc.Value))
             };
         }
     }

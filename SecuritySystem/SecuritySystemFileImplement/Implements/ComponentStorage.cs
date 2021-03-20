@@ -5,7 +5,6 @@ using SecuritySystemFileImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SecuritySystemFileImplement.Implements
 {
@@ -31,6 +30,7 @@ namespace SecuritySystemFileImplement.Implements
             {
                 return null;
             }
+
             return source.Components
                 .Where(rec => rec.ComponentName.Contains(model.ComponentName))
                 .Select(CreateModel)
@@ -43,6 +43,7 @@ namespace SecuritySystemFileImplement.Implements
             {
                 return null;
             }
+
             var component = source.Components
                 .FirstOrDefault(rec => rec.ComponentName == model.ComponentName ||
                 rec.Id == model.Id);
@@ -53,30 +54,31 @@ namespace SecuritySystemFileImplement.Implements
         {
             int maxId = source.Components.Count > 0 ? source.Components.Max(
                 rec => rec.Id) : 0;
-            var element = new Component { Id = maxId + 1 };
-            source.Components.Add(CreateModel(model, element));
+            var component = new Component { Id = maxId + 1 };
+            source.Components.Add(CreateModel(model, component));
         }
 
         public void Update(ComponentBindingModel model)
         {
-            var element = source.Components.FirstOrDefault(rec => rec.Id == model.Id);
-            if (element == null)
+            var component = source.Components.FirstOrDefault(rec => rec.Id == model.Id);
+            if (component == null)
             {
-                throw new Exception("Элемент не найден");
+                throw new Exception("Компонент не найден");
             }
-            CreateModel(model, element);
+
+            CreateModel(model, component);
         }
 
         public void Delete(ComponentBindingModel model)
         {
-            Component element = source.Components.FirstOrDefault(rec => rec.Id == model.Id);
-            if (element != null)
+            Component component = source.Components.FirstOrDefault(rec => rec.Id == model.Id);
+            if (component != null)
             {
-                source.Components.Remove(element);
+                source.Components.Remove(component);
             }
             else
             {
-                throw new Exception("Элемент не найден");
+                throw new Exception("Компонент не найден");
             }
         }
 
@@ -91,7 +93,7 @@ namespace SecuritySystemFileImplement.Implements
         {
             return new ComponentViewModel
             {
-                Id= component.Id,
+                Id = component.Id,
                 ComponentName = component.ComponentName
             };
         }

@@ -5,7 +5,6 @@ using SecuritySystemFileImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SecuritySystemFileImplement.Implements
 {
@@ -31,6 +30,7 @@ namespace SecuritySystemFileImplement.Implements
             {
                 return null;
             }
+
             return source.Orders
                 .Where(rec => rec.Id == model.Id)
                 .Select(CreateModel)
@@ -43,39 +43,40 @@ namespace SecuritySystemFileImplement.Implements
             {
                 return null;
             }
-            var Order = source.Orders
+
+            var order = source.Orders
                 .FirstOrDefault(rec => rec.Id == model.Id);
-            return Order != null ? CreateModel(Order) : null;
+            return order != null ? CreateModel(order) : null;
         }
 
         public void Insert(OrderBindingModel model)
         {
             int maxId = source.Orders.Count > 0 ? source.Orders.Max(
                 rec => rec.Id) : 0;
-            var element = new Order { Id = maxId + 1, DateCreate = DateTime.Now };
-            source.Orders.Add(CreateModel(model, element));
+            var order = new Order { Id = maxId + 1, DateCreate = DateTime.Now };
+            source.Orders.Add(CreateModel(model, order));
         }
 
         public void Update(OrderBindingModel model)
         {
-            var element = source.Orders.FirstOrDefault(rec => rec.Id == model.Id);
-            if (element == null)
+            var order = source.Orders.FirstOrDefault(rec => rec.Id == model.Id);
+            if (order == null)
             {
-                throw new Exception("Элемент не найден");
+                throw new Exception("Заказ не найден");
             }
-            CreateModel(model, element);
+            CreateModel(model, order);
         }
 
         public void Delete(OrderBindingModel model)
         {
-            Order element = source.Orders.FirstOrDefault(rec => rec.Id == model.Id);
-            if (element != null)
+            Order order = source.Orders.FirstOrDefault(rec => rec.Id == model.Id);
+            if (order != null)
             {
-                source.Orders.Remove(element);
+                source.Orders.Remove(order);
             }
             else
             {
-                throw new Exception("Элемент не найден");
+                throw new Exception("Заказ не найден");
             }
         }
 
@@ -96,7 +97,7 @@ namespace SecuritySystemFileImplement.Implements
             {
                 Id = order.Id,
                 SecureId = order.SecureId,
-                SecureName = source.Secures.FirstOrDefault(secure => secure.Id == order.SecureId).SecureName,
+                SecureName = source.Secures.FirstOrDefault(secure => secure.Id == order.SecureId)?.SecureName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,
