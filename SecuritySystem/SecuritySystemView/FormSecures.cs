@@ -31,10 +31,10 @@ namespace SecuritySystemView
                 var list = logic.Read(null);
                 if (list != null)
                 {
-                    dataGridView.DataSource = list;
-                    dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].AutoSizeMode =
-                    DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridViewSecures.DataSource = list;
+                    dataGridViewSecures.Columns[0].Visible = false;
+                    dataGridViewSecures.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridViewSecures.Columns[3].Visible = false;
                 }
             }
             catch (Exception ex)
@@ -55,10 +55,10 @@ namespace SecuritySystemView
 
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
-            if (dataGridView.SelectedRows.Count == 1)
+            if (dataGridViewSecures.SelectedRows.Count == 1)
             {
                 var form = Container.Resolve<FormSecure>();
-                form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
+                form.Id = Convert.ToInt32(dataGridViewSecures.SelectedRows[0].Cells[0].Value);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     LoadData();
@@ -68,13 +68,13 @@ namespace SecuritySystemView
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            if (dataGridView.SelectedRows.Count == 1)
+            if (dataGridViewSecures.SelectedRows.Count == 1)
             {
                 if (MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButtons.YesNo,
                MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     int id =
-                   Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
+                   Convert.ToInt32(dataGridViewSecures.SelectedRows[0].Cells[0].Value);
                     try
                     {
                         logic.Delete(new SecureBindingModel { Id = id });
@@ -95,5 +95,3 @@ namespace SecuritySystemView
         }
     }
 }
-
-

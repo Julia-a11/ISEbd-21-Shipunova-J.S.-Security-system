@@ -1,13 +1,11 @@
 ﻿using SecuritySystemBusinessLogic.BindingModels;
 using SecuritySystemBusinessLogic.Interfaces;
 using SecuritySystemBusinessLogic.ViewModels;
-using SecuritySystemFileImplement.Models;
+using SecuritySystemListImplement.Models;
 using System;
 using System.Collections.Generic;
 
-
-
-namespace SecuritySystemFileImplement.Implements
+namespace SecuritySystemListImplement.Implements
 {
     public class ComponentStorage : IComponentStorage
     {
@@ -87,7 +85,7 @@ namespace SecuritySystemFileImplement.Implements
             }
             if (tempComponent == null)
             {
-                throw new Exception("Элемент не найден");
+                throw new Exception("Компонент не найден");
             }
             CreateModel(model, tempComponent);
         }
@@ -102,7 +100,7 @@ namespace SecuritySystemFileImplement.Implements
                     return;
                 }
             }
-            throw new Exception("Элемент не найден");
+            throw new Exception("Компонент не найден");
         }
 
         private Component CreateModel(ComponentBindingModel model, Component component)
@@ -119,6 +117,5 @@ namespace SecuritySystemFileImplement.Implements
                 ComponentName = component.ComponentName
             };
         }
-
     }
 }

@@ -1,11 +1,11 @@
 ﻿using SecuritySystemBusinessLogic.BindingModels;
 using SecuritySystemBusinessLogic.Interfaces;
 using SecuritySystemBusinessLogic.ViewModels;
-using SecuritySystemFileImplement.Models;
+using SecuritySystemListImplement.Models;
 using System;
 using System.Collections.Generic;
 
-namespace SecuritySystemFileImplement.Implements
+namespace SecuritySystemListImplement.Implements
 {
     public class OrderStorage : IOrderStorage
     {
@@ -84,7 +84,7 @@ namespace SecuritySystemFileImplement.Implements
             }
             if (tempOrder == null)
             {
-                throw new Exception("Элемент не найден");
+                throw new Exception("Заказ не найден");
             }
             CreateModel(model, tempOrder);
         }
@@ -99,7 +99,7 @@ namespace SecuritySystemFileImplement.Implements
                     return;
                 }
             }
-            throw new Exception("Элемент не найден");
+            throw new Exception("Заказ не найден");
         }
 
         private Order CreateModel(OrderBindingModel model, Order order)
@@ -128,7 +128,7 @@ namespace SecuritySystemFileImplement.Implements
             {
                 Id = order.Id,
                 SecureId = order.SecureId,
-                SecureName = source.Secures.FirstOrDefault(secure => secure.Id == order.SecureId).SecureName,
+                SecureName = secureName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,
@@ -136,6 +136,5 @@ namespace SecuritySystemFileImplement.Implements
                 DateImplement = order.DateImplement
             };
         }
-
     }
 }
