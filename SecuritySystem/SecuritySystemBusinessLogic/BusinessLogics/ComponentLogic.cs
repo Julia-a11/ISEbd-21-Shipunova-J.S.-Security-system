@@ -4,7 +4,6 @@ using SecuritySystemBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 
-
 namespace SecuritySystemBusinessLogic.BusinessLogics
 {
     public class ComponentLogic

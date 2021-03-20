@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 
-
 namespace SecuritySystemBusinessLogic.BindingModels
 {
     // Изделие, изготавливаемое в магазине
@@ -15,4 +14,3 @@ namespace SecuritySystemBusinessLogic.BindingModels
         public Dictionary<int, (string, int)> SecureComponents { get; set; }
     }
 }
-
