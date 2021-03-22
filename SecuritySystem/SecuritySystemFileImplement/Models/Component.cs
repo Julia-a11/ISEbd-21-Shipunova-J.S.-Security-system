@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SecuritySystemFileImplement.Models
+﻿namespace SecuritySystemFileImplement.Models
 {
     public class Component
     {

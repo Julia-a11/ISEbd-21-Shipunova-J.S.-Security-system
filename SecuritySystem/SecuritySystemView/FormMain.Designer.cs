@@ -44,9 +44,9 @@ namespace SecuritySystemView
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrders)).BeginInit();
             this.SuspendLayout();
-            // 
+            //
             // menuStrip
-            // 
+            //
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.справочникToolStripMenuItem,
             this.пополнениеСкладаToolStripMenuItem});
@@ -55,9 +55,9 @@ namespace SecuritySystemView
             this.menuStrip.Size = new System.Drawing.Size(917, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip";
-            // 
+            //
             // справочникToolStripMenuItem
-            // 
+            //
             this.справочникToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.компонентыToolStripMenuItem,
             this.комплектацииToolStripMenuItem,
@@ -65,37 +65,37 @@ namespace SecuritySystemView
             this.справочникToolStripMenuItem.Name = "справочникToolStripMenuItem";
             this.справочникToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
             this.справочникToolStripMenuItem.Text = "Справочник";
-            // 
+            //
             // компонентыToolStripMenuItem
-            // 
+            //
             this.компонентыToolStripMenuItem.Name = "компонентыToolStripMenuItem";
             this.компонентыToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.компонентыToolStripMenuItem.Text = "Компоненты";
             this.компонентыToolStripMenuItem.Click += new System.EventHandler(this.компонентыToolStripMenuItem_Click);
-            // 
+            //
             // комплектацииToolStripMenuItem
-            // 
+            //
             this.комплектацииToolStripMenuItem.Name = "комплектацииToolStripMenuItem";
             this.комплектацииToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.комплектацииToolStripMenuItem.Text = "Комплектации";
-            this.комплектацииToolStripMenuItem.Click += new System.EventHandler(this.изделияToolStripMenuItem_Click);
-            // 
+            this.комплектацииToolStripMenuItem.Click += new System.EventHandler(this.комплектацииToolStripMenuItem_Click);
+            //
             // складыToolStripMenuItem
-            // 
+            //
             this.складыToolStripMenuItem.Name = "складыToolStripMenuItem";
             this.складыToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.складыToolStripMenuItem.Text = "Склады";
             this.складыToolStripMenuItem.Click += new System.EventHandler(this.складыToolStripMenuItem_Click);
-            // 
+            //
             // пополнениеСкладаToolStripMenuItem
-            // 
+            //
             this.пополнениеСкладаToolStripMenuItem.Name = "пополнениеСкладаToolStripMenuItem";
             this.пополнениеСкладаToolStripMenuItem.Size = new System.Drawing.Size(129, 20);
             this.пополнениеСкладаToolStripMenuItem.Text = "Пополнение склада";
             this.пополнениеСкладаToolStripMenuItem.Click += new System.EventHandler(this.пополнениеСкладаToolStripMenuItem_Click);
-            // 
+            //
             // dataGridViewOrders
-            // 
+            //
             this.dataGridViewOrders.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewOrders.Location = new System.Drawing.Point(0, 27);
@@ -105,9 +105,9 @@ namespace SecuritySystemView
             this.dataGridViewOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewOrders.Size = new System.Drawing.Size(685, 358);
             this.dataGridViewOrders.TabIndex = 1;
-            // 
+            //
             // buttonCreateOrder
-            // 
+            //
             this.buttonCreateOrder.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonCreateOrder.Location = new System.Drawing.Point(724, 42);
             this.buttonCreateOrder.Name = "buttonCreateOrder";
@@ -116,9 +116,9 @@ namespace SecuritySystemView
             this.buttonCreateOrder.Text = "Создать заказ";
             this.buttonCreateOrder.UseVisualStyleBackColor = true;
             this.buttonCreateOrder.Click += new System.EventHandler(this.buttonCreateOrder_Click);
-            // 
+            //
             // buttonTakeOrderInWork
-            // 
+            //
             this.buttonTakeOrderInWork.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonTakeOrderInWork.Location = new System.Drawing.Point(724, 100);
             this.buttonTakeOrderInWork.Name = "buttonTakeOrderInWork";
@@ -127,9 +127,9 @@ namespace SecuritySystemView
             this.buttonTakeOrderInWork.Text = "Отдать на выполнение";
             this.buttonTakeOrderInWork.UseVisualStyleBackColor = true;
             this.buttonTakeOrderInWork.Click += new System.EventHandler(this.buttonTakeOrderInWork_Click);
-            // 
+            //
             // buttonOrderReady
-            // 
+            //
             this.buttonOrderReady.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonOrderReady.Location = new System.Drawing.Point(724, 157);
             this.buttonOrderReady.Name = "buttonOrderReady";
@@ -138,9 +138,9 @@ namespace SecuritySystemView
             this.buttonOrderReady.Text = "Заказ готов";
             this.buttonOrderReady.UseVisualStyleBackColor = true;
             this.buttonOrderReady.Click += new System.EventHandler(this.buttonOrderReady_Click);
-            // 
+            //
             // buttonOrderPayed
-            // 
+            //
             this.buttonOrderPayed.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonOrderPayed.Location = new System.Drawing.Point(724, 214);
             this.buttonOrderPayed.Name = "buttonOrderPayed";
@@ -149,9 +149,9 @@ namespace SecuritySystemView
             this.buttonOrderPayed.Text = "Заказ оплачен";
             this.buttonOrderPayed.UseVisualStyleBackColor = true;
             this.buttonOrderPayed.Click += new System.EventHandler(this.buttonOrderPayed_Click);
-            // 
+            //
             // buttonRefresh
-            // 
+            //
             this.buttonRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonRefresh.Location = new System.Drawing.Point(724, 271);
             this.buttonRefresh.Name = "buttonRefresh";
@@ -160,9 +160,9 @@ namespace SecuritySystemView
             this.buttonRefresh.Text = "Обновить список";
             this.buttonRefresh.UseVisualStyleBackColor = true;
             this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
-            // 
+            //
             // FormMain
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(917, 385);

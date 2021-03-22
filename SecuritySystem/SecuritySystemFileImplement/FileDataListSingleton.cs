@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using System.Xml.Serialization;
-
 
 namespace SecuritySystemFileImplement
 {
@@ -97,7 +95,7 @@ namespace SecuritySystemFileImplement
                         Sum = Convert.ToDecimal(elem.Element("Sum").Value),
                         Status = (OrderStatus)Convert.ToInt32(elem.Element("Status").Value),
                         DateCreate = Convert.ToDateTime(elem.Element("DateCreate").Value),
-                        DateImplement = (!string.IsNullOrEmpty(elem.Element("DateImplement").Value)) ? Convert.ToDateTime(elem.Element("DateImplement").Value) : (DateTime?)null
+                        DateImplement = !string.IsNullOrEmpty(elem.Element("DateImplement").Value) ? Convert.ToDateTime(elem.Element("DateImplement").Value) : DateTime.MinValue
                     });
                 }
             }
@@ -116,10 +114,10 @@ namespace SecuritySystemFileImplement
 
                 foreach (var elem in xElements)
                 {
-                    var prodComp = new Dictionary<int, int>();
+                    var secureComponents = new Dictionary<int, int>();
                     foreach (var component in elem.Element("SecureComponents").Elements("SecureComponent").ToList())
                     {
-                        prodComp.Add(Convert.ToInt32(component.Element("Key").Value),
+                        secureComponents.Add(Convert.ToInt32(component.Element("Key").Value),
                             Convert.ToInt32(component.Element("Value").Value));
                     }
                     list.Add(new Secure
@@ -127,7 +125,7 @@ namespace SecuritySystemFileImplement
                         Id = Convert.ToInt32(elem.Attribute("Id").Value),
                         SecureName = elem.Element("SecureName").Value,
                         Price = Convert.ToDecimal(elem.Element("Price").Value),
-                        SecureComponents = prodComp
+                        SecureComponents = secureComponents
                     });
                 }
             }
