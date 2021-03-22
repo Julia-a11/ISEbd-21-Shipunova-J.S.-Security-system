@@ -6,17 +6,20 @@ using System.Text;
 
 namespace SecuritySystemDatabaseImplement.Models
 {
-    public class Component
+    public class StoreHouse
     {
         public int Id { get; set; }
 
         [Required]
-        public string ComponentName { get; set; }
+        public string StoreHouseName { get; set; }
 
-        [ForeignKey("ComponentId")]
-        public virtual List<SecureComponent> SecureComponents { get; set; }
+        [Required]
+        public string ResponsiblePersonFCS { get; set; }
 
-        [ForeignKey("ComponentId")]
+        [Required]
+        public DateTime DateCreate { get; set; }
+
+        [ForeignKey("StoreHouseId")]
         public virtual List<StoreHouseComponent> StoreHouseComponents { get; set; }
     }
 }
