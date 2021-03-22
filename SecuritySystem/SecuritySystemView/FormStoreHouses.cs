@@ -11,12 +11,12 @@ namespace SecuritySystemView
         [Dependency]
         public new IUnityContainer Container { get; set; }
 
-        private readonly StoreHouseLogic logic;
+        private readonly StoreHouseLogic storeHouseLogic;
 
-        public FormStoreHouses(StoreHouseLogic logic)
+        public FormStoreHouses(StoreHouseLogic storeHouseLogic)
         {
             InitializeComponent();
-            this.logic = logic;
+            this.storeHouseLogic = storeHouseLogic;
         }
 
         private void FormStoreHouses_Load(object sender, EventArgs e)
@@ -28,14 +28,14 @@ namespace SecuritySystemView
         {
             try
             {
-                var list = logic.Read(null);
+                var list = storeHouseLogic.Read(null);
                 if (list != null)
                 {
-                    dataGridView.DataSource = list;
-                    dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].AutoSizeMode =
+                    dataGridViewStoreHouses.DataSource = list;
+                    dataGridViewStoreHouses.Columns[0].Visible = false;
+                    dataGridViewStoreHouses.Columns[1].AutoSizeMode =
                     DataGridViewAutoSizeColumnMode.Fill;
-                    dataGridView.Columns[4].Visible = false;
+                    dataGridViewStoreHouses.Columns[4].Visible = false;
                 }
             }
             catch (Exception ex)
@@ -56,10 +56,10 @@ namespace SecuritySystemView
 
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
-            if (dataGridView.SelectedRows.Count == 1)
+            if (dataGridViewStoreHouses.SelectedRows.Count == 1)
             {
                 var form = Container.Resolve<FormStoreHouse>();
-                form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
+                form.Id = Convert.ToInt32(dataGridViewStoreHouses.SelectedRows[0].Cells[0].Value);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     LoadData();
@@ -69,16 +69,16 @@ namespace SecuritySystemView
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            if (dataGridView.SelectedRows.Count == 1)
+            if (dataGridViewStoreHouses.SelectedRows.Count == 1)
             {
                 if (MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButtons.YesNo,
                MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     int id =
-                   Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
+                   Convert.ToInt32(dataGridViewStoreHouses.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        logic.Delete(new StoreHouseBindingModel { Id = id });
+                        storeHouseLogic.Delete(new StoreHouseBindingModel { Id = id });
                     }
                     catch (Exception ex)
                     {

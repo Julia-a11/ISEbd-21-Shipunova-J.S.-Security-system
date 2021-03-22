@@ -52,8 +52,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
         {
             var order = _orderStorage.GetElement(new OrderBindingModel
             {
-                Id =
-           model.OrderId
+                Id = model.OrderId
             });
             if (order == null)
             {
@@ -85,8 +84,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
         {
             var order = _orderStorage.GetElement(new OrderBindingModel
             {
-                Id =
-           model.OrderId
+                Id = model.OrderId
             });
             if (order == null)
             {

@@ -1,14 +1,12 @@
 ﻿using SecuritySystemBusinessLogic.BindingModels;
 using SecuritySystemBusinessLogic.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SecuritySystemBusinessLogic.Interfaces
 {
     public interface IStoreHouseStorage
     {
-         List<StoreHouseViewModel> GetFullList();
+        List<StoreHouseViewModel> GetFullList();
         
         List<StoreHouseViewModel> GetFilteredList(StoreHouseBindingModel model);
        

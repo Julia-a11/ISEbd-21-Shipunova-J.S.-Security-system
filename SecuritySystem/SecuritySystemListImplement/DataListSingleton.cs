@@ -1,7 +1,6 @@
 ﻿using SecuritySystemListImplement.Models;
 using System.Collections.Generic;
 
-
 namespace SecuritySystemListImplement
 {
     public class DataListSingleton

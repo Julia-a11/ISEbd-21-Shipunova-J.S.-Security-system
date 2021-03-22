@@ -6,7 +6,6 @@ using System.ComponentModel;
 namespace SecuritySystemBusinessLogic.ViewModels
 {
     // Заказ
-
     public class OrderViewModel
     {
         public int Id { get; set; }

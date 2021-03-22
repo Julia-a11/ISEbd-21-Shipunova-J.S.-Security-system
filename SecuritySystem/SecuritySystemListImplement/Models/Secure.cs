@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 
-
 namespace SecuritySystemListImplement.Models
 {
-    // Изделие, изготавливаемое в магазине
-
+    // Комплектация, изготавливаемая в магазине
     public class Secure
     {
         public int Id { get; set; }

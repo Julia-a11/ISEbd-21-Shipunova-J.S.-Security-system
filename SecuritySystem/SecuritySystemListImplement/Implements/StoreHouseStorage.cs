@@ -33,6 +33,7 @@ namespace SecuritySystemListImplement.Implements
             {
                 return null;
             }
+
             List<StoreHouseViewModel> result = new List<StoreHouseViewModel>();
             foreach (var storeHouse in source.Storehouses)
             {
@@ -50,6 +51,7 @@ namespace SecuritySystemListImplement.Implements
             {
                 return null;
             }
+
             foreach (var storeHouse in source.Storehouses)
             {
                 if (storeHouse.Id == model.Id || storeHouse.StoreHouseName ==
@@ -91,7 +93,7 @@ namespace SecuritySystemListImplement.Implements
             }
             if (tempStoreHouse == null)
             {
-                throw new Exception("Элемент не найден");
+                throw new Exception("Склад не найден");
             }
             CreateModel(model, tempStoreHouse);
         }
@@ -106,14 +108,14 @@ namespace SecuritySystemListImplement.Implements
                     return;
                 }
             }
-            throw new Exception("Элемент не найден");
+            throw new Exception("Склад не найден");
         }
 
         private StoreHouse CreateModel(StoreHouseBindingModel model, StoreHouse storeHouse)
         {
             storeHouse.StoreHouseName = model.StoreHouseName;
             storeHouse.ResponsiblePersonFCS = model.ResponsiblePersonFCS;
-            // удаляем убранные
+
             foreach (var key in storeHouse.StoreHouseComponents.Keys.ToList())
             {
                 if (!model.StoreHouseComponents.ContainsKey(key))
@@ -121,7 +123,7 @@ namespace SecuritySystemListImplement.Implements
                     storeHouse.StoreHouseComponents.Remove(key);
                 }
             }
-            // обновляем существуюущие и добавляем новые
+
             foreach (var component in model.StoreHouseComponents)
             {
                 if (storeHouse.StoreHouseComponents.ContainsKey(component.Key))
@@ -135,12 +137,12 @@ namespace SecuritySystemListImplement.Implements
                     model.StoreHouseComponents[component.Key].Item2);
                 }
             }
+
             return storeHouse;
         }
 
         private StoreHouseViewModel CreateModel(StoreHouse storeHouse)
         {
-            // требуется дополнительно получить список компонентов для изделия с названиями и их количество
             Dictionary<int, (string, int)> storeHouseComponents = new Dictionary<int, (string, int)>();
 
             foreach (var storeHouseComponent in storeHouse.StoreHouseComponents)
@@ -156,6 +158,7 @@ namespace SecuritySystemListImplement.Implements
                 }
                 storeHouseComponents.Add(storeHouseComponent.Key, (componentName, storeHouseComponent.Value));
             }
+
             return new StoreHouseViewModel
             {
                 Id = storeHouse.Id,
@@ -170,10 +173,18 @@ namespace SecuritySystemListImplement.Implements
         {
             foreach (StoreHouse storehouse in source.Storehouses)
             {
-                Console.WriteLine(storehouse.StoreHouseName + " " + storehouse.ResponsiblePersonFCS +" " + storehouse.DateCreate);
+                Console.WriteLine(storehouse.StoreHouseName + " " + storehouse.ResponsiblePersonFCS + " " + storehouse.DateCreate);
                 foreach (KeyValuePair<int, int> keyValue in storehouse.StoreHouseComponents)
                 {
-                    string componentName = source.Components.FirstOrDefault(component => component.Id == keyValue.Key).ComponentName;
+                    string componentName = null;
+                    foreach (var component in source.Components)
+                    {
+                        if (component.Id == keyValue.Key)
+                        {
+                            componentName = component.ComponentName;
+                            break;
+                        }
+                    }
                     Console.WriteLine(componentName + " " + keyValue.Value);
                 }
             }
@@ -185,5 +196,3 @@ namespace SecuritySystemListImplement.Implements
         }
     }
 }
-
-

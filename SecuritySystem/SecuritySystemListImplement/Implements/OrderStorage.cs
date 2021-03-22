@@ -85,7 +85,7 @@ namespace SecuritySystemFileImplement.Implements
             }
             if (tempOrder == null)
             {
-                throw new Exception("Элемент не найден");
+                throw new Exception("Заказ не найден");
             }
             CreateModel(model, tempOrder);
         }
@@ -100,7 +100,7 @@ namespace SecuritySystemFileImplement.Implements
                     return;
                 }
             }
-            throw new Exception("Элемент не найден");
+            throw new Exception("Заказ не найден");
         }
 
         private Order CreateModel(OrderBindingModel model, Order order)
@@ -116,11 +116,20 @@ namespace SecuritySystemFileImplement.Implements
 
         private OrderViewModel CreateModel(Order order)
         {
+            string secureName = null;
+            foreach (Secure secure in source.Secures)
+            {
+                if (secure.Id == order.SecureId)
+                {
+                    secureName = secure.SecureName;
+                    break;
+                }
+            }
             return new OrderViewModel
             {
                 Id = order.Id,
                 SecureId = order.SecureId,
-                SecureName = source.Secures.FirstOrDefault(secure => secure.Id == order.SecureId).SecureName,
+                SecureName = secureName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,
@@ -128,9 +137,5 @@ namespace SecuritySystemFileImplement.Implements
                 DateImplement = order.DateImplement
             };
         }
-
     }
 }
-
-
-

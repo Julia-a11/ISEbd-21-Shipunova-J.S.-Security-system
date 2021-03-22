@@ -33,8 +33,8 @@ namespace SecuritySystemView
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
-            this.dataGridView = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            this.dataGridViewStoreHouses = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStoreHouses)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonRefresh
@@ -81,17 +81,17 @@ namespace SecuritySystemView
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
-            // dataGridView
+            // dataGridViewStoreHouses
             // 
-            this.dataGridView.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(2, 3);
-            this.dataGridView.Name = "dataGridView";
-            this.dataGridView.ReadOnly = true;
-            this.dataGridView.RowHeadersVisible = false;
-            this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(429, 356);
-            this.dataGridView.TabIndex = 5;
+            this.dataGridViewStoreHouses.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridViewStoreHouses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStoreHouses.Location = new System.Drawing.Point(2, 3);
+            this.dataGridViewStoreHouses.Name = "dataGridViewStoreHouses";
+            this.dataGridViewStoreHouses.ReadOnly = true;
+            this.dataGridViewStoreHouses.RowHeadersVisible = false;
+            this.dataGridViewStoreHouses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewStoreHouses.Size = new System.Drawing.Size(429, 356);
+            this.dataGridViewStoreHouses.TabIndex = 5;
             // 
             // FormStoreHouses
             // 
@@ -102,11 +102,11 @@ namespace SecuritySystemView
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonUpdate);
             this.Controls.Add(this.buttonAdd);
-            this.Controls.Add(this.dataGridView);
+            this.Controls.Add(this.dataGridViewStoreHouses);
             this.Name = "FormStoreHouses";
             this.Text = "Склады";
             this.Load += new System.EventHandler(this.FormStoreHouses_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStoreHouses)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -117,6 +117,6 @@ namespace SecuritySystemView
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonUpdate;
         private System.Windows.Forms.Button buttonAdd;
-        private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.DataGridView dataGridViewStoreHouses;
     }
 }
