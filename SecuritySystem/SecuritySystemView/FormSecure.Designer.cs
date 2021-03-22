@@ -38,14 +38,14 @@ namespace SecuritySystemView
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
-            this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.dataGridViewComponents = new System.Windows.Forms.DataGridView();
             this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.groupBoxComponents.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewComponents)).BeginInit();
             this.SuspendLayout();
             // 
             // labelName
@@ -88,7 +88,7 @@ namespace SecuritySystemView
             this.groupBoxComponents.Controls.Add(this.buttonDelete);
             this.groupBoxComponents.Controls.Add(this.buttonUpdate);
             this.groupBoxComponents.Controls.Add(this.buttonAdd);
-            this.groupBoxComponents.Controls.Add(this.dataGridView);
+            this.groupBoxComponents.Controls.Add(this.dataGridViewComponents);
             this.groupBoxComponents.Location = new System.Drawing.Point(12, 97);
             this.groupBoxComponents.Name = "groupBoxComponents";
             this.groupBoxComponents.Size = new System.Drawing.Size(312, 289);
@@ -140,22 +140,22 @@ namespace SecuritySystemView
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
-            // dataGridView
+            // dataGridViewComponents
             // 
-            this.dataGridView.AllowUserToAddRows = false;
-            this.dataGridView.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewComponents.AllowUserToAddRows = false;
+            this.dataGridViewComponents.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridViewComponents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewComponents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnId,
             this.ColumnName,
             this.ColumnCount});
-            this.dataGridView.Location = new System.Drawing.Point(0, 19);
-            this.dataGridView.Name = "dataGridView";
-            this.dataGridView.ReadOnly = true;
-            this.dataGridView.RowHeadersVisible = false;
-            this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(204, 264);
-            this.dataGridView.TabIndex = 0;
+            this.dataGridViewComponents.Location = new System.Drawing.Point(0, 19);
+            this.dataGridViewComponents.Name = "dataGridViewComponents";
+            this.dataGridViewComponents.ReadOnly = true;
+            this.dataGridViewComponents.RowHeadersVisible = false;
+            this.dataGridViewComponents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewComponents.Size = new System.Drawing.Size(204, 264);
+            this.dataGridViewComponents.TabIndex = 0;
             // 
             // ColumnId
             // 
@@ -214,7 +214,7 @@ namespace SecuritySystemView
             this.Text = "Комплектация";
             this.Load += new System.EventHandler(this.FormSecure_Load);
             this.groupBoxComponents.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewComponents)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -227,7 +227,7 @@ namespace SecuritySystemView
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.TextBox textBoxPrice;
         private System.Windows.Forms.GroupBox groupBoxComponents;
-        private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.DataGridView dataGridViewComponents;
         private System.Windows.Forms.Button buttonRefresh;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonUpdate;
