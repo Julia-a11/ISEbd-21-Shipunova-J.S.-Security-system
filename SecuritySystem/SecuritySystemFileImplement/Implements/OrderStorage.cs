@@ -32,7 +32,7 @@ namespace SecuritySystemFileImplement.Implements
                 return null;
             }
             return source.Orders
-                .Where(rec => rec.Id == model.Id)
+                .Where(rec => rec.Id == model.Id || (rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo))
                 .Select(CreateModel)
                 .ToList();
         }

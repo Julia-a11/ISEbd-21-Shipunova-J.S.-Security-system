@@ -39,7 +39,10 @@ namespace SecuritySystemView
             currentContainer.RegisterType<OrderLogic>(new HierarchicalLifetimeManager());
             
             currentContainer.RegisterType<SecureLogic>(new HierarchicalLifetimeManager());
-          
+
+            currentContainer.RegisterType<ReportLogic>(new HierarchicalLifetimeManager());
+
+
             return currentContainer;
         }
     }

@@ -53,7 +53,7 @@ namespace SecuritySystemDatabaseImplement.Implements
             using (var context = new SecuritySystemDatabase())
             {
                 return context.Orders
-                    .Where(rec => rec.SecureId == model.SecureId)
+                    .Where(rec => rec.SecureId == model.SecureId || (rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo))
                     .Select(rec => new OrderViewModel
                     {
                         Id = rec.Id,
