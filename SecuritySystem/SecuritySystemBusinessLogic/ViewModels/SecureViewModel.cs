@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 
-
 namespace SecuritySystemBusinessLogic.ViewModels
 {
     // Изделие, изготавливаемое в магазине
