@@ -15,6 +15,6 @@ namespace SecuritySystemBusinessLogic.ViewModels
 
         public decimal Sum { get; set; }
 
-        public OrderStatus Status { get; set; }
+        public  OrderStatus Status { get; set; }
     }
 }

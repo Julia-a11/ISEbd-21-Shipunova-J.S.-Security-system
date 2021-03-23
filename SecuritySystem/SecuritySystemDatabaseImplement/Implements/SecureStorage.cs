@@ -173,7 +173,7 @@ namespace SecuritySystemDatabaseImplement.Implements
                             throw new Exception("Компонент не найден");
                         }
 
-                        context.Secures.Add(CreateModel(model, new Secure(), context));
+                       CreateModel(model, secure, context);
                         context.SaveChanges();
 
                         transaction.Commit();

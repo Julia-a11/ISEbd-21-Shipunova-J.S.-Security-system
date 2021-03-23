@@ -136,7 +136,7 @@ namespace SecuritySystemView
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    _reportLogic.SaveComponentsToWordFile(new ReportBindingModel
+                    _reportLogic.SaveSecuresToWordFile(new ReportBindingModel
                     {
                         FileName =
                    dialog.FileName

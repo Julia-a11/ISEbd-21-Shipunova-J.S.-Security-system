@@ -33,12 +33,26 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                     }
                 }));
 
-                foreach (var component in info.Components)
+                foreach (var secure in info.Secures)
                 {
                     docBody.AppendChild(CreateParagraph(new WordParagraph
                     {
-                        Texts = new List<(string, WordParagraphProperties)> {
-                         (component.ComponentName, new WordParagraphProperties {Size = "24",}) },
+                        Texts = new List<(string, WordParagraphProperties)> {(
+                        secure.SecureName + " ",
+                        new WordParagraphProperties
+                        {
+                            Size = "24",
+                            Bold =true
+                        }
+                        ),
+                        (
+                        secure.Price.ToString(),
+                        new WordParagraphProperties
+                        {
+                            Size = "24",
+                        }
+                        ) },
+                         
                         TextProperties = new WordParagraphProperties
                         {
                             Size = "24",

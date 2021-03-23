@@ -77,13 +77,13 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
         }
 
         // Сохранение компонент в файл-Word
-        public void SaveComponentsToWordFile(ReportBindingModel model)
+        public void SaveSecuresToWordFile(ReportBindingModel model)
         {
             SaveToWord.CreateDoc(new WordInfo
             {
                 FileName = model.FileName,
-                Title = "Список компонент",
-                Components = _componentStorage.GetFullList()
+                Title = "Список комп",
+                Secures = _secureStorage.GetFullList()
             });
         }
 
@@ -93,7 +93,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             SaveToExcel.CreateDoc(new ExcelInfo
             {
                 FileName = model.FileName,
-                Title = "Список компонент",
+                Title = "Список компонентов",
                 SecureComponents = GetSecureComponent()
             });
         }

@@ -9,6 +9,6 @@ namespace SecuritySystemBusinessLogic.HelperModels
 
         public string Title { get; set; }
 
-        public List<ComponentViewModel> Components { get; set; }
+        public List<SecureViewModel> Secures { get; set; }
     }
 }
