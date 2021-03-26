@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SecuritySystemFileImplement.Models
+namespace SecuritySystemListImplement.Models
 {
     // Комплектация, изготавливаемая в магазине
     public class Secure
