@@ -85,7 +85,7 @@ namespace SecuritySystemFileImplement.Implements
         {
             storeHouse.StoreHouseName = model.StoreHouseName;
             storeHouse.ResponsiblePersonFCS = model.ResponsiblePersonFCS;
-            // удаляем убранные
+
             foreach (var key in storeHouse.StoreHouseComponents.Keys.ToList())
             {
                 if (!model.StoreHouseComponents.ContainsKey(key))
@@ -93,7 +93,7 @@ namespace SecuritySystemFileImplement.Implements
                     storeHouse.StoreHouseComponents.Remove(key);
                 }
             }
-            // обновляем существуюущие и добавляем новые
+
             foreach (var component in model.StoreHouseComponents)
             {
                 if (storeHouse.StoreHouseComponents.ContainsKey(component.Key))
@@ -112,7 +112,6 @@ namespace SecuritySystemFileImplement.Implements
 
         private StoreHouseViewModel CreateModel(StoreHouse storeHouse)
         {
-            // требуется дополнительно получить список компонентов для изделия с названиями и их количество
             Dictionary<int, (string, int)> storeHouseComponents = new Dictionary<int, (string, int)>();
 
             foreach (var storeHouseComponent in storeHouse.StoreHouseComponents)
