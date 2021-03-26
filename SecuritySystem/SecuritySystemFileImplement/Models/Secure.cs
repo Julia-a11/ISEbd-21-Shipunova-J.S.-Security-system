@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 
-namespace SecuritySystemListImplement.Models
+namespace SecuritySystemFileImplement.Models
 {
-    // Комплектация, изготавливаемая в магазине
     public class Secure
     {
         public int Id { get; set; }
