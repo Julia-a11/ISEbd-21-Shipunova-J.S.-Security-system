@@ -12,6 +12,8 @@ namespace SecuritySystemDatabaseImplement.Models
 
         public int SecureId { get; set; }
 
+        public int ClientId { get; set; }
+
         [Required]
         public int Count { get; set; }
 
@@ -27,5 +29,7 @@ namespace SecuritySystemDatabaseImplement.Models
         public DateTime? DateImplement { get; set; }
 
         public virtual Secure Secure { get; set; }
+
+        public virtual Client Client { get; set; }
     }
 }

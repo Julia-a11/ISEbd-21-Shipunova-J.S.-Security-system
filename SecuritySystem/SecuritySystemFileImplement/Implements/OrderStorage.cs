@@ -32,9 +32,13 @@ namespace SecuritySystemFileImplement.Implements
             }
 
             return source.Orders
-                .Where(rec => rec.Id == model.Id || (rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo))
-                .Select(CreateModel)
-                .ToList();
+                  .Where(rec => (!model.DateFrom.HasValue &&
+                !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) ||
+                (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >=
+                model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) ||
+                (model.ClientId.HasValue && rec.ClientId == model.ClientId))
+                  .Select(CreateModel)
+                  .ToList();
         }
 
         public OrderViewModel GetElement(OrderBindingModel model)
@@ -64,6 +68,10 @@ namespace SecuritySystemFileImplement.Implements
             {
                 throw new Exception("Заказ не найден");
             }
+            if (!model.ClientId.HasValue)
+            {
+                model.ClientId = order.ClientId;
+            }
             CreateModel(model, order);
         }
 
@@ -83,6 +91,7 @@ namespace SecuritySystemFileImplement.Implements
         private Order CreateModel(OrderBindingModel model, Order order)
         {
             order.SecureId = model.SecureId;
+            order.ClientId = Convert.ToInt32(model.ClientId);
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -97,6 +106,8 @@ namespace SecuritySystemFileImplement.Implements
             {
                 Id = order.Id,
                 SecureId = order.SecureId,
+                ClientId = order.ClientId,
+                ClientFIO = source.Clients.FirstOrDefault(client =>  client.Id == order.ClientId)?.ClientFIO,
                 SecureName = source.Secures.FirstOrDefault(secure => secure.Id == order.SecureId)?.SecureName,
                 Count = order.Count,
                 Sum = order.Sum,
