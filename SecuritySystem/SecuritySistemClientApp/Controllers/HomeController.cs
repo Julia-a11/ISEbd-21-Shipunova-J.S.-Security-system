@@ -46,6 +46,17 @@ namespace SecuritySistemClientApp.Controllers
             throw new Exception("Введите логин, пароль и ФИО");
         }
 
+        [HttpGet]
+        public IActionResult Privacy()
+        {
+            if (Program.Client == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+
+            return View(Program.Client);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
@@ -66,14 +77,18 @@ namespace SecuritySistemClientApp.Controllers
         {
             if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password))
             {
-                Program.Client = APIClient.GetRequest<ClientViewModel>($"api/client/login?login={login}&password={password}");
+                Program.Client =
+                APIClient.GetRequest<ClientViewModel>($"api/client/login?login={login}&password={password}");
+
                 if (Program.Client == null)
                 {
-                    throw new Exception("Неверное имя пользователя или пароль");
+                    throw new Exception("Неверный логин/пароль");
                 }
+
                 Response.Redirect("Index");
                 return;
             }
+
             throw new Exception("Введите логин, пароль");
         }
 
@@ -103,7 +118,7 @@ namespace SecuritySistemClientApp.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Secures = APIClient.GetRequest<List<SecureViewModel>>("api/main/getcarlist");
+            ViewBag.Secures = APIClient.GetRequest<List<SecureViewModel>>("api/main/getsecurelist");
             return View();
         }
 
@@ -128,7 +143,7 @@ namespace SecuritySistemClientApp.Controllers
         [HttpPost]
         public decimal Calc(decimal count, int secure)
         {
-            SecureViewModel sec = APIClient.GetRequest<SecureViewModel>($"api/main/getcar?carId={secure}");
+            SecureViewModel sec = APIClient.GetRequest<SecureViewModel>($"api/main/getsecure?secureId={secure}");
             return count * sec.Price;
         }
     }

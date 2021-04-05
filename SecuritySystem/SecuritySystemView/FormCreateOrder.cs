@@ -17,18 +17,22 @@ namespace SecuritySystemView
         private readonly SecureLogic _logicSecure;
         
         private readonly OrderLogic _logicOrder;
+
+        private readonly ClientLogic _logicClient;
        
-        public FormCreateOrder(SecureLogic logicSecure, OrderLogic logicOrder)
+        public FormCreateOrder(SecureLogic logicSecure, OrderLogic logicOrder, ClientLogic logicClient)
         {
             InitializeComponent();
             _logicSecure = logicSecure;
             _logicOrder = logicOrder;
+            _logicClient = logicClient;
         }
 
         private void FormCreateOrder_Load(object sender, EventArgs e)
         {
             try
             {
+                /*
                 List<SecureViewModel> list = _logicSecure.Read(null);
                 if (list != null)
                 {
@@ -37,6 +41,16 @@ namespace SecuritySystemView
                     comboBoxSecure.DataSource = list;
                     comboBoxSecure.SelectedItem = null;
                 }
+                */
+
+                var secures = _logicSecure.Read(null);
+                var clients = _logicClient.Read(null);
+                comboBoxSecure.DataSource = secures;
+                comboBoxSecure.DisplayMember = "SecureName";
+                comboBoxSecure.ValueMember = "Id";
+                comboBoxClient.DataSource = clients;
+                comboBoxClient.DisplayMember = "ClientFIO";
+                comboBoxClient.ValueMember = "Id";
             }
             catch (Exception ex)
             {
@@ -92,11 +106,18 @@ namespace SecuritySystemView
                MessageBoxIcon.Error);
                 return;
             }
+            if (comboBoxClient.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите клиента", "Ошибка", MessageBoxButtons.OK,
+               MessageBoxIcon.Error);
+                return;
+            }
             try
             {
                 _logicOrder.CreateOrder(new CreateOrderBindingModel
                 {
                     SecureId = Convert.ToInt32(comboBoxSecure.SelectedValue),
+                    ClientId = Convert.ToInt32(comboBoxClient.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSum.Text)
                 });

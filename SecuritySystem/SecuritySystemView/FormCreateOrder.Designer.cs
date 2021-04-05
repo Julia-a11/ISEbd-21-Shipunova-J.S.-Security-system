@@ -37,13 +37,15 @@ namespace SecuritySystemView
             this.comboBoxSecure = new System.Windows.Forms.ComboBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.comboBoxClient = new System.Windows.Forms.ComboBox();
+            this.labelClient = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelSecure
             // 
             this.labelSecure.AutoSize = true;
             this.labelSecure.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelSecure.Location = new System.Drawing.Point(12, 18);
+            this.labelSecure.Location = new System.Drawing.Point(12, 51);
             this.labelSecure.Name = "labelSecure";
             this.labelSecure.Size = new System.Drawing.Size(101, 17);
             this.labelSecure.TabIndex = 0;
@@ -53,7 +55,7 @@ namespace SecuritySystemView
             // 
             this.labelCount.AutoSize = true;
             this.labelCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelCount.Location = new System.Drawing.Point(12, 46);
+            this.labelCount.Location = new System.Drawing.Point(12, 91);
             this.labelCount.Name = "labelCount";
             this.labelCount.Size = new System.Drawing.Size(90, 17);
             this.labelCount.TabIndex = 1;
@@ -63,7 +65,7 @@ namespace SecuritySystemView
             // 
             this.labelSum.AutoSize = true;
             this.labelSum.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelSum.Location = new System.Drawing.Point(12, 74);
+            this.labelSum.Location = new System.Drawing.Point(12, 127);
             this.labelSum.Name = "labelSum";
             this.labelSum.Size = new System.Drawing.Size(54, 17);
             this.labelSum.TabIndex = 2;
@@ -71,7 +73,7 @@ namespace SecuritySystemView
             // 
             // textBoxCount
             // 
-            this.textBoxCount.Location = new System.Drawing.Point(120, 46);
+            this.textBoxCount.Location = new System.Drawing.Point(120, 88);
             this.textBoxCount.Name = "textBoxCount";
             this.textBoxCount.Size = new System.Drawing.Size(240, 20);
             this.textBoxCount.TabIndex = 3;
@@ -79,7 +81,7 @@ namespace SecuritySystemView
             // 
             // textBoxSum
             // 
-            this.textBoxSum.Location = new System.Drawing.Point(120, 74);
+            this.textBoxSum.Location = new System.Drawing.Point(121, 124);
             this.textBoxSum.Name = "textBoxSum";
             this.textBoxSum.Size = new System.Drawing.Size(240, 20);
             this.textBoxSum.TabIndex = 4;
@@ -87,7 +89,7 @@ namespace SecuritySystemView
             // comboBoxSecure
             // 
             this.comboBoxSecure.FormattingEnabled = true;
-            this.comboBoxSecure.Location = new System.Drawing.Point(120, 18);
+            this.comboBoxSecure.Location = new System.Drawing.Point(120, 51);
             this.comboBoxSecure.Name = "comboBoxSecure";
             this.comboBoxSecure.Size = new System.Drawing.Size(240, 21);
             this.comboBoxSecure.TabIndex = 5;
@@ -96,7 +98,7 @@ namespace SecuritySystemView
             // buttonSave
             // 
             this.buttonSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonSave.Location = new System.Drawing.Point(204, 100);
+            this.buttonSave.Location = new System.Drawing.Point(205, 163);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 6;
@@ -107,7 +109,7 @@ namespace SecuritySystemView
             // buttonCancel
             // 
             this.buttonCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonCancel.Location = new System.Drawing.Point(285, 100);
+            this.buttonCancel.Location = new System.Drawing.Point(286, 163);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 7;
@@ -115,11 +117,31 @@ namespace SecuritySystemView
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // comboBoxClient
+            // 
+            this.comboBoxClient.FormattingEnabled = true;
+            this.comboBoxClient.Location = new System.Drawing.Point(120, 12);
+            this.comboBoxClient.Name = "comboBoxClient";
+            this.comboBoxClient.Size = new System.Drawing.Size(240, 21);
+            this.comboBoxClient.TabIndex = 8;
+            // 
+            // labelClient
+            // 
+            this.labelClient.AutoSize = true;
+            this.labelClient.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelClient.Location = new System.Drawing.Point(13, 16);
+            this.labelClient.Name = "labelClient";
+            this.labelClient.Size = new System.Drawing.Size(60, 17);
+            this.labelClient.TabIndex = 9;
+            this.labelClient.Text = "Клиент:";
+            // 
             // FormCreateOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(421, 153);
+            this.ClientSize = new System.Drawing.Size(507, 198);
+            this.Controls.Add(this.labelClient);
+            this.Controls.Add(this.comboBoxClient);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.comboBoxSecure);
@@ -146,5 +168,7 @@ namespace SecuritySystemView
         private System.Windows.Forms.ComboBox comboBoxSecure;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.ComboBox comboBoxClient;
+        private System.Windows.Forms.Label labelClient;
     }
 }

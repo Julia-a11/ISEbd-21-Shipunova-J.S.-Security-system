@@ -6,7 +6,6 @@ using SecuritySystemDatabaseImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SecuritySystemDatabaseImplement.Implements
 {
@@ -69,8 +68,8 @@ namespace SecuritySystemDatabaseImplement.Implements
                     .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue &&
                     rec.DateCreate.Date == model.DateCreate.Date) || (model.DateFrom.HasValue &&
                     model.DateTo.HasValue && rec.DateCreate.Date >= model.DateFrom.Value.Date &&
-                    rec.DateCreate.Date <= model.DateTo.Value.Date) || (model.ClientId.HasValue && 
-                    rec.ClientId == model.ClientId)) 
+                    rec.DateCreate.Date <= model.DateTo.Value.Date) || (model.ClientId.HasValue &&
+                    rec.ClientId == model.ClientId))
                     .Select(CreateModel)
                     .ToList();
             }
@@ -102,12 +101,12 @@ namespace SecuritySystemDatabaseImplement.Implements
                 throw new Exception("Клиент не указан");
             }
 
-                using (var context = new SecuritySystemDatabase())
-                {
-                    context.Orders.Add(CreateModel(model, new Order()));
-                    context.SaveChanges();
-                }
+            using (var context = new SecuritySystemDatabase())
+            {
+                context.Orders.Add(CreateModel(model, new Order()));
+                context.SaveChanges();
             }
+        }
 
         public void Update(OrderBindingModel model)
         {

@@ -17,15 +17,15 @@
         <div class="col-8"><input type="text" name="count" id="count" /></div>
     </div>
     <div class="row">
-        <div class="col-4">Сумма::</div>
+        <div class="col-4">Сумма:</div>
         <div class="col-8">
-            <input type="text" id="sum" name="name" readonly="true" />
+            <input type="text" id="sum" name="sum" readonly />
         </div>
     </div>
     <div class="row">
         <div class="col-8"></div>
         <div class="col-4">
-            <input type="submit" value="Создать" class="btn btnprimary" />
+            <input type="submit" value="Создать" class="btn btn-primary" />
         </div>
     </div>
 </form>
@@ -40,7 +40,7 @@
     function check() {
         var count = $('#count').val();
         var secure = $('#secure').val();
-        if (count && car) {
+        if (count && secure) {
             $.ajax({
                 method: "POST",
                 url: "/Home/Calc",

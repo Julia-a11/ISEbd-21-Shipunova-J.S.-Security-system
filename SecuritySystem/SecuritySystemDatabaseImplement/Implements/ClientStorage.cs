@@ -49,8 +49,8 @@ namespace SecuritySystemDatabaseImplement.Implements
             using (var context = new SecuritySystemDatabase())
             {
                 return context.Clients
-                    .Where(rec => rec.ClientFIO.Contains(model.ClientFIO) || (rec.Login.Equals(model.Login) &&
-                    rec.Password.Equals(model.Password)))
+                    .Where(rec => rec.Login.Equals(model.Login) &&
+                    rec.Password.Equals(model.Password))
                     .Select(CreateModel)
                     .ToList();
             }

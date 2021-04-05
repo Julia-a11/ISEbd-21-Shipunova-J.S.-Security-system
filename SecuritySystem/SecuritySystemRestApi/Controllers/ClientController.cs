@@ -21,9 +21,14 @@ namespace SecuritySystemRestApi.Controllers
         }
 
         [HttpGet]
-        public ClientViewModel Login(string login, string password) => _logic.Read(
-            new ClientBindingModel
-        { Login = login, Password = password })?[0];
+        public ClientViewModel Login(string login, string password)
+        {
+            return _logic.Read(new ClientBindingModel
+            {
+                Login = login,
+                Password = password
+            }).FirstOrDefault();
+        }
 
         [HttpPost]
         public void Register(ClientBindingModel model) => _logic.CreateOrUpdate(model);
