@@ -120,6 +120,116 @@ spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
             }
         }
 
+        public static void CreateDocForStoreHouse(ExcelInfoForStoreHouse info)
+        {
+            using (SpreadsheetDocument spreadsheetDocument =
+             SpreadsheetDocument.Create(info.FileName, SpreadsheetDocumentType.Workbook))
+            {
+                // Создаём книгу (храним листы)
+                WorkbookPart workbookpart = spreadsheetDocument.AddWorkbookPart();
+                workbookpart.Workbook = new Workbook();
+
+                CreateStyles(workbookpart);
+
+                // Получаем/создаём хранилище текстов для книги 
+                SharedStringTablePart shareStringPart =
+spreadsheetDocument.WorkbookPart.GetPartsOfType<SharedStringTablePart>().Count() > 0
+?
+spreadsheetDocument.WorkbookPart.GetPartsOfType<SharedStringTablePart>().First()
+:
+spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
+
+                // Создаем SharedStringTable, если его нет
+                if (shareStringPart.SharedStringTable == null)
+                {
+                    shareStringPart.SharedStringTable = new SharedStringTable();
+                }
+
+                // Cоздаем SharedStringTable, если его нет
+                WorksheetPart worksheetPart = workbookpart.AddNewPart<WorksheetPart>();
+                worksheetPart.Worksheet = new Worksheet(new SheetData());
+
+                // Добавляем лист в книгу
+                Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild<Sheets>(new Sheets());
+                Sheet sheet = new Sheet()
+                {
+                    Id = spreadsheetDocument.WorkbookPart.GetIdOfPart(worksheetPart),
+                    SheetId = 1,
+                    Name = "Лист"
+                };
+                sheets.Append(sheet);
+
+                InsertCellInWorksheet(new ExcelCellParameters
+                {
+                    Worksheet = worksheetPart.Worksheet,
+                    ShareStringPart = shareStringPart,
+                    ColumnName = "A",
+                    RowIndex = 1,
+                    Text = info.Title,
+                    StyleIndex = 2U
+                });
+
+                MergeCells(new ExcelMergeParameters
+                {
+                    Worksheet = worksheetPart.Worksheet,
+                    CellFromName = "A1",
+                    CellToName = "C1"
+                });
+
+                uint rowIndex = 2;
+                foreach (var pc in info.StoreHouseComponents)
+                {
+                    InsertCellInWorksheet(new ExcelCellParameters
+                    {
+                        Worksheet = worksheetPart.Worksheet,
+                        ShareStringPart = shareStringPart,
+                        ColumnName = "A",
+                        RowIndex = rowIndex,
+                        Text = pc.StoreHouseName,
+                        StyleIndex = 0U
+                    });
+                    rowIndex++;
+
+                    foreach (var secure in pc.Components)
+                    {
+                        InsertCellInWorksheet(new ExcelCellParameters
+                        {
+                            Worksheet = worksheetPart.Worksheet,
+                            ShareStringPart = shareStringPart,
+                            ColumnName = "B",
+                            RowIndex = rowIndex,
+                            Text = secure.Item1,
+                            StyleIndex = 1U
+                        });
+
+                        InsertCellInWorksheet(new ExcelCellParameters
+                        {
+                            Worksheet = worksheetPart.Worksheet,
+                            ShareStringPart = shareStringPart,
+                            ColumnName = "C",
+                            RowIndex = rowIndex,
+                            Text = secure.Item2.ToString(),
+                            StyleIndex = 1U
+                        });
+                        rowIndex++;
+                    }
+
+                    InsertCellInWorksheet(new ExcelCellParameters
+                    {
+                        Worksheet = worksheetPart.Worksheet,
+                        ShareStringPart = shareStringPart,
+                        ColumnName = "C",
+                        RowIndex = rowIndex,
+                        Text = pc.TotalCount.ToString(),
+                        StyleIndex = 0U
+                    });
+                    rowIndex++;
+                }
+
+                workbookpart.Workbook.Save();
+            }
+        }
+
         // Настройка стилей для файла
         private static void CreateStyles(WorkbookPart workbookpart)
         {
@@ -132,8 +242,7 @@ spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
             fontUsual.Append(new FontSize() { Val = 12D });
             fontUsual.Append(new DocumentFormat.OpenXml.Office2010.Excel.Color()
             {
-                Theme
-           = (UInt32Value)1U
+                Theme = (UInt32Value)1U
             });
             fontUsual.Append(new FontName() { Val = "Times New Roman" });
             fontUsual.Append(new FontFamilyNumbering() { Val = 2 });

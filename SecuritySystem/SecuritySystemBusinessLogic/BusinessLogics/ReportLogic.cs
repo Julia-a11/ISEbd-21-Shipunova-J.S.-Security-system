@@ -14,10 +14,13 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
 
         private readonly IOrderStorage _orderStorage;
 
-        public ReportLogic(ISecureStorage secureStorage, IOrderStorage orderStorage)
+        private readonly IStoreHouseStorage _storeHouseStorage;
+
+        public ReportLogic(ISecureStorage secureStorage, IOrderStorage orderStorage, IStoreHouseStorage storeHouseStorage)
         {
             _secureStorage = secureStorage;
             _orderStorage = orderStorage;
+            _storeHouseStorage = storeHouseStorage;
         }
 
         //  Получение списка компонент с указанием, в каких изделиях используются
@@ -45,6 +48,30 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             return list;
         }
 
+        public List<ReportStoreHouseComponentsViewModel> GetStoreHouseComponent()
+        {
+            var storeHouses = _storeHouseStorage.GetFullList();
+
+            var list = new List<ReportStoreHouseComponentsViewModel>();
+
+            foreach (var storeHouse in storeHouses)
+            {
+                var record = new ReportStoreHouseComponentsViewModel
+                {
+                    StoreHouseName = storeHouse.StoreHouseName,
+                    Components = new List<Tuple<string, int>>(),
+                    TotalCount = 0
+                };
+                foreach (var component in storeHouse.StoreHouseComponents)
+                {
+                    record.Components.Add(new Tuple<string, int>(component.Value.Item1, component.Value.Item2));
+                    record.TotalCount += component.Value.Item2;
+                }
+                list.Add(record);
+            }
+            return list;
+        }
+
         // Получение списка заказов за определенный период
         public List<ReportOrdersViewModel> GetOrders(ReportBindingModel model)
         {
@@ -61,6 +88,20 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                     Sum = x.Sum,
                     Status = x.Status
 
+                })
+                .ToList();
+        }
+
+        public List<ReportOrderByDateViewModel> GetOrdersInfo()
+        {
+            return _orderStorage.GetFullList()
+                .GroupBy(order => order.DateCreate
+                .ToShortDateString())
+                .Select(rec => new ReportOrderByDateViewModel
+                {
+                    Date = Convert.ToDateTime(rec.Key),
+                    Count = rec.Count(),
+                    Sum = rec.Sum(order => order.Sum)
                 })
                 .ToList();
         }
@@ -98,6 +139,37 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                 DateFrom = model.DateFrom.Value,
                 DateTo = model.DateTo.Value,
                 Orders = GetOrders(model)
+            });
+        }
+
+        public void SaveStoreHouseComponentsToExcel(ReportBindingModel model)
+        {
+            SaveToExcel.CreateDocForStoreHouse(new ExcelInfoForStoreHouse
+            {
+                FileName = model.FileName,
+                Title = "Список складов",
+                StoreHouseComponents = GetStoreHouseComponent()
+            });
+        }
+
+        [Obsolete]
+        public void SaveOrdersInfoToPdfFile(ReportBindingModel model)
+        {
+            SaveToPdf.CreateDocForStoreHouse(new PdfInfoForOrder
+            {
+                FileName = model.FileName,
+                Title = "Список заказов",
+                Orders = GetOrdersInfo()
+            });
+        }
+
+        public void SaveStoreHousesToWordFile(ReportBindingModel model)
+        {
+            SaveToWord.CreateDocForStoreHouse(new WordInfoForStoreHouse
+            {
+                FileName = model.FileName,
+                Title = "Список складов",
+                StoreHouses = _storeHouseStorage.GetFullList()
             });
         }
     }
