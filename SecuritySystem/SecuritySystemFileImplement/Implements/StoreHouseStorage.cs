@@ -65,7 +65,7 @@ namespace SecuritySystemFileImplement.Implements
 
             if (storeHouse == null)
             {
-                throw new Exception("Элемент не найден");
+                throw new Exception("Склад не найден");
             }
             CreateModel(model, storeHouse);
         }
@@ -76,7 +76,7 @@ namespace SecuritySystemFileImplement.Implements
 
             if (storeHouse == null)
             {
-                throw new Exception("Элемент не найден");
+                throw new Exception("Склад не найден");
             }
             source.StoreHouses.Remove(storeHouse);
         }

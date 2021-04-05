@@ -61,7 +61,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             {
                 throw new Exception("Заказ не в статусе \"Принят\"");
             }
-            Dictionary<int, (string, int)> components = _secureStorage
+            var components = _secureStorage
                 .GetElement(new SecureBindingModel { Id = order.SecureId}).SecureComponents;
             if (!_storeHouseStorage.CheckAndTake(order.Count, components))
             {
