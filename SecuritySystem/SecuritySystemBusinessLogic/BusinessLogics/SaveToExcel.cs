@@ -75,12 +75,12 @@ spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
                         ShareStringPart = shareStringPart,
                         ColumnName = "A",
                         RowIndex = rowIndex,
-                        Text = pc.ComponentName,
+                        Text = pc.SecureName,
                         StyleIndex = 0U
                     });
                     rowIndex++;
 
-                    foreach(var secure in pc.Secures)
+                    foreach(var secure in pc.Components)
                     {
                         InsertCellInWorksheet(new ExcelCellParameters
                         {
