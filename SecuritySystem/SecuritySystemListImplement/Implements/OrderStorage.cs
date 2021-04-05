@@ -4,6 +4,7 @@ using SecuritySystemBusinessLogic.ViewModels;
 using SecuritySystemListImplement.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SecuritySystemListImplement.Implements
 {

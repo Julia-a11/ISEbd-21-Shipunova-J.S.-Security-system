@@ -13,5 +13,8 @@ namespace SecuritySystemDatabaseImplement.Models
 
         [ForeignKey("ComponentId")]
         public virtual List<SecureComponent> SecureComponents { get; set; }
+
+        [ForeignKey("ComponentId")]
+        public virtual List<StoreHouseComponent> StoreHouseComponents { get; set; }
     }
 }

@@ -5,16 +5,21 @@ using SecuritySystemBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 
-
 namespace SecuritySystemBusinessLogic.BusinessLogics
 {
     public class OrderLogic
     {
         private readonly IOrderStorage _orderStorage;
 
-        public OrderLogic(IOrderStorage orderStorage)
+        private readonly ISecureStorage _secureStorage;
+
+        private readonly IStoreHouseStorage _storeHouseStorage;
+
+        public OrderLogic(IOrderStorage orderStorage, ISecureStorage secureStorage, IStoreHouseStorage storeHouseStorage)
         {
             _orderStorage = orderStorage;
+            _secureStorage = secureStorage;
+            _storeHouseStorage = storeHouseStorage;
         }
 
         public List<OrderViewModel> Read(OrderBindingModel model)
@@ -55,6 +60,12 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             if (order.Status != OrderStatus.Принят)
             {
                 throw new Exception("Заказ не в статусе \"Принят\"");
+            }
+            var components = _secureStorage
+                .GetElement(new SecureBindingModel { Id = order.SecureId}).SecureComponents;
+            if (!_storeHouseStorage.CheckAndTake(order.Count, components))
+            {
+                throw new Exception("Для выполнения заказа не хвататет компонентов на складах");
             }
             _orderStorage.Update(new OrderBindingModel
             {

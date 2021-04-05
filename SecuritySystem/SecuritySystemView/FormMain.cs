@@ -10,18 +10,18 @@ namespace SecuritySystemView
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
-       
+
         private readonly OrderLogic _orderLogic;
 
         private readonly ReportLogic _reportLogic;
-       
+
         public FormMain(OrderLogic orderLogic, ReportLogic reportLogic)
         {
             InitializeComponent();
            _orderLogic = orderLogic;
             _reportLogic = reportLogic;
         }
-      
+
         private void FormMain_Load(object sender, EventArgs e)
         {
             LoadData();
@@ -157,6 +157,17 @@ namespace SecuritySystemView
         private void списокЗаказовToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormReportOrders>();
+            form.ShowDialog();
+        }
+        private void складыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormStoreHouses>();
+            form.ShowDialog();
+        }
+
+        private void пополнениеСкладаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReplenishmentStoreHouse>();
             form.ShowDialog();
 
         }

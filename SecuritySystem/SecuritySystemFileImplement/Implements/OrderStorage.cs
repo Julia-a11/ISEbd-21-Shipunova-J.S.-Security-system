@@ -53,7 +53,7 @@ namespace SecuritySystemFileImplement.Implements
         {
             int maxId = source.Orders.Count > 0 ? source.Orders.Max(
                 rec => rec.Id) : 0;
-            var order = new Order { Id = maxId + 1, DateCreate = DateTime.Now };
+            var order = new Order { Id = maxId + 1};
             source.Orders.Add(CreateModel(model, order));
         }
 
