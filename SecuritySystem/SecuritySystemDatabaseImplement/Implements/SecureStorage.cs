@@ -6,7 +6,6 @@ using SecuritySystemDatabaseImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SecuritySystemDatabaseImplement.Implements
 {
@@ -24,16 +23,16 @@ namespace SecuritySystemDatabaseImplement.Implements
 
             if (model.Id.HasValue)
             {
-                var SecureComponents = context.SecureComponents
+                var secureComponents = context.SecureComponents
                     .Where(rec => rec.SecureId == model.Id.Value)
                     .ToList();
 
-                context.SecureComponents.RemoveRange(SecureComponents
+                context.SecureComponents.RemoveRange(secureComponents
                     .Where(rec => !model.SecureComponents.ContainsKey(rec.ComponentId))
                     .ToList());
                 context.SaveChanges();
 
-                foreach (var updateComponent in SecureComponents)
+                foreach (var updateComponent in secureComponents)
                 {
                     updateComponent.Count = model.SecureComponents[updateComponent.ComponentId].Item2;
                     model.SecureComponents.Remove(updateComponent.ComponentId);
@@ -41,14 +40,13 @@ namespace SecuritySystemDatabaseImplement.Implements
                 context.SaveChanges();
             }
 
-
-            foreach (var SecureComponent in model.SecureComponents)
+            foreach (var secureComponent in model.SecureComponents)
             {
                 context.SecureComponents.Add(new SecureComponent
                 {
                     SecureId = secure.Id,
-                    ComponentId = SecureComponent.Key,
-                    Count = SecureComponent.Value.Item2
+                    ComponentId = secureComponent.Key,
+                    Count = secureComponent.Value.Item2
                 });
                 context.SaveChanges();
             }
@@ -115,19 +113,19 @@ namespace SecuritySystemDatabaseImplement.Implements
 
             using (var context = new SecuritySystemDatabase())
             {
-                var Secure = context.Secures
+                var secure = context.Secures
                     .Include(rec => rec.SecureComponents)
                     .ThenInclude(rec => rec.Component)
                     .FirstOrDefault(rec => rec.SecureName == model.SecureName ||
                     rec.Id == model.Id);
 
-                return Secure != null ?
+                return secure != null ?
                     new SecureViewModel
                     {
-                        Id = Secure.Id,
-                        SecureName = Secure.SecureName,
-                        Price = Secure.Price,
-                        SecureComponents = Secure.SecureComponents
+                        Id = secure.Id,
+                        SecureName = secure.SecureName,
+                        Price = secure.Price,
+                        SecureComponents = secure.SecureComponents
                             .ToDictionary(recSecureComponent => recSecureComponent.ComponentId,
                             recSecureComponent => (recSecureComponent.Component?.ComponentName,
                             recSecureComponent.Count))
@@ -170,10 +168,10 @@ namespace SecuritySystemDatabaseImplement.Implements
 
                         if (secure == null)
                         {
-                            throw new Exception("Компонент не найден");
+                            throw new Exception("Комлектация не найдена");
                         }
 
-                        context.Secures.Add(CreateModel(model, new Secure(), context));
+                        CreateModel(model, secure, context);
                         context.SaveChanges();
 
                         transaction.Commit();
@@ -191,14 +189,14 @@ namespace SecuritySystemDatabaseImplement.Implements
         {
             using (var context = new SecuritySystemDatabase())
             {
-                var Secure = context.Secures.FirstOrDefault(rec => rec.Id == model.Id);
+                var secure = context.Secures.FirstOrDefault(rec => rec.Id == model.Id);
 
-                if (Secure == null)
+                if (secure == null)
                 {
-                    throw new Exception("Компонент не найден");
+                    throw new Exception("Комплектация не найдена");
                 }
 
-                context.Secures.Remove(Secure);
+                context.Secures.Remove(secure);
                 context.SaveChanges();
             }
         }

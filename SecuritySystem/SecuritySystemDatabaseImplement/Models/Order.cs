@@ -1,8 +1,6 @@
 ﻿using SecuritySystemBusinessLogic.Enums;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace SecuritySystemDatabaseImplement.Models
 {
@@ -11,6 +9,8 @@ namespace SecuritySystemDatabaseImplement.Models
         public int Id { get; set; }
 
         public int SecureId { get; set; }
+
+        public virtual Secure Secure { get; set; }
 
         [Required]
         public int Count { get; set; }
@@ -25,7 +25,5 @@ namespace SecuritySystemDatabaseImplement.Models
         public DateTime DateCreate { get; set; }
 
         public DateTime? DateImplement { get; set; }
-
-        public virtual Secure Secure { get; set; }
     }
 }

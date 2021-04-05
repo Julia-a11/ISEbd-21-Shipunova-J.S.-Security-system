@@ -1,11 +1,11 @@
-﻿using SecuritySystemBusinessLogic.BindingModels;
+﻿using Microsoft.EntityFrameworkCore;
+using SecuritySystemBusinessLogic.BindingModels;
 using SecuritySystemBusinessLogic.Interfaces;
 using SecuritySystemBusinessLogic.ViewModels;
 using SecuritySystemDatabaseImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SecuritySystemDatabaseImplement.Implements
 {
@@ -28,6 +28,7 @@ namespace SecuritySystemDatabaseImplement.Implements
             using (var context = new SecuritySystemDatabase())
             {
                 return context.Orders
+                    .Include(rec => rec.Secure)
                     .Select(rec => new OrderViewModel
                     {
                         Id = rec.Id,
@@ -53,6 +54,7 @@ namespace SecuritySystemDatabaseImplement.Implements
             using (var context = new SecuritySystemDatabase())
             {
                 return context.Orders
+                    .Include(rec => rec.Secure)
                     .Where(rec => rec.SecureId == model.SecureId)
                     .Select(rec => new OrderViewModel
                     {
@@ -79,13 +81,14 @@ namespace SecuritySystemDatabaseImplement.Implements
             using (var context = new SecuritySystemDatabase())
             {
                 var order = context.Orders
+                    .Include(rec => rec.Secure)
                     .FirstOrDefault(rec => rec.Id == model.Id);
 
                 return order != null ?
                     new OrderViewModel
                     {
                         Id = order.Id,
-                        SecureName = context.Secures.FirstOrDefault(Secure => Secure.Id == order.SecureId)?.SecureName,
+                        SecureName = order.Secure.SecureName,
                         SecureId = order.SecureId,
                         Count = order.Count,
                         Sum = order.Sum,
