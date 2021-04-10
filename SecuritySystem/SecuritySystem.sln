@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecuritySystemBusinessLogic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecuritySystemListImplement", "SecuritySystemListImplement\SecuritySystemListImplement.csproj", "{09D113C9-2B8C-46D8-BD01-B1C6F898831F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecuritySystemFileImplement", "SecuritySystemFileImplement\SecuritySystemFileImplement.csproj", "{F19940ED-5246-4B78-A4C4-68C681680552}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecuritySystemFileImplement", "SecuritySystemFileImplement\SecuritySystemFileImplement.csproj", "{F19940ED-5246-4B78-A4C4-68C681680552}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecuritySystemDatabaseImplement", "SecuritySystemDatabaseImplement\SecuritySystemDatabaseImplement.csproj", "{B8D5086B-63B6-4F46-A4FD-D97E2C2AA04A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{F19940ED-5246-4B78-A4C4-68C681680552}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F19940ED-5246-4B78-A4C4-68C681680552}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F19940ED-5246-4B78-A4C4-68C681680552}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8D5086B-63B6-4F46-A4FD-D97E2C2AA04A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8D5086B-63B6-4F46-A4FD-D97E2C2AA04A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8D5086B-63B6-4F46-A4FD-D97E2C2AA04A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8D5086B-63B6-4F46-A4FD-D97E2C2AA04A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
