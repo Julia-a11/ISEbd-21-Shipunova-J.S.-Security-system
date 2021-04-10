@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.12.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SecuritySystemBusinessLogic\SecuritySystemBusinessLogic.csproj" />
   </ItemGroup>
 
