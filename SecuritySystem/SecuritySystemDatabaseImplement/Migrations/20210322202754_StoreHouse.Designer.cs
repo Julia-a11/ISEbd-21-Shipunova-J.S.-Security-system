@@ -10,8 +10,8 @@ using SecuritySystemDatabaseImplement;
 namespace SecuritySystemDatabaseImplement.Migrations
 {
     [DbContext(typeof(SecuritySystemDatabase))]
-    [Migration("20210410200946_Create")]
-    partial class Create
+    [Migration("20210322202754_StoreHouse")]
+    partial class StoreHouse
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
