@@ -96,7 +96,7 @@ namespace SecuritySystemView
             this.списокКомплектовToolStripMenuItem.Name = "списокКомплектовToolStripMenuItem";
             this.списокКомплектовToolStripMenuItem.Size = new System.Drawing.Size(253, 22);
             this.списокКомплектовToolStripMenuItem.Text = "Список комплектов";
-            this.списокКомплектовToolStripMenuItem.Click += new System.EventHandler(this.списокКомпонентовToolStripMenuItem_Click);
+            this.списокКомплектовToolStripMenuItem.Click += new System.EventHandler(this.списокКомплектовToolStripMenuItem_Click);
             // 
             // компонентыПоКомплектациямToolStripMenuItem
             // 

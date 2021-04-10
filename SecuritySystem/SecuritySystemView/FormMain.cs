@@ -130,7 +130,7 @@ namespace SecuritySystemView
             LoadData();
         }
 
-        private void списокКомпонентовToolStripMenuItem_Click(object sender, EventArgs e)
+        private void списокКомплектовToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
             {

@@ -20,7 +20,6 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             _orderStorage = orderStorage;
         }
 
-        //  Получение списка компонент с указанием, в каких изделиях используются
         public List<ReportSecureComponentViewModel> GetSecureComponent()
         {
             var secures = _secureStorage.GetFullList();
@@ -45,24 +44,22 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             return list;
         }
 
-        // Получение списка заказов за определенный период
         public List<ReportOrdersViewModel> GetOrders(ReportBindingModel model)
         {
             return _orderStorage.GetFilteredList(new OrderBindingModel
             {
                 DateFrom = model.DateFrom,
                 DateTo = model.DateTo
-            }).Select(x => new ReportOrdersViewModel
+            }).Select(rec => new ReportOrdersViewModel
             {
-                DateCreate = x.DateCreate,
-                SecureName = x.SecureName,
-                Count = x.Count,
-                Sum = x.Sum,
-                Status = x.Status
+                DateCreate = rec.DateCreate,
+                SecureName = rec.SecureName,
+                Count = rec.Count,
+                Sum = rec.Sum,
+                Status = rec.Status
             }).ToList();
         }
 
-        // Сохранение компонент в файл-Word
         public void SaveSecuresToWordFile(ReportBindingModel model)
         {
             SaveToWord.CreateDoc(new WordInfo
@@ -73,7 +70,6 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             });
         }
 
-        // Сохранение компонент с указаеним продуктов в файл-Excel
         public void SaveSecureComponentToExcelFile(ReportBindingModel model)
         {
             SaveToExcel.CreateDoc(new ExcelInfo
@@ -84,7 +80,6 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             });
         }
 
-        // Сохранение заказов в файл-Pdf
         public void SaveOrdersToPdfFile(ReportBindingModel model)
         {
             SaveToPdf.CreateDoc(new PdfInfo

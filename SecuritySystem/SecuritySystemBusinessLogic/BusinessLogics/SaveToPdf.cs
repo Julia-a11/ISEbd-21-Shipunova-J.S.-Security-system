@@ -83,7 +83,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                     Text = rowParameters.Texts[i],
                     Style = rowParameters.Style,
                     BorderWidth = 0.5,
-                    ParagraphAlignment = rowParameters.ParagraphAligment
+                    ParagraphAlignment = rowParameters.ParagraphAlignment
                 });
             }
         }

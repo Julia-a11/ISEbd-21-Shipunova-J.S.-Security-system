@@ -85,7 +85,7 @@ namespace SecuritySystemView
             this.Controls.Add(this.dataGridViewReportSecureComponents);
             this.Controls.Add(this.buttonSaveToExcel);
             this.Name = "FormReportSecureComponents";
-            this.Text = "Компоненты по изделиям";
+            this.Text = "Компоненты по комплектациям";
             this.Load += new System.EventHandler(this.FormReportSecureComponents_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReportSecureComponents)).EndInit();
             this.ResumeLayout(false);

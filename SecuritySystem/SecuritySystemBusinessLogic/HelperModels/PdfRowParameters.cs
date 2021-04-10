@@ -12,7 +12,6 @@ namespace SecuritySystemBusinessLogic.HelperModels
 
         public string Style { get; set; }
 
-        public ParagraphAlignment ParagraphAligment { get; set; }
-        public ParagraphAlignment ParagraphAlignment { get; internal set; }
+        public ParagraphAlignment ParagraphAlignment { get; set; }
     }
 }

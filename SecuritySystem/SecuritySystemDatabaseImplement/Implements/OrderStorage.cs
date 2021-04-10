@@ -55,6 +55,7 @@ namespace SecuritySystemDatabaseImplement.Implements
             {
                 return context.Orders
                     .Include(rec => rec.Secure)
+                    // Т.к. если указан id, мы не попадаем в этот метод, я полностью заменила условие 
                     .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && 
                         rec.DateCreate.Date == model.DateCreate.Date) ||
                         (model.DateFrom.HasValue && model.DateTo.HasValue && 
