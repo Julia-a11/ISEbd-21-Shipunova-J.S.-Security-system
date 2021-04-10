@@ -2,13 +2,6 @@
 using SecuritySystemBusinessLogic.BindingModels;
 using SecuritySystemBusinessLogic.BusinessLogics;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 
@@ -29,7 +22,6 @@ namespace SecuritySystemView
 
         private void FormReportOrders_Load(object sender, EventArgs e)
         {
-
             reportViewerOrders.RefreshReport();
         }
 
@@ -55,8 +47,7 @@ namespace SecuritySystemView
                     DateFrom = dateTimePickerFrom.Value,
                     DateTo = dateTimePickerTo.Value
                 });
-                ReportDataSource source = new ReportDataSource("DataSetOrders",
-dataSource);
+                ReportDataSource source = new ReportDataSource("DataSetOrders", dataSource);
                 reportViewerOrders.LocalReport.DataSources.Add(source);
                 reportViewerOrders.RefreshReport();
             }
@@ -92,8 +83,7 @@ dataSource);
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-MessageBoxIcon.Error);
+                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }

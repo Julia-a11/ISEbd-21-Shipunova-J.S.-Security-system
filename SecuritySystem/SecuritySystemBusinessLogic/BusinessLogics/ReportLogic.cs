@@ -52,17 +52,14 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             {
                 DateFrom = model.DateFrom,
                 DateTo = model.DateTo
-            })
-                .Select(x => new ReportOrdersViewModel
-                {
-                    DateCreate = x.DateCreate,
-                    SecureName = x.SecureName,
-                    Count = x.Count,
-                    Sum = x.Sum,
-                    Status = x.Status
-
-                })
-                .ToList();
+            }).Select(x => new ReportOrdersViewModel
+            {
+                DateCreate = x.DateCreate,
+                SecureName = x.SecureName,
+                Count = x.Count,
+                Sum = x.Sum,
+                Status = x.Status
+            }).ToList();
         }
 
         // Сохранение компонент в файл-Word
@@ -88,7 +85,6 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
         }
 
         // Сохранение заказов в файл-Pdf
-        [Obsolete]
         public void SaveOrdersToPdfFile(ReportBindingModel model)
         {
             SaveToPdf.CreateDoc(new PdfInfo

@@ -2,14 +2,12 @@
 using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
 using SecuritySystemBusinessLogic.HelperModels;
-using System;
 using System.Collections.Generic;
 
 namespace SecuritySystemBusinessLogic.BusinessLogics
 {
-    class SaveToPdf
+    public static class SaveToPdf
     {
-        [Obsolete]
         public static void CreateDoc(PdfInfo info)
         {
             Document document = new Document();
