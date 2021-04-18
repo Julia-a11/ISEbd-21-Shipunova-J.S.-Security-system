@@ -1,4 +1,5 @@
 ﻿using SecuritySystemBusinessLogic.BindingModels;
+using SecuritySystemBusinessLogic.Enums;
 using SecuritySystemBusinessLogic.Interfaces;
 using SecuritySystemBusinessLogic.ViewModels;
 using SecuritySystemFileImplement.Models;
@@ -36,7 +37,9 @@ namespace SecuritySystemFileImplement.Implements
                 !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) ||
                 (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >=
                 model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) ||
-                (model.ClientId.HasValue && rec.ClientId == model.ClientId))
+                (model.ClientId.HasValue && rec.ClientId == model.ClientId) || 
+                (model.FreeOrders.HasValue && model.FreeOrders.Value && rec.Status == OrderStatus.Принят) ||
+                (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && rec.Status == OrderStatus.Выполняется))
                   .Select(CreateModel)
                   .ToList();
         }
@@ -55,9 +58,16 @@ namespace SecuritySystemFileImplement.Implements
 
         public void Insert(OrderBindingModel model)
         {
+            if (!model.ClientId.HasValue)
+            {
+                throw new Exception("Клиент не указан");
+            }
             int maxId = source.Orders.Count > 0 ? source.Orders.Max(
                 rec => rec.Id) : 0;
-            var order = new Order { Id = maxId + 1, DateCreate = DateTime.Now };
+            var order = new Order { 
+                Id = maxId + 1
+                //DateCreate = DateTime.Now
+            };
             source.Orders.Add(CreateModel(model, order));
         }
 
@@ -92,6 +102,7 @@ namespace SecuritySystemFileImplement.Implements
         {
             order.SecureId = model.SecureId;
             order.ClientId = Convert.ToInt32(model.ClientId);
+            order.ImplementerId = model.ImplementerId;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -107,8 +118,10 @@ namespace SecuritySystemFileImplement.Implements
                 Id = order.Id,
                 SecureId = order.SecureId,
                 ClientId = order.ClientId,
+                ImplementerId = (int)order.ImplementerId,
                 ClientFIO = source.Clients.FirstOrDefault(client =>  client.Id == order.ClientId)?.ClientFIO,
                 SecureName = source.Secures.FirstOrDefault(secure => secure.Id == order.SecureId)?.SecureName,
+                ImplementerFIO = source.Implementers.FirstOrDefault(implementer => implementer.Id == order.ImplementerId)?.ImplementerFIO,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,

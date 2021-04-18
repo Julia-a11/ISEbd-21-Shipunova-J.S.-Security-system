@@ -14,14 +14,16 @@ namespace SecuritySystemView
         private readonly OrderLogic _orderLogic;
 
         private readonly ReportLogic _reportLogic;
-       
-        public FormMain(OrderLogic orderLogic, ReportLogic reportLogic)
+
+        private readonly WorkModeling _workModeling;
+
+        public FormMain(OrderLogic orderLogic, ReportLogic reportLogic, WorkModeling workModeling)
         {
-            InitializeComponent();
-           _orderLogic = orderLogic;
+            _orderLogic = orderLogic;
             _reportLogic = reportLogic;
+            _workModeling = workModeling;
         }
-      
+
         private void FormMain_Load(object sender, EventArgs e)
         {
             LoadData();
@@ -37,7 +39,8 @@ namespace SecuritySystemView
                     dataGridViewOrders.DataSource = list;
                     dataGridViewOrders.Columns[0].Visible = false;
                     dataGridViewOrders.Columns[1].Visible = false;
-                    dataGridViewOrders.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridViewOrders.Columns[3].Visible = false;
+                    dataGridViewOrders.Columns[4].Visible = false;
                 }
             }
             catch (Exception ex)
@@ -64,47 +67,6 @@ namespace SecuritySystemView
             var form = Container.Resolve<FormCreateOrder>();
             form.ShowDialog();
             LoadData();
-        }
-
-        private void buttonTakeOrderInWork_Click(object sender, EventArgs e)
-        {
-            if (dataGridViewOrders.SelectedRows.Count == 1)
-            {
-                int id = Convert.ToInt32(dataGridViewOrders.SelectedRows[0].Cells[0].Value);
-                try
-                {
-                    _orderLogic.TakeOrderInWork(new ChangeStatusBindingModel
-                    {
-                        OrderId = id
-                    });
-                    LoadData();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-                   MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void buttonOrderReady_Click(object sender, EventArgs e)
-        {
-            {
-                int id = Convert.ToInt32(dataGridViewOrders.SelectedRows[0].Cells[0].Value);
-                try
-                {
-                    _orderLogic.FinishOrder(new ChangeStatusBindingModel
-                    {
-                        OrderId = id
-                    });
-                    LoadData();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-                   MessageBoxIcon.Error);
-                }
-            }
         }
 
         private void buttonOrderPayed_Click(object sender, EventArgs e)
@@ -165,6 +127,18 @@ namespace SecuritySystemView
         {
             var form = Container.Resolve<FormClients>();
             form.ShowDialog();
+        }
+
+        private void исполнителиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormImplementers>();
+            form.ShowDialog();
+        }
+
+        private void запускРаботToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _workModeling.DoWork();
+            LoadData();
         }
     }
 }
