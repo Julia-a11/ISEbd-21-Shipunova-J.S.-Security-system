@@ -40,6 +40,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             _orderStorage.Insert(new OrderBindingModel
             {
                 SecureId = model.SecureId,
+                ClientId = model.ClientId,
                 Count = model.Count,
                 Sum = model.Sum,
                 DateCreate = DateTime.Now,

@@ -14,6 +14,7 @@ namespace SecuritySystemDatabaseImplement.Implements
         private Order CreateModel(OrderBindingModel model, Order order)
         {
             order.SecureId = model.SecureId;
+            order.ClientId = Convert.ToInt32(model.ClientId);
             order.Sum = model.Sum;
             order.Count = model.Count;
             order.Status = model.Status;
@@ -23,23 +24,31 @@ namespace SecuritySystemDatabaseImplement.Implements
             return order;
         }
 
+        private OrderViewModel CreateModel(Order order)
+        {
+            return new OrderViewModel
+            {
+                Id = order.Id,
+                SecureId = order.Id,
+                ClientId = order.ClientId,
+                ClientFIO = order.Client.ClientFIO,
+                SecureName = order.Secure.SecureName,
+                Sum = order.Sum,
+                Count = order.Count,
+                Status = order.Status,
+                DateCreate = order.DateCreate,
+                DateImplement = order?.DateImplement
+            };
+        }
+
         public List<OrderViewModel> GetFullList()
         {
             using (var context = new SecuritySystemDatabase())
             {
                 return context.Orders
                     .Include(rec => rec.Secure)
-                    .Select(rec => new OrderViewModel
-                    {
-                        Id = rec.Id,
-                        SecureName = rec.Secure.SecureName,
-                        SecureId = rec.SecureId,
-                        Count = rec.Count,
-                        Sum = rec.Sum,
-                        Status = rec.Status,
-                        DateCreate = rec.DateCreate,
-                        DateImplement = rec.DateImplement
-                    })
+                    .Include(rec => rec.Client)
+                    .Select(CreateModel)
                     .ToList();
             }
         }
@@ -55,18 +64,13 @@ namespace SecuritySystemDatabaseImplement.Implements
             {
                 return context.Orders
                     .Include(rec => rec.Secure)
-                    .Where(rec => rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
-                    .Select(rec => new OrderViewModel
-                    {
-                        Id = rec.Id,
-                        SecureName = rec.Secure.SecureName,
-                        SecureId = rec.SecureId,
-                        Count = rec.Count,
-                        Sum = rec.Sum,
-                        Status = rec.Status,
-                        DateCreate = rec.DateCreate,
-                        DateImplement = rec.DateImplement
-                    })
+                    .Include(rec => rec.Client)
+                    .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue &&
+                    rec.DateCreate.Date == model.DateCreate.Date) || (model.DateFrom.HasValue &&
+                    model.DateTo.HasValue && rec.DateCreate.Date >= model.DateFrom.Value.Date &&
+                    rec.DateCreate.Date <= model.DateTo.Value.Date) || (model.ClientId.HasValue &&
+                    rec.ClientId == model.ClientId))
+                    .Select(CreateModel)
                     .ToList();
             }
         }
@@ -82,26 +86,21 @@ namespace SecuritySystemDatabaseImplement.Implements
             {
                 var order = context.Orders
                     .Include(rec => rec.Secure)
+                    .Include(rec => rec.Client)
                     .FirstOrDefault(rec => rec.Id == model.Id);
 
                 return order != null ?
-                    new OrderViewModel
-                    {
-                        Id = order.Id,
-                        SecureName = order.Secure.SecureName,
-                        SecureId = order.SecureId,
-                        Count = order.Count,
-                        Sum = order.Sum,
-                        Status = order.Status,
-                        DateCreate = order.DateCreate,
-                        DateImplement = order.DateImplement
-                    } :
-                    null;
+                    CreateModel(order) : null;
             }
         }
 
         public void Insert(OrderBindingModel model)
         {
+            if (!model.ClientId.HasValue)
+            {
+                throw new Exception("Клиент не указан");
+            }
+
             using (var context = new SecuritySystemDatabase())
             {
                 context.Orders.Add(CreateModel(model, new Order()));
@@ -113,13 +112,19 @@ namespace SecuritySystemDatabaseImplement.Implements
         {
             using (var context = new SecuritySystemDatabase())
             {
-                var order = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
+                var order = context.Orders
+                    .Include(rec => rec.Secure)
+                    .Include(rec => rec.Client)
+                    .FirstOrDefault(rec => rec.Id == model.Id);
 
                 if (order == null)
                 {
                     throw new Exception("Заказ не найден");
                 }
-
+                if (!model.ClientId.HasValue)
+                {
+                    model.ClientId = order.ClientId;
+                }
                 CreateModel(model, order);
                 context.SaveChanges();
             }
