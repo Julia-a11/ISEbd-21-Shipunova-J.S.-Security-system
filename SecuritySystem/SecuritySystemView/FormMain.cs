@@ -19,6 +19,7 @@ namespace SecuritySystemView
 
         public FormMain(OrderLogic orderLogic, ReportLogic reportLogic, WorkModeling workModeling)
         {
+            InitializeComponent();
             _orderLogic = orderLogic;
             _reportLogic = reportLogic;
             _workModeling = workModeling;

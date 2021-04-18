@@ -61,7 +61,7 @@ namespace SecuritySystemView
             {
                 _logic.CreateOrUpdate(new ImplementerBindingModel
                 {
-                    Id = (int)id,
+                    Id = id,
                     ImplementerFIO = textBoxFIO.Text,
                     WorkingTime = Convert.ToInt32(textBoxWorkingTime.Text),
                     PauseTime = Convert.ToInt32(textBoxPauseTime.Text)

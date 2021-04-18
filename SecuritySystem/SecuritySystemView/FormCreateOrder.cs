@@ -32,7 +32,7 @@ namespace SecuritySystemView
         {
             try
             {
-                /*
+                
                 List<SecureViewModel> list = _logicSecure.Read(null);
                 if (list != null)
                 {
@@ -41,7 +41,7 @@ namespace SecuritySystemView
                     comboBoxSecure.DataSource = list;
                     comboBoxSecure.SelectedItem = null;
                 }
-                */
+                
 
                 var secures = _logicSecure.Read(null);
                 var clients = _logicClient.Read(null);

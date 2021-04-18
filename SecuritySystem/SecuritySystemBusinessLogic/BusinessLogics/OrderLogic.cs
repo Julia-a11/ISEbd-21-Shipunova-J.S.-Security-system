@@ -59,7 +59,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                 }
                 if (order.Status != OrderStatus.Принят)
                 {
-                    throw new Exception("Order isn't in the status \"Accepted\"");
+                    throw new Exception("Заказ ещё не принят");
                 }
                 if (order.ImplementerId.HasValue)
                 {
@@ -97,6 +97,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 SecureId = order.SecureId,
+                ClientId = order.ClientId,
                 ImplementerId = order.ImplementerId,
                 Count = order.Count,
                 Sum = order.Sum,
@@ -124,6 +125,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 SecureId = order.SecureId,
+                ClientId = order.ClientId,
                 ImplementerId = order.ImplementerId,
                 Count = order.Count,
                 Sum = order.Sum,
