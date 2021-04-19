@@ -2,10 +2,8 @@
 using SecuritySystemBusinessLogic.BindingModels;
 using SecuritySystemBusinessLogic.BusinessLogics;
 using SecuritySystemBusinessLogic.ViewModels;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SecuritySystemRestApi.Controllers
 {
@@ -29,17 +27,15 @@ namespace SecuritySystemRestApi.Controllers
 
         [HttpGet]
         public List<SecureViewModel> GetSecureList() => _secure.Read(null)?.ToList();
-        
+
         [HttpGet]
-        public SecureViewModel GetSecure(int SecureId) => _secure.Read(new
-       SecureBindingModel
+        public SecureViewModel GetSecure(int SecureId) => _secure.Read(new SecureBindingModel
         { Id = SecureId })?[0];
-        
+
         [HttpGet]
-        public List<OrderViewModel> GetOrders(int clientId) => _order.Read(new
-       OrderBindingModel
+        public List<OrderViewModel> GetOrders(int clientId) => _order.Read(new OrderBindingModel
         { ClientId = clientId });
-       
+
         [HttpPost]
         public void CreateOrder(CreateOrderBindingModel model) =>
        _main.CreateOrder(model);
