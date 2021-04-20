@@ -102,7 +102,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement,
+                DateImplement = DateTime.Now,
                 Status = OrderStatus.Готов
             });
         }
