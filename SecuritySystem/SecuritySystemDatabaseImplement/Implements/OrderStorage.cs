@@ -81,7 +81,6 @@ namespace SecuritySystemDatabaseImplement.Implements
                     OrderStatus.Принят) ||
                     (model.ImplementerId.HasValue && rec.ImplementerId ==
                      model.ImplementerId && rec.Status == OrderStatus.Выполняется))
-
                     .Select(CreateModel)
                     .ToList();
             }
@@ -102,8 +101,7 @@ namespace SecuritySystemDatabaseImplement.Implements
                     .Include(rec => rec.Implementer)
                     .FirstOrDefault(rec => rec.Id == model.Id);
 
-                return order != null ?
-                    CreateModel(order) : null;
+                return order != null ? CreateModel(order) : null;
             }
         }
 

@@ -40,8 +40,8 @@ namespace SecuritySystemView
                     dataGridViewOrders.DataSource = list;
                     dataGridViewOrders.Columns[0].Visible = false;
                     dataGridViewOrders.Columns[1].Visible = false;
+                    dataGridViewOrders.Columns[2].Visible = false;
                     dataGridViewOrders.Columns[3].Visible = false;
-                    dataGridViewOrders.Columns[4].Visible = false;
                 }
             }
             catch (Exception ex)
