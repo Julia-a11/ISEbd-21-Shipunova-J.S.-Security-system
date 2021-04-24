@@ -130,7 +130,7 @@ namespace SecuritySystemView
             LoadData();
         }
 
-        private void списокКомпонентовToolStripMenuItem_Click(object sender, EventArgs e)
+        private void списокКомплектовToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
             {
@@ -138,8 +138,7 @@ namespace SecuritySystemView
                 {
                     _reportLogic.SaveSecuresToWordFile(new ReportBindingModel
                     {
-                        FileName =
-                   dialog.FileName
+                        FileName = dialog.FileName
                     });
                     MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
                    MessageBoxIcon.Information);
@@ -147,7 +146,7 @@ namespace SecuritySystemView
             }
         }
 
-        private void компонентыПоИзделиямToolStripMenuItem_Click(object sender, EventArgs e)
+        private void компонентыПоКомплектациямToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormReportSecureComponents>();
             form.ShowDialog();
