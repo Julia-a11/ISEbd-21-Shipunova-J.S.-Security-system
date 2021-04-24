@@ -68,10 +68,6 @@ namespace SecuritySystemFileImplement.Implements
             {
                 throw new Exception("Заказ не найден");
             }
-            if (!model.ClientId.HasValue)
-            {
-                model.ClientId = order.ClientId;
-            }
             CreateModel(model, order);
         }
 
@@ -91,7 +87,7 @@ namespace SecuritySystemFileImplement.Implements
         private Order CreateModel(OrderBindingModel model, Order order)
         {
             order.SecureId = model.SecureId;
-            order.ClientId = Convert.ToInt32(model.ClientId);
+            order.ClientId = model.ClientId.Value;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -107,7 +103,7 @@ namespace SecuritySystemFileImplement.Implements
                 Id = order.Id,
                 SecureId = order.SecureId,
                 ClientId = order.ClientId,
-                ClientFIO = source.Clients.FirstOrDefault(client =>  client.Id == order.ClientId)?.ClientFIO,
+                ClientFIO = source.Clients.FirstOrDefault(client => client.Id == order.ClientId)?.ClientFIO,
                 SecureName = source.Secures.FirstOrDefault(secure => secure.Id == order.SecureId)?.SecureName,
                 Count = order.Count,
                 Sum = order.Sum,

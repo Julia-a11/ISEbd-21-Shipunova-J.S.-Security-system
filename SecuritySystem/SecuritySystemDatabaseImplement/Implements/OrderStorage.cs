@@ -14,7 +14,7 @@ namespace SecuritySystemDatabaseImplement.Implements
         private Order CreateModel(OrderBindingModel model, Order order)
         {
             order.SecureId = model.SecureId;
-            order.ClientId = Convert.ToInt32(model.ClientId);
+            order.ClientId = model.ClientId.Value;
             order.Sum = model.Sum;
             order.Count = model.Count;
             order.Status = model.Status;
@@ -37,7 +37,7 @@ namespace SecuritySystemDatabaseImplement.Implements
                 Count = order.Count,
                 Status = order.Status,
                 DateCreate = order.DateCreate,
-                DateImplement = order?.DateImplement
+                DateImplement = order.DateImplement
             };
         }
 
@@ -66,10 +66,11 @@ namespace SecuritySystemDatabaseImplement.Implements
                     .Include(rec => rec.Secure)
                     .Include(rec => rec.Client)
                     .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue &&
-                    rec.DateCreate.Date == model.DateCreate.Date) || (model.DateFrom.HasValue &&
-                    model.DateTo.HasValue && rec.DateCreate.Date >= model.DateFrom.Value.Date &&
-                    rec.DateCreate.Date <= model.DateTo.Value.Date) || (model.ClientId.HasValue &&
-                    rec.ClientId == model.ClientId))
+                    rec.DateCreate.Date == model.DateCreate.Date) || 
+                    (model.DateFrom.HasValue && model.DateTo.HasValue && 
+                    rec.DateCreate.Date >= model.DateFrom.Value.Date &&
+                    rec.DateCreate.Date <= model.DateTo.Value.Date) || 
+                    (model.ClientId.HasValue && rec.ClientId == model.ClientId))
                     .Select(CreateModel)
                     .ToList();
             }
@@ -96,11 +97,6 @@ namespace SecuritySystemDatabaseImplement.Implements
 
         public void Insert(OrderBindingModel model)
         {
-            if (!model.ClientId.HasValue)
-            {
-                throw new Exception("Клиент не указан");
-            }
-
             using (var context = new SecuritySystemDatabase())
             {
                 context.Orders.Add(CreateModel(model, new Order()));
@@ -112,19 +108,13 @@ namespace SecuritySystemDatabaseImplement.Implements
         {
             using (var context = new SecuritySystemDatabase())
             {
-                var order = context.Orders
-                    .Include(rec => rec.Secure)
-                    .Include(rec => rec.Client)
-                    .FirstOrDefault(rec => rec.Id == model.Id);
+                var order = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
 
                 if (order == null)
                 {
                     throw new Exception("Заказ не найден");
                 }
-                if (!model.ClientId.HasValue)
-                {
-                    model.ClientId = order.ClientId;
-                }
+
                 CreateModel(model, order);
                 context.SaveChanges();
             }

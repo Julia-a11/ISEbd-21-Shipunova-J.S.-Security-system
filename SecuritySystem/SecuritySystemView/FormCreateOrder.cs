@@ -32,25 +32,24 @@ namespace SecuritySystemView
         {
             try
             {
-                /*
-                List<SecureViewModel> list = _logicSecure.Read(null);
-                if (list != null)
-                {
-                    comboBoxSecure.DisplayMember = "SecureName";
-                    comboBoxSecure.ValueMember = "Id";
-                    comboBoxSecure.DataSource = list;
-                    comboBoxSecure.SelectedItem = null;
-                }
-                */
-
                 var secures = _logicSecure.Read(null);
                 var clients = _logicClient.Read(null);
-                comboBoxSecure.DataSource = secures;
-                comboBoxSecure.DisplayMember = "SecureName";
-                comboBoxSecure.ValueMember = "Id";
-                comboBoxClient.DataSource = clients;
-                comboBoxClient.DisplayMember = "ClientFIO";
-                comboBoxClient.ValueMember = "Id";
+
+                if (secures != null)
+                {
+                    comboBoxSecure.DataSource = secures;
+                    comboBoxSecure.DisplayMember = "SecureName";
+                    comboBoxSecure.ValueMember = "Id";
+                    comboBoxSecure.SelectedItem = null;
+                }
+                
+                if (clients != null)
+                {
+                    comboBoxClient.DataSource = clients;
+                    comboBoxClient.DisplayMember = "ClientFIO";
+                    comboBoxClient.ValueMember = "Id";
+                    comboBoxClient.SelectedItem = null;
+                }
             }
             catch (Exception ex)
             {
