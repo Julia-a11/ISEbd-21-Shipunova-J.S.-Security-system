@@ -20,7 +20,7 @@ namespace SecuritySystemListImplement.Implements
         private Client CreateModel(ClientBindingModel model, Client client)
         {
             client.ClientFIO = model.ClientFIO;
-            client.Login = model.Login;
+            client.Login = model.Email;
             client.Password = model.Password;
             return client;
         }
@@ -31,7 +31,7 @@ namespace SecuritySystemListImplement.Implements
             {
                 Id = client.Id,
                 ClientFIO = client.ClientFIO,
-                Login = client.Login,
+                Email = client.Login,
                 Password = client.Password
             };
         }

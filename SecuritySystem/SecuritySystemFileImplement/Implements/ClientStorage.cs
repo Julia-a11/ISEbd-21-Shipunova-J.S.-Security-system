@@ -21,7 +21,7 @@ namespace SecuritySystemFileImplement.Implements
         private Client CreateModel(ClientBindingModel model, Client client)
         {
             client.ClientFIO = model.ClientFIO;
-            client.Login = model.Login;
+            client.Login = model.Email;
             client.Password = model.Password;
             return client;
         }
@@ -32,7 +32,7 @@ namespace SecuritySystemFileImplement.Implements
             {
                 Id = client.Id,
                 ClientFIO = client.ClientFIO,
-                Login = client.Login,
+                Email = client.Login,
                 Password = client.Password
             };
         }
@@ -55,7 +55,7 @@ namespace SecuritySystemFileImplement.Implements
                 return null;
             }
             var client = source.Clients
-            .FirstOrDefault(rec => rec.Login == model.Login || rec.Id == model.Id);
+            .FirstOrDefault(rec => rec.Login == model.Email || rec.Id == model.Id);
             return client != null ? CreateModel(client) : null;
         }
 

@@ -25,7 +25,7 @@ namespace SecuritySystemRestApi.Controllers
         {
             return _logic.Read(new ClientBindingModel
             {
-                Login = login,
+                Email = login,
                 Password = password
             }).FirstOrDefault();
         }
