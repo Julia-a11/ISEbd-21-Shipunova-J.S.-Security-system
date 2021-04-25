@@ -123,7 +123,7 @@ namespace SecuritySystemView
             this.Controls.Add(this.reportViewerOrders);
             this.Controls.Add(this.panelDate);
             this.Name = "FormReportOrders";
-            this.Text = "FormReportOrders";
+            this.Text = "Отчёт по заказам";
             this.Load += new System.EventHandler(this.FormReportOrders_Load);
             this.panelDate.ResumeLayout(false);
             this.panelDate.PerformLayout();

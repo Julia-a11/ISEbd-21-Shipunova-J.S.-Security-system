@@ -145,7 +145,6 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             });
         }
 
-        [Obsolete]
         public void SaveOrdersInfoToPdfFile(ReportBindingModel model)
         {
             SaveToPdf.CreateDocForStoreHouse(new PdfInfoForOrder

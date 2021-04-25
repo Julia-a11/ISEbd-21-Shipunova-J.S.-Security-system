@@ -84,7 +84,6 @@ namespace SecuritySystemView
             this.Controls.Add(this.buttonCreate);
             this.Name = "FormReportOrdersByDate";
             this.Text = "Отчёты по заказам";
-            this.Load += new System.EventHandler(this.FormReportOrdersByDate_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ReportStoreHouseByDateViewModelBindingSource)).EndInit();
             this.ResumeLayout(false);
 

@@ -150,7 +150,6 @@ namespace SecuritySystemView
         {
             var form = Container.Resolve<FormReportSecureComponents>();
             form.ShowDialog();
-
         }
 
         private void списокЗаказовToolStripMenuItem_Click(object sender, EventArgs e)
@@ -158,6 +157,7 @@ namespace SecuritySystemView
             var form = Container.Resolve<FormReportOrders>();
             form.ShowDialog();
         }
+
         private void складыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormStoreHouses>();
@@ -168,7 +168,6 @@ namespace SecuritySystemView
         {
             var form = Container.Resolve<FormReplenishmentStoreHouse>();
             form.ShowDialog();
-
         }
 
         private void списокКомпонентовВСкладахToolStripMenuItem_Click(object sender, EventArgs e)
@@ -191,8 +190,7 @@ namespace SecuritySystemView
                 {
                     _reportLogic.SaveStoreHousesToWordFile(new ReportBindingModel
                     {
-                        FileName =
-                   dialog.FileName
+                        FileName = dialog.FileName
                     });
                     MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
                    MessageBoxIcon.Information);

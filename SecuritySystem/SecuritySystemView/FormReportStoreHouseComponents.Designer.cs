@@ -31,9 +31,9 @@ namespace SecuritySystemView
         {
             this.dataGridViewReportStoreHouseComponents = new System.Windows.Forms.DataGridView();
             this.buttonSaveToExcel = new System.Windows.Forms.Button();
-            this.Secure = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Component = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StoreHouseColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ComponentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReportStoreHouseComponents)).BeginInit();
             this.SuspendLayout();
             // 
@@ -41,9 +41,9 @@ namespace SecuritySystemView
             // 
             this.dataGridViewReportStoreHouseComponents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewReportStoreHouseComponents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Secure,
-            this.Component,
-            this.Count});
+            this.StoreHouseColumn,
+            this.ComponentColumn,
+            this.CountColumn});
             this.dataGridViewReportStoreHouseComponents.Location = new System.Drawing.Point(12, 55);
             this.dataGridViewReportStoreHouseComponents.Name = "dataGridViewReportStoreHouseComponents";
             this.dataGridViewReportStoreHouseComponents.Size = new System.Drawing.Size(507, 389);
@@ -60,22 +60,22 @@ namespace SecuritySystemView
             this.buttonSaveToExcel.UseVisualStyleBackColor = true;
             this.buttonSaveToExcel.Click += new System.EventHandler(this.buttonSaveToExcel_Click);
             // 
-            // Secure
+            // StoreHouseColumn
             // 
-            this.Secure.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Secure.HeaderText = "Склад";
-            this.Secure.Name = "Secure";
+            this.StoreHouseColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.StoreHouseColumn.HeaderText = "Склад";
+            this.StoreHouseColumn.Name = "StoreHouseColumn";
             // 
-            // Component
+            // ComponentColumn
             // 
-            this.Component.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Component.HeaderText = "Компонент";
-            this.Component.Name = "Component";
+            this.ComponentColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ComponentColumn.HeaderText = "Компонент";
+            this.ComponentColumn.Name = "ComponentColumn";
             // 
-            // Count
+            // CountColumn
             // 
-            this.Count.HeaderText = "Количество";
-            this.Count.Name = "Count";
+            this.CountColumn.HeaderText = "Количество";
+            this.CountColumn.Name = "CountColumn";
             // 
             // FormReportStoreHouseComponents
             // 
@@ -95,9 +95,9 @@ namespace SecuritySystemView
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridViewReportStoreHouseComponents;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Secure;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Component;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Count;
         private System.Windows.Forms.Button buttonSaveToExcel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StoreHouseColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ComponentColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CountColumn;
     }
 }
