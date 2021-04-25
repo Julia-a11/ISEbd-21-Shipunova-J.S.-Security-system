@@ -55,7 +55,11 @@ namespace SecuritySystemDatabaseImplement.Implements
             {
                 return context.Orders
                     .Include(rec => rec.Secure)
-                    .Where(rec => rec.SecureId == model.SecureId)
+                    .Where(rec => (rec.SecureId == model.SecureId) ||
+                        (!model.DateFrom.HasValue && !model.DateTo.HasValue && 
+                        rec.DateCreate.Date == model.DateCreate.Date) ||
+                        (model.DateFrom.HasValue && model.DateTo.HasValue && 
+                        rec.DateCreate.Date >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date))
                     .Select(rec => new OrderViewModel
                     {
                         Id = rec.Id,
