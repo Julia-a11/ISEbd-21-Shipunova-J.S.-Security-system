@@ -29,7 +29,7 @@ namespace SecuritySystemView
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelDate = new System.Windows.Forms.Panel();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCreate = new System.Windows.Forms.Button();
             this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
@@ -37,21 +37,22 @@ namespace SecuritySystemView
             this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
             this.labelFrom = new System.Windows.Forms.Label();
             this.reportViewerOrders = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.panel1.SuspendLayout();
+            this.panelDate.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // panelDate
             // 
-            this.panel1.Controls.Add(this.buttonSave);
-            this.panel1.Controls.Add(this.buttonCreate);
-            this.panel1.Controls.Add(this.dateTimePickerTo);
-            this.panel1.Controls.Add(this.labelTo);
-            this.panel1.Controls.Add(this.dateTimePickerFrom);
-            this.panel1.Controls.Add(this.labelFrom);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(807, 36);
-            this.panel1.TabIndex = 0;
+            this.panelDate.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
+            this.panelDate.Controls.Add(this.buttonSave);
+            this.panelDate.Controls.Add(this.buttonCreate);
+            this.panelDate.Controls.Add(this.dateTimePickerTo);
+            this.panelDate.Controls.Add(this.labelTo);
+            this.panelDate.Controls.Add(this.dateTimePickerFrom);
+            this.panelDate.Controls.Add(this.labelFrom);
+            this.panelDate.Location = new System.Drawing.Point(12, 12);
+            this.panelDate.Name = "panelDate";
+            this.panelDate.Size = new System.Drawing.Size(807, 36);
+            this.panelDate.TabIndex = 0;
             // 
             // buttonSave
             // 
@@ -120,19 +121,19 @@ namespace SecuritySystemView
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(823, 433);
             this.Controls.Add(this.reportViewerOrders);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelDate);
             this.Name = "FormReportOrders";
             this.Text = "FormReportOrders";
             this.Load += new System.EventHandler(this.FormReportOrders_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panelDate.ResumeLayout(false);
+            this.panelDate.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelDate;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewerOrders;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonCreate;
