@@ -16,7 +16,6 @@ namespace SecuritySystemRestApi.Controllers
 
         private readonly SecureLogic _secure;
 
-
         public MainController(OrderLogic order, SecureLogic secure)
         {
             _order = order;

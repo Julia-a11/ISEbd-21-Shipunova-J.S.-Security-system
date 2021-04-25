@@ -126,7 +126,6 @@ namespace SecuritySistemClientApp.Controllers
             {
                 return;
             }
-            var str = Program.Client.Id;
             APIClient.PostRequest("api/main/createorder", new CreateOrderBindingModel
             {
                 SecureId = secure,
