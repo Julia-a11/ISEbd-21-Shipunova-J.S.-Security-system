@@ -64,40 +64,34 @@ namespace SecuritySystemDatabaseImplement.Implements
                 {
                     try
                     {
-                        foreach (var storeHouseComponent in components)
+                        foreach (var component in components)
                         {
-                            int requiredCount = storeHouseComponent.Value.Item2 * count;
-                            int countInStoreHouses = context.StoreHouseComponents
-                                .Where(rec => rec.ComponentId == storeHouseComponent.Key)
-                                .Sum(rec => rec.Count);
-                            if (requiredCount > countInStoreHouses)
-                            {
-                                throw new Exception("На складе недостаточно компонентов");
-                            }
-
+                            int requiredCount = component.Value.Item2 * count;
                             IEnumerable<StoreHouseComponent> storeHouseComponents = context.StoreHouseComponents
-                                .Where(rec => rec.ComponentId == storeHouseComponent.Key);
-                            foreach (var component in storeHouseComponents)
+                                .Where(rec => rec.ComponentId == component.Key);
+
+                            foreach (StoreHouseComponent storeHouseComponent in storeHouseComponents)
                             {
-                                if (component.Count <= requiredCount)
+                                if (storeHouseComponent.Count <= requiredCount)
                                 {
-                                    requiredCount -= component.Count;
-                                    context.StoreHouseComponents.Remove(component);
-                                    context.SaveChanges();
+                                    requiredCount -= storeHouseComponent.Count;
+                                    context.StoreHouseComponents.Remove(storeHouseComponent);
                                 }
                                 else
                                 {
-                                    component.Count -= requiredCount;
-                                    context.SaveChanges();
+                                    storeHouseComponent.Count -= requiredCount;
                                     requiredCount = 0;
-                                }
-                                if (requiredCount == 0)
-                                {
                                     break;
                                 }
                             }
+
+                            if (requiredCount != 0)
+                            {
+                                throw new Exception("Не хвататет компонентов на складе");
+                            }
                         }
 
+                        context.SaveChanges();
                         transaction.Commit();
                         return true;
                     }
