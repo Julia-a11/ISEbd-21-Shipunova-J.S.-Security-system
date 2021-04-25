@@ -19,7 +19,7 @@ namespace SecuritySystemDatabaseImplement.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ClientFIO = table.Column<string>(nullable: false),
-                    Login = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
                     Password = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
