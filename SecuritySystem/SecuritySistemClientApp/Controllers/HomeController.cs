@@ -34,11 +34,11 @@ namespace SecuritySistemClientApp.Controllers
                 {
                     Id = Program.Client.Id,
                     ClientFIO = fio,
-                    Login = login,
+                    Email = login,
                     Password = password
                 });
                 Program.Client.ClientFIO = fio;
-                Program.Client.Login = login;
+                Program.Client.Email = login;
                 Program.Client.Password = password;
                 Response.Redirect("Index");
                 return;
@@ -55,6 +55,18 @@ namespace SecuritySistemClientApp.Controllers
             }
 
             return View(Program.Client);
+        }
+
+        [HttpGet]
+        public IActionResult Mail()
+        {
+            if (Program.Client == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+
+            var model = APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/getmessages?clientId={Program.Client.Id}");
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -77,8 +89,7 @@ namespace SecuritySistemClientApp.Controllers
         {
             if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password))
             {
-                Program.Client =
-                APIClient.GetRequest<ClientViewModel>($"api/client/login?login={login}&password={password}");
+                Program.Client = APIClient.GetRequest<ClientViewModel>($"api/client/login?login={login}&password={password}");
 
                 if (Program.Client == null)
                 {
@@ -106,7 +117,7 @@ namespace SecuritySistemClientApp.Controllers
                 APIClient.PostRequest("api/client/register", new ClientBindingModel
                 {
                     ClientFIO = fio,
-                    Login = login,
+                    Email = login,
                     Password = password
                 });
                 Response.Redirect("Enter");

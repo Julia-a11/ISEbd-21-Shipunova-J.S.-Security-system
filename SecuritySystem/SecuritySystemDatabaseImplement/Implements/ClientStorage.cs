@@ -14,7 +14,7 @@ namespace SecuritySystemDatabaseImplement.Implements
         private Client CreateModel(ClientBindingModel model, Client client)
         {
             client.ClientFIO = model.ClientFIO;
-            client.Login = model.Login;
+            client.Email = model.Email;
             client.Password = model.Password;
             return client;
         }
@@ -25,7 +25,7 @@ namespace SecuritySystemDatabaseImplement.Implements
             {
                 Id = client.Id,
                 ClientFIO = client.ClientFIO,
-                Login = client.Login,
+                Email = client.Email,
                 Password = client.Password
             };
         }
@@ -49,7 +49,7 @@ namespace SecuritySystemDatabaseImplement.Implements
             using (var context = new SecuritySystemDatabase())
             {
                 return context.Clients
-                    .Where(rec => rec.Login.Equals(model.Login) &&
+                    .Where(rec => rec.Email.Equals(model.Email) &&
                     rec.Password.Equals(model.Password))
                     .Select(CreateModel)
                     .ToList();
@@ -66,7 +66,7 @@ namespace SecuritySystemDatabaseImplement.Implements
             using (var context = new SecuritySystemDatabase())
             {
                 var client = context.Clients
-                    .FirstOrDefault(rec => rec.Login.Equals(model.Login) ||
+                    .FirstOrDefault(rec => rec.Email.Equals(model.Email) ||
                     rec.Id == model.Id);
 
                 return client != null ?

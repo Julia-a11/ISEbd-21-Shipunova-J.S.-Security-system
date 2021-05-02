@@ -7,11 +7,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SecuritySystemBusinessLogic.BusinessLogics;
+using SecuritySystemBusinessLogic.HelperModels;
 using SecuritySystemBusinessLogic.Interfaces;
 using SecuritySystemDatabaseImplement.Implements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SecuritySystemRestApi
@@ -31,9 +33,18 @@ namespace SecuritySystemRestApi
             services.AddTransient<IClientStorage, ClientStorage>();
             services.AddTransient<IOrderStorage, OrderStorage>();
             services.AddTransient<ISecureStorage, SecureStorage>();
+            services.AddTransient<IMessageInfoStorage, MessageInfoStorage>();
             services.AddTransient<OrderLogic>();
             services.AddTransient<ClientLogic>();
             services.AddTransient<SecureLogic>();
+            services.AddTransient<MailLogic>();
+            MailLogic.MailConfig(new MailConfig
+            {
+                SmtpClientHost = "smpt.yandex.ru",
+                SmtpClientPort = 587,
+                MailLogin = "lettersforlaba@yandex.ru",
+                MailPassword = "123laba",
+            });
             services.AddControllers().AddNewtonsoftJson();
         }
 
