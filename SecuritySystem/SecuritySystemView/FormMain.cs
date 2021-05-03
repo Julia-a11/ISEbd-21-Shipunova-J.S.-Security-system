@@ -42,6 +42,7 @@ namespace SecuritySystemView
                     dataGridViewOrders.Columns[1].Visible = false;
                     dataGridViewOrders.Columns[2].Visible = false;
                     dataGridViewOrders.Columns[3].Visible = false;
+                    dataGridViewOrders.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
             catch (Exception ex)
