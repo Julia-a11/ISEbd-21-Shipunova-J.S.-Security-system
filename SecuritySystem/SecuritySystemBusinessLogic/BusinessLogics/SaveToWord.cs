@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace SecuritySystemBusinessLogic.BusinessLogics
 {
-    static class SaveToWord
+    public static class SaveToWord
     {
         // Создание документа
         public static void CreateDoc(WordInfo info)
@@ -15,7 +15,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                 WordprocessingDocument.Create(info.FileName, WordprocessingDocumentType.Document))
             {
                 MainDocumentPart mainPart = wordDocument.AddMainDocumentPart();
-                mainPart.Document = new DocumentFormat.OpenXml.Wordprocessing.Document();
+                mainPart.Document = new Document();
                 Body docBody = mainPart.Document.AppendChild(new Body());
 
                 docBody.AppendChild(CreateParagraph(new WordParagraph
@@ -43,16 +43,15 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                         {
                             Size = "24",
                             Bold =true
-                        }
-                        ),
+                        }),
                         (
                         secure.Price.ToString(),
                         new WordParagraphProperties
                         {
                             Size = "24",
                         }
-                        ) },
-                         
+                        )},
+
                         TextProperties = new WordParagraphProperties
                         {
                             Size = "24",
@@ -65,6 +64,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                 wordDocument.MainDocumentPart.Document.Save();
             }
         }
+
         // Настройка страницы
         private static SectionProperties CreateSectionProperties()
         {
@@ -148,6 +148,5 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             }
             return null;
         }
-
     }
 }

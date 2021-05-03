@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SecuritySystemBusinessLogic.HelperModels
 {
-    class WordInfo
+    public class WordInfo
     {
         public string FileName { get; set; }
 

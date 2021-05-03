@@ -41,7 +41,7 @@ namespace SecuritySystemDatabaseImplement.Implements
                 Count = order.Count,
                 Status = order.Status,
                 DateCreate = order.DateCreate,
-                DateImplement = order?.DateImplement
+                DateImplement = order.DateImplement
             };
         }
 
@@ -107,11 +107,6 @@ namespace SecuritySystemDatabaseImplement.Implements
 
         public void Insert(OrderBindingModel model)
         {
-            if (!model.ClientId.HasValue)
-            {
-                throw new Exception("Клиент не указан");
-            }
-
             using (var context = new SecuritySystemDatabase())
             {
                 context.Orders.Add(CreateModel(model, new Order()));
@@ -123,17 +118,13 @@ namespace SecuritySystemDatabaseImplement.Implements
         {
             using (var context = new SecuritySystemDatabase())
             {
-                var order = context.Orders
-                    .FirstOrDefault(rec => rec.Id == model.Id);
+                var order = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
 
                 if (order == null)
                 {
                     throw new Exception("Заказ не найден");
                 }
-                if (!model.ClientId.HasValue)
-                {
-                    model.ClientId = order.ClientId;
-                }
+
                 CreateModel(model, order);
                 context.SaveChanges();
             }
