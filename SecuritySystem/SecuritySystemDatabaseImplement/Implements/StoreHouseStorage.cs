@@ -104,7 +104,7 @@ namespace SecuritySystemDatabaseImplement.Implements
                     catch
                     {
                         transaction.Rollback();
-                        throw;
+                        return false;
                     }
                 }
             }
