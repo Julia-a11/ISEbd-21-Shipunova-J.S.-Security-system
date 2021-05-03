@@ -31,9 +31,13 @@ namespace SecuritySystemRestApi
             services.AddTransient<IClientStorage, ClientStorage>();
             services.AddTransient<IOrderStorage, OrderStorage>();
             services.AddTransient<ISecureStorage, SecureStorage>();
+            services.AddTransient<IComponentStorage, ComponentStorage>();
+            services.AddTransient<IStoreHouseStorage, StoreHouseStorage>();
             services.AddTransient<OrderLogic>();
             services.AddTransient<ClientLogic>();
             services.AddTransient<SecureLogic>();
+            services.AddTransient<StoreHouseLogic>();
+            services.AddTransient<ComponentLogic>();
             services.AddControllers().AddNewtonsoftJson();
         }
 

@@ -31,9 +31,9 @@ namespace SecuritySystemView
                     {
                         dataGridViewReportSecureComponents.Rows.Add(new object[]
                         {
-                            elem.ComponentName, "", ""
+                            elem.SecureName, "", ""
                         });
-                        foreach (var listElem in elem.Secures)
+                        foreach (var listElem in elem.Components)
                         {
                             dataGridViewReportSecureComponents.Rows.Add(new object[]
                             {

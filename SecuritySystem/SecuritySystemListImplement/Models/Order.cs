@@ -1,7 +1,7 @@
 ﻿using SecuritySystemBusinessLogic.Enums;
 using System;
 
-namespace SecuritySystemFileImplement.Models
+namespace SecuritySystemListImplement.Models
 {
     // Заказ
     public class Order

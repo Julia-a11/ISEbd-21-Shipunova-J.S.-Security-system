@@ -167,6 +167,54 @@ namespace SecuritySystemDatabaseImplement.Migrations
                     b.ToTable("SecureComponents");
                 });
 
+            modelBuilder.Entity("SecuritySystemDatabaseImplement.Models.StoreHouse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateCreate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ResponsiblePersonFCS")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StoreHouseName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StoreHouses");
+                });
+
+            modelBuilder.Entity("SecuritySystemDatabaseImplement.Models.StoreHouseComponent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ComponentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StoreHouseId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComponentId");
+
+                    b.HasIndex("StoreHouseId");
+
+                    b.ToTable("StoreHouseComponents");
+                });
+
             modelBuilder.Entity("SecuritySystemDatabaseImplement.Models.Order", b =>
                 {
                     b.HasOne("SecuritySystemDatabaseImplement.Models.Client", "Client")
@@ -197,6 +245,21 @@ namespace SecuritySystemDatabaseImplement.Migrations
                     b.HasOne("SecuritySystemDatabaseImplement.Models.Secure", "Secure")
                         .WithMany("SecureComponents")
                         .HasForeignKey("SecureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SecuritySystemDatabaseImplement.Models.StoreHouseComponent", b =>
+                {
+                    b.HasOne("SecuritySystemDatabaseImplement.Models.Component", "Component")
+                        .WithMany("StoreHouseComponents")
+                        .HasForeignKey("ComponentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SecuritySystemDatabaseImplement.Models.StoreHouse", "StoreHouse")
+                        .WithMany("StoreHouseComponents")
+                        .HasForeignKey("StoreHouseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

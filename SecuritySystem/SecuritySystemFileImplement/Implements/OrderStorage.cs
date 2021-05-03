@@ -37,7 +37,7 @@ namespace SecuritySystemFileImplement.Implements
                 !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) ||
                 (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >=
                 model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) ||
-                (model.ClientId.HasValue && rec.ClientId == model.ClientId) || 
+                (model.ClientId.HasValue && rec.ClientId == model.ClientId) ||
                 (model.FreeOrders.HasValue && model.FreeOrders.Value && rec.Status == OrderStatus.Принят) ||
                 (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && rec.Status == OrderStatus.Выполняется))
                   .Select(CreateModel)
@@ -64,9 +64,8 @@ namespace SecuritySystemFileImplement.Implements
             }
             int maxId = source.Orders.Count > 0 ? source.Orders.Max(
                 rec => rec.Id) : 0;
-            var order = new Order { 
+            var order = new Order {
                 Id = maxId + 1
-                //DateCreate = DateTime.Now
             };
             source.Orders.Add(CreateModel(model, order));
         }
