@@ -2,14 +2,12 @@
 using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
 using SecuritySystemBusinessLogic.HelperModels;
-using System;
 using System.Collections.Generic;
 
 namespace SecuritySystemBusinessLogic.BusinessLogics
 {
-    public class SaveToPdf
+    public static class SaveToPdf
     {
-        [Obsolete]
         public static void CreateDoc(PdfInfo info)
         {
             Document document = new Document();
@@ -133,7 +131,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                     Text = rowParameters.Texts[i],
                     Style = rowParameters.Style,
                     BorderWidth = 0.5,
-                    ParagraphAlignment = rowParameters.ParagraphAligment
+                    ParagraphAlignment = rowParameters.ParagraphAlignment
                 });
             }
         }

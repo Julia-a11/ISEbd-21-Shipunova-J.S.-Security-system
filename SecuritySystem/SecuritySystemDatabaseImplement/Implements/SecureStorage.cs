@@ -171,7 +171,7 @@ namespace SecuritySystemDatabaseImplement.Implements
                             throw new Exception("Комлектация не найдена");
                         }
 
-                       CreateModel(model, secure, context);
+                        CreateModel(model, secure, context);
                         context.SaveChanges();
 
                         transaction.Commit();

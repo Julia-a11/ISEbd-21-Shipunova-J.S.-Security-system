@@ -8,11 +8,11 @@ using System.Linq;
 
 namespace SecuritySystemBusinessLogic.BusinessLogics
 {
-    static class SaveToExcel
+    public static class SaveToExcel
     {
         public static void CreateDoc(ExcelInfo info)
         {
-            using (SpreadsheetDocument spreadsheetDocument = 
+            using (SpreadsheetDocument spreadsheetDocument =
              SpreadsheetDocument.Create(info.FileName, SpreadsheetDocumentType.Workbook))
             {
                 // Создаём книгу (храним листы)
@@ -21,13 +21,11 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
 
                 CreateStyles(workbookpart);
 
-                // Получаем/создаём хранилище текстов для книги 
+                // Получаем/создаём хранилище текстов для книги
                 SharedStringTablePart shareStringPart =
-spreadsheetDocument.WorkbookPart.GetPartsOfType<SharedStringTablePart>().Count() > 0
-?
-spreadsheetDocument.WorkbookPart.GetPartsOfType<SharedStringTablePart>().First()
-:
-spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
+                    spreadsheetDocument.WorkbookPart.GetPartsOfType<SharedStringTablePart>().Count() > 0
+                    ? spreadsheetDocument.WorkbookPart.GetPartsOfType<SharedStringTablePart>().First()
+                    : spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
 
                 // Создаем SharedStringTable, если его нет
                 if (shareStringPart.SharedStringTable == null)
@@ -67,7 +65,7 @@ spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
                 });
 
                 uint rowIndex = 2;
-                foreach(var pc in info.SecureComponents)
+                foreach (var secureComponent in info.SecureComponents)
                 {
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
@@ -75,12 +73,12 @@ spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
                         ShareStringPart = shareStringPart,
                         ColumnName = "A",
                         RowIndex = rowIndex,
-                        Text = pc.SecureName,
+                        Text = secureComponent.SecureName,
                         StyleIndex = 0U
                     });
                     rowIndex++;
 
-                    foreach(var secure in pc.Components)
+                    foreach (var secure in secureComponent.Components)
                     {
                         InsertCellInWorksheet(new ExcelCellParameters
                         {
@@ -110,7 +108,7 @@ spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
                         ShareStringPart = shareStringPart,
                         ColumnName = "C",
                         RowIndex = rowIndex,
-                        Text = pc.TotalCount.ToString(),
+                        Text = secureComponent.TotalCount.ToString(),
                         StyleIndex = 0U
                     });
                     rowIndex++;
@@ -131,7 +129,7 @@ spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
 
                 CreateStyles(workbookpart);
 
-                // Получаем/создаём хранилище текстов для книги 
+                // Получаем/создаём хранилище текстов для книги
                 SharedStringTablePart shareStringPart =
 spreadsheetDocument.WorkbookPart.GetPartsOfType<SharedStringTablePart>().Count() > 0
 ?
@@ -236,13 +234,13 @@ spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
             WorkbookStylesPart sp = workbookpart.AddNewPart<WorkbookStylesPart>();
             sp.Stylesheet = new Stylesheet();
 
-            Fonts fonts = new Fonts() { Count = (UInt32Value)2U, KnownFonts = true };
+            Fonts fonts = new Fonts() { Count = 2U, KnownFonts = true };
 
             Font fontUsual = new Font();
             fontUsual.Append(new FontSize() { Val = 12D });
             fontUsual.Append(new DocumentFormat.OpenXml.Office2010.Excel.Color()
             {
-                Theme = (UInt32Value)1U
+                Theme = 1U
             });
             fontUsual.Append(new FontName() { Val = "Times New Roman" });
             fontUsual.Append(new FontFamilyNumbering() { Val = 2 });
@@ -253,8 +251,7 @@ spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
             fontTitle.Append(new FontSize() { Val = 14D });
             fontTitle.Append(new DocumentFormat.OpenXml.Office2010.Excel.Color()
             {
-                Theme
-           = (UInt32Value)1U
+                Theme = 1U
             });
             fontTitle.Append(new FontName() { Val = "Times New Roman" });
             fontTitle.Append(new FontFamilyNumbering() { Val = 2 });
@@ -263,7 +260,7 @@ spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
             fonts.Append(fontUsual);
             fonts.Append(fontTitle);
 
-            Fills fills = new Fills() { Count = (UInt32Value)2U };
+            Fills fills = new Fills() { Count = 2U };
 
             Fill fill1 = new Fill();
             fill1.Append(new PatternFill() { PatternType = PatternValues.None });
@@ -274,7 +271,7 @@ spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
             fills.Append(fill1);
             fills.Append(fill2);
 
-            Borders borders = new Borders() { Count = (UInt32Value)2U };
+            Borders borders = new Borders() { Count = 2U };
 
             Border borderNoBorder = new Border();
             borderNoBorder.Append(new LeftBorder());
@@ -288,25 +285,25 @@ spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
             LeftBorder leftBorder = new LeftBorder() { Style = BorderStyleValues.Thin };
             leftBorder.Append(new DocumentFormat.OpenXml.Office2010.Excel.Color()
             {
-                Indexed = (UInt32Value)64U
+                Indexed = 64U
             });
 
             RightBorder rightBorder = new RightBorder() { Style = BorderStyleValues.Thin };
             rightBorder.Append(new DocumentFormat.OpenXml.Office2010.Excel.Color()
             {
-                Indexed = (UInt32Value)64U
+                Indexed = 64U
             });
 
             TopBorder topBorder = new TopBorder() { Style = BorderStyleValues.Thin };
             rightBorder.Append(new DocumentFormat.OpenXml.Office2010.Excel.Color()
             {
-                Indexed = (UInt32Value)64U
+                Indexed = 64U
             });
 
             BottomBorder bottomBorder = new BottomBorder() { Style = BorderStyleValues.Thin };
             rightBorder.Append(new DocumentFormat.OpenXml.Office2010.Excel.Color()
             {
-                Indexed = (UInt32Value)64U
+                Indexed = 64U
             });
 
             borderThin.Append(leftBorder);
@@ -320,51 +317,51 @@ spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
 
             CellStyleFormats cellStyleFormats = new CellStyleFormats()
             {
-                Count = (UInt32Value)1U
+                Count = 1U
             };
             CellFormat cellFormatStyle = new CellFormat()
             {
-                NumberFormatId = (UInt32Value)0U,
-                FontId = (UInt32Value)0U,
-                FillId = (UInt32Value)0U,
-                BorderId = (UInt32Value)0U
+                NumberFormatId = 0U,
+                FontId = 0U,
+                FillId = 0U,
+                BorderId = 0U
             };
 
             cellStyleFormats.Append(cellFormatStyle);
 
             CellFormats cellFormats = new CellFormats()
             {
-                Count = (UInt32Value)3U
+                Count = 3U
             };
 
             CellFormat cellFormatFont = new CellFormat()
             {
-                NumberFormatId = (UInt32Value)0U,
-                FontId = (UInt32Value)0U,
-                FillId = (UInt32Value)0U,
-                BorderId = (UInt32Value)0U,
-                FormatId = (UInt32Value)0U,
+                NumberFormatId = 0U,
+                FontId = 0U,
+                FillId = 0U,
+                BorderId = 0U,
+                FormatId = 0U,
                 ApplyFont = true
             };
 
             CellFormat cellFormatFontAndBorder = new CellFormat()
             {
-                NumberFormatId = (UInt32Value)0U,
-                FontId = (UInt32Value)0U,
-                FillId = (UInt32Value)0U,
-                BorderId = (UInt32Value)0U,
-                FormatId = (UInt32Value)0U,
+                NumberFormatId = 0U,
+                FontId = 0U,
+                FillId = 0U,
+                BorderId = 0U,
+                FormatId = 0U,
                 ApplyFont = true,
                 ApplyBorder = true
             };
 
             CellFormat cellFormatTitle = new CellFormat()
             {
-                NumberFormatId = (UInt32Value)0U,
-                FontId = (UInt32Value)1U,
-                FillId = (UInt32Value)0U,
-                BorderId = (UInt32Value)0U,
-                FormatId = (UInt32Value)0U,
+                NumberFormatId = 0U,
+                FontId = 1U,
+                FillId = 0U,
+                BorderId = 0U,
+                FormatId = 0U,
                 Alignment = new Alignment()
                 {
                     Vertical = VerticalAlignmentValues.Center,
@@ -380,25 +377,25 @@ spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
 
             CellStyles cellStyles = new CellStyles()
             {
-                Count = (UInt32Value)1U
+                Count = 1U
             };
 
             cellStyles.Append(new CellStyle()
             {
                 Name = "Normal",
-                FormatId = (UInt32Value)0U,
-                BuiltinId = (UInt32Value)0U
+                FormatId = 0U,
+                BuiltinId = 0U
             });
 
             DocumentFormat.OpenXml.Office2013.Excel.DifferentialFormats differentialFormats =
                 new DocumentFormat.OpenXml.Office2013.Excel.DifferentialFormats()
                 {
-                    Count = (UInt32Value)0U
+                    Count = 0U
                 };
 
             TableStyles tableStyles = new TableStyles()
             {
-                Count = (UInt32Value)0U,
+                Count = 0U,
                 DefaultTableStyle = "TableStyleMedium2",
                 DefaultPivotStyle = "PivotStyleLight16"
             };
@@ -407,28 +404,24 @@ spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
 
             StylesheetExtension stylesheetExtension1 = new StylesheetExtension()
             {
-                Uri =
-"{EB79DEF2-80B8-43e5-95BD-54CBDDF9020C}"
+                Uri = "{EB79DEF2-80B8-43e5-95BD-54CBDDF9020C}"
             };
             stylesheetExtension1.AddNamespaceDeclaration("x14",
-           "http://schemas.microsoft.com/office/spreadsheetml/2009/9/main");
+            "http://schemas.microsoft.com/office/spreadsheetml/2009/9/main");
             stylesheetExtension1.Append(new SlicerStyles()
             {
-                DefaultSlicerStyle =
-           "SlicerStyleLight1"
+                DefaultSlicerStyle = "SlicerStyleLight1"
             });
 
             StylesheetExtension stylesheetExtension2 = new StylesheetExtension()
             {
-                Uri =
-"{9260A510-F301-46a8-8635-F512D64BE5F5}"
+                Uri = "{9260A510-F301-46a8-8635-F512D64BE5F5}"
             };
             stylesheetExtension2.AddNamespaceDeclaration("x15",
-           "http://schemas.microsoft.com/office/spreadsheetml/2010/11/main");
+            "http://schemas.microsoft.com/office/spreadsheetml/2010/11/main");
             stylesheetExtension2.Append(new TimelineStyles()
             {
-                DefaultTimelineStyle =
-           "TimeSlicerStyleLight1"
+                DefaultTimelineStyle = "TimeSlicerStyleLight1"
             });
 
             stylesheetExtensionList.Append(stylesheetExtension1);
@@ -464,8 +457,7 @@ spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
 
             // Ищем нужную ячейку
             Cell cell;
-            if (row.Elements<Cell>().Where(c => c.CellReference.Value ==
-cellParameters.CellReference).Count() > 0)
+            if (row.Elements<Cell>().Where(c => c.CellReference.Value == cellParameters.CellReference).Count() > 0)
             {
                 cell = row.Elements<Cell>().Where(c => c.CellReference.Value == cellParameters.CellReference).First();
             }

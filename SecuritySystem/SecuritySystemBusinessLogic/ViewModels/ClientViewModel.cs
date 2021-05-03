@@ -18,7 +18,7 @@ namespace SecuritySystemBusinessLogic.ViewModels
 
         [DataMember]
         [DisplayName("Логин")]
-        public string Login { get; set; }
+        public string Email { get; set; }
 
         [DataMember]
         [DisplayName("Пароль")]

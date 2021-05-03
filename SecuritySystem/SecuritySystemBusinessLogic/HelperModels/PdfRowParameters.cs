@@ -2,10 +2,9 @@
 using MigraDoc.DocumentObjectModel.Tables;
 using System.Collections.Generic;
 
-
 namespace SecuritySystemBusinessLogic.HelperModels
 {
-    class PdfRowParameters
+    public class PdfRowParameters
     {
         public Table Table { get; set; }
 
@@ -13,7 +12,6 @@ namespace SecuritySystemBusinessLogic.HelperModels
 
         public string Style { get; set; }
 
-        public ParagraphAlignment ParagraphAligment { get; set; }
-        public ParagraphAlignment ParagraphAlignment { get; internal set; }
+        public ParagraphAlignment ParagraphAlignment { get; set; }
     }
 }

@@ -2,10 +2,6 @@
 using SecuritySystemBusinessLogic.BindingModels;
 using SecuritySystemBusinessLogic.BusinessLogics;
 using SecuritySystemBusinessLogic.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SecuritySystemRestApi.Controllers
 {
@@ -25,9 +21,9 @@ namespace SecuritySystemRestApi.Controllers
         {
             return _logic.Read(new ClientBindingModel
             {
-                Login = login,
+                Email = login,
                 Password = password
-            }).FirstOrDefault();
+            })?[0];
         }
 
         [HttpPost]

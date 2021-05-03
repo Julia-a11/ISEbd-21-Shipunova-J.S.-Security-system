@@ -16,13 +16,10 @@ namespace SecuritySystemRestApi.Controllers
 
         private readonly SecureLogic _secure;
 
-        private readonly OrderLogic _main;
-
-        public MainController(OrderLogic order, SecureLogic secure, OrderLogic main)
+        public MainController(OrderLogic order, SecureLogic secure)
         {
             _order = order;
             _secure = secure;
-            _main = main;
         }
 
         [HttpGet]
@@ -30,14 +27,17 @@ namespace SecuritySystemRestApi.Controllers
 
         [HttpGet]
         public SecureViewModel GetSecure(int SecureId) => _secure.Read(new SecureBindingModel
-        { Id = SecureId })?[0];
+        {
+            Id = SecureId
+        })?[0];
 
         [HttpGet]
         public List<OrderViewModel> GetOrders(int clientId) => _order.Read(new OrderBindingModel
-        { ClientId = clientId });
+        {
+            ClientId = clientId
+        });
 
         [HttpPost]
-        public void CreateOrder(CreateOrderBindingModel model) =>
-       _main.CreateOrder(model);
+        public void CreateOrder(CreateOrderBindingModel model) => _order.CreateOrder(model);
     }
 }

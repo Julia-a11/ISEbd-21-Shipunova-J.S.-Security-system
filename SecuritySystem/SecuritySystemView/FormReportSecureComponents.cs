@@ -23,17 +23,17 @@ namespace SecuritySystemView
         {
             try
             {
-                var dict = logic.GetSecureComponent();
-                if (dict != null)
+                var secureComponents = logic.GetSecureComponent();
+                if (secureComponents != null)
                 {
                     dataGridViewReportSecureComponents.Rows.Clear();
-                    foreach (var elem in dict)
+                    foreach (var secureComponent in secureComponents)
                     {
                         dataGridViewReportSecureComponents.Rows.Add(new object[]
                         {
-                            elem.SecureName, "", ""
+                            secureComponent.SecureName, "", ""
                         });
-                        foreach (var listElem in elem.Components)
+                        foreach (var listElem in secureComponent.Components)
                         {
                             dataGridViewReportSecureComponents.Rows.Add(new object[]
                             {
@@ -42,7 +42,7 @@ namespace SecuritySystemView
                         }
                         dataGridViewReportSecureComponents.Rows.Add(new object[]
                         {
-                            "Итого", "", elem.TotalCount
+                            "Итого", "", secureComponent.TotalCount
                         });
                         dataGridViewReportSecureComponents.Rows.Add(new object[] { });
                     }
@@ -50,8 +50,7 @@ namespace SecuritySystemView
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -67,13 +66,11 @@ MessageBoxIcon.Error);
                         {
                             FileName = dialog.FileName
                         });
-                        MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
-MessageBoxIcon.Information);
+                        MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-MessageBoxIcon.Error);
+                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }

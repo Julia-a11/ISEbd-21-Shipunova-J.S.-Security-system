@@ -1,13 +1,10 @@
 ﻿using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SecuritySystemBusinessLogic.HelperModels
 {
-    class ExcelCellParameters
+    public class ExcelCellParameters
     {
         public Worksheet Worksheet { get; set; }
 
