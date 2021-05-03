@@ -28,6 +28,9 @@ namespace SecuritySystemView
             {
                 dataGridViewMails.DataSource = list;
                 dataGridViewMails.Columns[0].Visible = false;
+                dataGridViewMails.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewMails.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewMails.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
         }
     }
