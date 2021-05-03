@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecuritySystemDatabaseImple
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecuritySystemRestApi", "SecuritySystemRestApi\SecuritySystemRestApi.csproj", "{837C0D59-D0CA-4C7E-87B9-E59065B4B75F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecuritySystemClientApp", "SecuritySistemClientApp\SecuritySystemClientApp.csproj", "{201874EE-54DB-4DCB-886C-3CDF3AFBBF8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecuritySystemClientApp", "SecuritySystemClientApp\SecuritySystemClientApp.csproj", "{201874EE-54DB-4DCB-886C-3CDF3AFBBF8F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreHouseWebApp", "StoreHouseWebApp\StoreHouseWebApp.csproj", "{3A43641C-526F-409A-8263-27BE4E0C0B82}"
 EndProject

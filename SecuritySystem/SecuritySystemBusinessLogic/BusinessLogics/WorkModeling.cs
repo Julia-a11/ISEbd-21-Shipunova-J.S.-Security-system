@@ -3,7 +3,7 @@ using SecuritySystemBusinessLogic.Interfaces;
 using SecuritySystemBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -63,6 +63,26 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
 
                 // Отдыхаем
                 Thread.Sleep(implementer.PauseTime);
+            }
+
+            var ordersRequiringMaterials = await Task.Run(() => _orderStorage.GetFullList().Where(rec => rec.Status == Enums.OrderStatus.ТребуютсяMатериалы).ToList());
+            foreach (var order in ordersRequiringMaterials)
+            {
+                try
+                {
+                    _orderLogic.TakeOrderInWork(new ChangeStatusBindingModel
+                    {
+                        OrderId = order.Id,
+                        ImplementerId = implementer.Id
+                    });
+                    Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
+                    _orderLogic.FinishOrder(new ChangeStatusBindingModel
+                    {
+                        OrderId = order.Id
+                    });
+                    Thread.Sleep(implementer.PauseTime);
+                }
+                catch (Exception) { }
             }
 
             await Task.Run(() =>

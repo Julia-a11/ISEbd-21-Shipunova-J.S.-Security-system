@@ -62,13 +62,29 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                 {
                     throw new Exception("Заказ не найден");
                 }
-                if (order.Status != OrderStatus.Принят)
+                if (order.Status != OrderStatus.Принят && order.Status != OrderStatus.ТребуютсяMатериалы)
                 {
                     throw new Exception("Заказ ещё не принят");
                 }
                 if (order.ImplementerId.HasValue)
                 {
                     throw new Exception("У заказа уже есть исполнитель");
+                }
+
+                var components = _secureStorage.GetElement(new SecureBindingModel { Id = order.SecureId }).SecureComponents;
+                if (!_storeHouseStorage.CheckAndTake(order.Count, components))
+                {
+                    _orderStorage.Update(new OrderBindingModel
+                    {
+                        Id = order.Id,
+                        ClientId = order.ClientId,
+                        SecureId = order.SecureId,
+                        Count = order.Count,
+                        Sum = order.Sum,
+                        DateCreate = order.DateCreate,
+                        Status = OrderStatus.ТребуютсяMатериалы
+                    });
+                    return;
                 }
                 _orderStorage.Update(new OrderBindingModel
                 {
@@ -83,26 +99,6 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                     Status = OrderStatus.Выполняется
                 });
             }
-            if (order.Status != OrderStatus.Принят)
-            {
-                throw new Exception("Заказ не в статусе \"Принят\"");
-            }
-            var components = _secureStorage
-                .GetElement(new SecureBindingModel { Id = order.SecureId}).SecureComponents;
-            if (!_storeHouseStorage.CheckAndTake(order.Count, components))
-            {
-                throw new Exception("Для выполнения заказа не хвататет компонентов на складах");
-            }
-            _orderStorage.Update(new OrderBindingModel
-            {
-                Id = order.Id,
-                SecureId = order.SecureId,
-                Count = order.Count,
-                Sum = order.Sum,
-                DateCreate = order.DateCreate,
-                DateImplement = DateTime.Now,
-                Status = OrderStatus.Выполняется
-            });
         }
 
         public void FinishOrder(ChangeStatusBindingModel model)

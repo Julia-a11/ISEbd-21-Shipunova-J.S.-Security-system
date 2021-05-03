@@ -60,7 +60,6 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             renderer.PdfDocument.Save(info.FileName);
         }
 
-        [Obsolete]
         public static void CreateDocForStoreHouse(PdfInfoForOrder info)
         {
             Document document = new Document();

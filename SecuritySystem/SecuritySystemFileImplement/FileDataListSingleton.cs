@@ -102,7 +102,6 @@ namespace SecuritySystemFileImplement
                         Id = Convert.ToInt32(elem.Attribute("Id").Value),
                         ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
                         SecureId = Convert.ToInt32(elem.Element("SecureId").Value),
-                        ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
                         ImplementerId = Convert.ToInt32(elem.Element("ImplementerId").Value),
                         Count = Convert.ToInt32(elem.Element("Count").Value),
                         Sum = Convert.ToDecimal(elem.Element("Sum").Value),
