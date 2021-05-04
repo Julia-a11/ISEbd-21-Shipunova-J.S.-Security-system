@@ -30,7 +30,6 @@ namespace SecuritySystemView
                 MailPassword = ConfigurationManager.AppSettings["MailPassword"],
             });
 
-           var mailLogic = container.Resolve<MailLogic>();
             // Создаём таймер
             var timer = new System.Threading.Timer(new TimerCallback(MailCheck), new MailCheckInfo
             {

@@ -1,20 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using SecuritySystemBusinessLogic.BusinessLogics;
 using SecuritySystemBusinessLogic.HelperModels;
 using SecuritySystemBusinessLogic.Interfaces;
 using SecuritySystemDatabaseImplement.Implements;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace SecuritySystemRestApi
 {
@@ -40,10 +32,10 @@ namespace SecuritySystemRestApi
             services.AddTransient<MailLogic>();
             MailLogic.MailConfig(new MailConfig
             {
-                SmtpClientHost = "smpt.yandex.ru",
+                SmtpClientHost = "smtp.yandex.ru",
                 SmtpClientPort = 587,
                 MailLogin = "lettersforlaba@yandex.ru",
-                MailPassword = "123laba",
+                MailPassword = "yelgsuinhysyiyng",
             });
             services.AddControllers().AddNewtonsoftJson();
         }
