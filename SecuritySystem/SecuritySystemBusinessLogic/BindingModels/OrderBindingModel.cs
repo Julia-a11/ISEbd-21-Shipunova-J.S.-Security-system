@@ -18,6 +18,9 @@ namespace SecuritySystemBusinessLogic.BindingModels
         public int? ClientId { get; set; }
 
         [DataMember]
+        public int? ImplementerId { get; set; }
+
+        [DataMember]
         public int Count { get; set; }
 
         [DataMember]
@@ -37,5 +40,8 @@ namespace SecuritySystemBusinessLogic.BindingModels
 
         [DataMember]
         public DateTime? DateTo { get; set; }
+
+        [DataMember]
+        public bool? FreeOrders { get; set; }
     }
 }
