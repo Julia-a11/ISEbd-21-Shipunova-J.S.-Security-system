@@ -13,6 +13,8 @@ namespace SecuritySystemListImplement
 
         public List<Secure> Secures { get; set; }
 
+        public List<Client> Clients { get; set; }
+       
         public List<StoreHouse> Storehouses { get; set; }
 
         private DataListSingleton()
@@ -20,6 +22,7 @@ namespace SecuritySystemListImplement
             Components = new List<Component>();
             Orders = new List<Order>();
             Secures = new List<Secure>();
+            Clients = new List<Client>();
             Storehouses = new List<StoreHouse>();
         }
 
