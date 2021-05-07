@@ -73,6 +73,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 SecureId = order.SecureId,
+                ClientId = order.ClientId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
@@ -99,6 +100,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 SecureId = order.SecureId,
+                ClientId = order.ClientId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
@@ -125,6 +127,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 SecureId = order.SecureId,
+                ClientId = order.ClientId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,

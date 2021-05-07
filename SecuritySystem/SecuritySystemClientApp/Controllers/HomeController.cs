@@ -12,6 +12,7 @@ namespace SecuritySistemClientApp.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
         public IActionResult Index()
         {
             if (Program.Client == null)
@@ -30,11 +31,11 @@ namespace SecuritySistemClientApp.Controllers
                 {
                     Id = Program.Client.Id,
                     ClientFIO = fio,
-                    Login = login,
+                    Email = login,
                     Password = password
                 });
                 Program.Client.ClientFIO = fio;
-                Program.Client.Login = login;
+                Program.Client.Email = login;
                 Program.Client.Password = password;
                 Response.Redirect("Index");
                 return;
@@ -102,7 +103,7 @@ namespace SecuritySistemClientApp.Controllers
                 APIClient.PostRequest("api/client/register", new ClientBindingModel
                 {
                     ClientFIO = fio,
-                    Login = login,
+                    Email = login,
                     Password = password
                 });
                 Response.Redirect("Enter");
@@ -125,7 +126,6 @@ namespace SecuritySistemClientApp.Controllers
             {
                 return;
             }
-            var str = Program.Client.Id;
             APIClient.PostRequest("api/main/createorder", new CreateOrderBindingModel
             {
                 SecureId = secure,

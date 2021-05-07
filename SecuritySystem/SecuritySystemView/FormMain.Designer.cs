@@ -34,6 +34,7 @@ namespace SecuritySystemView
             this.компонентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.комплектацииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.складыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.клиентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.отчётыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокКомплектовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.компонентыПоКомплектациямToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,7 +46,7 @@ namespace SecuritySystemView
             this.buttonOrderReady = new System.Windows.Forms.Button();
             this.buttonOrderPayed = new System.Windows.Forms.Button();
             this.buttonRefresh = new System.Windows.Forms.Button();
-            this.клиентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+
             this.списокКомпонентовВСкладахToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокИнформацииОЗаказахToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокСкладовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,7 +62,7 @@ namespace SecuritySystemView
             this.пополнениеСкладаToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(917, 24);
+            this.menuStrip.Size = new System.Drawing.Size(950, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip";
             //
@@ -79,14 +80,14 @@ namespace SecuritySystemView
             // компонентыToolStripMenuItem
             //
             this.компонентыToolStripMenuItem.Name = "компонентыToolStripMenuItem";
-            this.компонентыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.компонентыToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.компонентыToolStripMenuItem.Text = "Компоненты";
             this.компонентыToolStripMenuItem.Click += new System.EventHandler(this.компонентыToolStripMenuItem_Click);
             //
             // комплектацииToolStripMenuItem
             //
             this.комплектацииToolStripMenuItem.Name = "комплектацииToolStripMenuItem";
-            this.комплектацииToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.комплектацииToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.комплектацииToolStripMenuItem.Text = "Комплектации";
             this.комплектацииToolStripMenuItem.Click += new System.EventHandler(this.комплектацииToolStripMenuItem_Click);
             //
@@ -96,6 +97,14 @@ namespace SecuritySystemView
             this.складыToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.складыToolStripMenuItem.Text = "Склады";
             this.складыToolStripMenuItem.Click += new System.EventHandler(this.складыToolStripMenuItem_Click);
+            //
+            //
+            // клиентыToolStripMenuItem
+            //
+            this.клиентыToolStripMenuItem.Name = "клиентыToolStripMenuItem";
+            this.клиентыToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.клиентыToolStripMenuItem.Text = "Клиенты";
+            this.клиентыToolStripMenuItem.Click += new System.EventHandler(this.клиентыToolStripMenuItem_Click);
             //
             // отчётыToolStripMenuItem
             //
@@ -147,13 +156,13 @@ namespace SecuritySystemView
             this.dataGridViewOrders.ReadOnly = true;
             this.dataGridViewOrders.RowHeadersVisible = false;
             this.dataGridViewOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewOrders.Size = new System.Drawing.Size(685, 358);
+            this.dataGridViewOrders.Size = new System.Drawing.Size(758, 358);
             this.dataGridViewOrders.TabIndex = 1;
             //
             // buttonCreateOrder
             //
             this.buttonCreateOrder.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonCreateOrder.Location = new System.Drawing.Point(724, 42);
+            this.buttonCreateOrder.Location = new System.Drawing.Point(775, 45);
             this.buttonCreateOrder.Name = "buttonCreateOrder";
             this.buttonCreateOrder.Size = new System.Drawing.Size(175, 23);
             this.buttonCreateOrder.TabIndex = 2;
@@ -164,7 +173,7 @@ namespace SecuritySystemView
             // buttonTakeOrderInWork
             //
             this.buttonTakeOrderInWork.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonTakeOrderInWork.Location = new System.Drawing.Point(724, 100);
+            this.buttonTakeOrderInWork.Location = new System.Drawing.Point(775, 83);
             this.buttonTakeOrderInWork.Name = "buttonTakeOrderInWork";
             this.buttonTakeOrderInWork.Size = new System.Drawing.Size(175, 23);
             this.buttonTakeOrderInWork.TabIndex = 3;
@@ -175,7 +184,7 @@ namespace SecuritySystemView
             // buttonOrderReady
             //
             this.buttonOrderReady.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonOrderReady.Location = new System.Drawing.Point(724, 157);
+            this.buttonOrderReady.Location = new System.Drawing.Point(775, 123);
             this.buttonOrderReady.Name = "buttonOrderReady";
             this.buttonOrderReady.Size = new System.Drawing.Size(175, 23);
             this.buttonOrderReady.TabIndex = 4;
@@ -186,7 +195,7 @@ namespace SecuritySystemView
             // buttonOrderPayed
             //
             this.buttonOrderPayed.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonOrderPayed.Location = new System.Drawing.Point(724, 214);
+            this.buttonOrderPayed.Location = new System.Drawing.Point(775, 166);
             this.buttonOrderPayed.Name = "buttonOrderPayed";
             this.buttonOrderPayed.Size = new System.Drawing.Size(175, 23);
             this.buttonOrderPayed.TabIndex = 5;
@@ -197,7 +206,7 @@ namespace SecuritySystemView
             // buttonRefresh
             //
             this.buttonRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonRefresh.Location = new System.Drawing.Point(724, 271);
+            this.buttonRefresh.Location = new System.Drawing.Point(775, 205);
             this.buttonRefresh.Name = "buttonRefresh";
             this.buttonRefresh.Size = new System.Drawing.Size(175, 23);
             this.buttonRefresh.TabIndex = 6;
@@ -225,19 +234,11 @@ namespace SecuritySystemView
             this.списокСкладовToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
             this.списокСкладовToolStripMenuItem.Text = "Список складов";
             this.списокСкладовToolStripMenuItem.Click += new System.EventHandler(this.списокСкладовToolStripMenuItem_Click);
-
-            // клиентыToolStripMenuItem
-            //
-            this.клиентыToolStripMenuItem.Name = "клиентыToolStripMenuItem";
-            this.клиентыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.клиентыToolStripMenuItem.Text = "Клиенты";
-            this.клиентыToolStripMenuItem.Click += new System.EventHandler(this.клиентыToolStripMenuItem_Click);
-            //
             // FormMain
             //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(917, 385);
+            this.ClientSize = new System.Drawing.Size(950, 385);
             this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.buttonOrderPayed);
             this.Controls.Add(this.buttonOrderReady);
