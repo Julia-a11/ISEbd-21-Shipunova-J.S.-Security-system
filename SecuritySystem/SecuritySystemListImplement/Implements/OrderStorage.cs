@@ -42,8 +42,8 @@ namespace SecuritySystemListImplement.Implements
                 (model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate.Date >=
                 model.DateFrom.Value.Date && order.DateCreate.Date <= model.DateTo.Value.Date) ||
                 (model.ClientId.HasValue && order.ClientId == model.ClientId) ||
-                (model.FreeOrders.HasValue && model.FreeOrders.Value && rec.Status == OrderStatus.Принят) ||
-                (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && rec.Status == OrderStatus.Выполняется)))
+                (model.FreeOrders.HasValue && model.FreeOrders.Value && order.Status == OrderStatus.Принят) ||
+                (model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId && order.Status == OrderStatus.Выполняется))
                 {
                     result.Add(CreateModel(order));
                 }
@@ -143,6 +143,15 @@ namespace SecuritySystemListImplement.Implements
                     break;
                 }
             }
+            string implementerFIO = null;
+            foreach (Implementer implementer in source.Implementers)
+            {
+                if (implementer.Id == order.ImplementerId)
+                {
+                    implementerFIO = implementer.ImplementerFIO;
+                    break;
+                }
+            }
             return new OrderViewModel
             {
                 Id = order.Id,
@@ -151,7 +160,7 @@ namespace SecuritySystemListImplement.Implements
                 ImplementerId = (int)order.ImplementerId,
                 SecureName = secureName,
                 ClientFIO = clientFIO,
-                ImplementerFIO = source.Implementers.FirstOrDefault(implementer => implementer.Id == order.ImplementerId)?.ImplementerFIO,
+                ImplementerFIO = implementerFIO,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,
