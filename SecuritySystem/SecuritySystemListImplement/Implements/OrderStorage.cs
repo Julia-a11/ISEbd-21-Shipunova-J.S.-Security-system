@@ -143,21 +143,32 @@ namespace SecuritySystemListImplement.Implements
                     break;
                 }
             }
+            string implementerFIO = null;
+            if (order.ImplementerId.HasValue)
+            {
+                foreach (Implementer implementer in source.Implementers)
+                {
+                    if (implementer.Id == order.ImplementerId)
+                    {
+                        implementerFIO = implementer.ImplementerFIO;
+                        break;
+                    }
+                }
+            }
             return new OrderViewModel
             {
                 Id = order.Id,
                 SecureId = order.SecureId,
                 ClientId = order.ClientId,
-                ImplementerId = (int)order.ImplementerId,
+                ImplementerId = order.ImplementerId,
                 SecureName = secureName,
-                ClientId = order.ClientId,
                 ClientFIO = clientFIO,
-                ImplementerFIO = source.Implementers.FirstOrDefault(implementer => implementer.Id == order.ImplementerId)?.ImplementerFIO,
+                ImplementerFIO = order.ImplementerId.HasValue ? implementerFIO : string.Empty,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,
                 DateCreate = order.DateCreate,
-                DateImplement = order?.DateImplement
+                DateImplement = order.DateImplement
             };
         }
     }

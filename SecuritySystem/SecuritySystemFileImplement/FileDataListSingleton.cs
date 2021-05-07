@@ -248,7 +248,6 @@ namespace SecuritySystemFileImplement
                         new XAttribute("Id", order.Id),
                         new XElement("ClientId", order.ClientId),
                         new XElement("SecureId", order.SecureId),
-                        new XElement("ClientId", order.ClientId),
                         new XElement("ImplementerId", order.ImplementerId),
                         new XElement("Count", order.Count),
                         new XElement("Sum", order.Sum),

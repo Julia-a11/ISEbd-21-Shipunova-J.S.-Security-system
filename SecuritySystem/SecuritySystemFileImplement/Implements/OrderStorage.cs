@@ -58,15 +58,9 @@ namespace SecuritySystemFileImplement.Implements
 
         public void Insert(OrderBindingModel model)
         {
-            if (!model.ClientId.HasValue)
-            {
-                throw new Exception("Клиент не указан");
-            }
             int maxId = source.Orders.Count > 0 ? source.Orders.Max(
                 rec => rec.Id) : 0;
-            var order = new Order {
-                Id = maxId + 1
-            };
+            var order = new Order { Id = maxId + 1, DateCreate = DateTime.Now };
             source.Orders.Add(CreateModel(model, order));
         }
 
@@ -113,10 +107,10 @@ namespace SecuritySystemFileImplement.Implements
                 Id = order.Id,
                 SecureId = order.SecureId,
                 ClientId = order.ClientId,
-                ImplementerId = (int)order.ImplementerId,
                 ClientFIO = source.Clients.FirstOrDefault(client =>  client.Id == order.ClientId)?.ClientFIO,
-                SecureName = source.Secures.FirstOrDefault(secure => secure.Id == order.SecureId)?.SecureName,
+                ImplementerId = order.ImplementerId,
                 ImplementerFIO = source.Implementers.FirstOrDefault(implementer => implementer.Id == order.ImplementerId)?.ImplementerFIO,
+                SecureName = source.Secures.FirstOrDefault(secure => secure.Id == order.SecureId)?.SecureName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,
