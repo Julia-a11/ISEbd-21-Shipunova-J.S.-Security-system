@@ -19,6 +19,7 @@ namespace SecuritySystemFileImplement
         private readonly string SecureFileName = "Secure.xml";
 
         private readonly string ClientFileName = "Client.xml";
+       
         private readonly string StoreHouseFileName = "StoreHouse.xml";
 
         public List<Component> Components { get; set; }
