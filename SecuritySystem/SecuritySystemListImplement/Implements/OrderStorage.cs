@@ -143,6 +143,7 @@ namespace SecuritySystemListImplement.Implements
                 Id = order.Id,
                 SecureId = order.SecureId,
                 SecureName = secureName,
+                ClientId = order.ClientId,
                 ClientFIO = clientFIO,
                 Count = order.Count,
                 Sum = order.Sum,
