@@ -23,7 +23,6 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             _storeHouseStorage = storeHouseStorage;
         }
 
-        //  Получение списка компонент с указанием, в каких изделиях используются
         public List<ReportSecureComponentViewModel> GetSecureComponent()
         {
             var secures = _secureStorage.GetFullList();
@@ -79,17 +78,14 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             {
                 DateFrom = model.DateFrom,
                 DateTo = model.DateTo
-            })
-                .Select(x => new ReportOrdersViewModel
-                {
-                    DateCreate = x.DateCreate,
-                    SecureName = x.SecureName,
-                    Count = x.Count,
-                    Sum = x.Sum,
-                    Status = x.Status
-
-                })
-                .ToList();
+            }).Select(rec => new ReportOrdersViewModel
+            {
+                DateCreate = rec.DateCreate,
+                SecureName = rec.SecureName,
+                Count = rec.Count,
+                Sum = rec.Sum,
+                Status = rec.Status
+            }).ToList();
         }
 
         public List<ReportOrderByDateViewModel> GetOrdersInfo()
@@ -117,7 +113,6 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             });
         }
 
-        // Сохранение компонент с указаеним продуктов в файл-Excel
         public void SaveSecureComponentToExcelFile(ReportBindingModel model)
         {
             SaveToExcel.CreateDoc(new ExcelInfo
@@ -128,8 +123,6 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             });
         }
 
-        // Сохранение заказов в файл-Pdf
-        [Obsolete]
         public void SaveOrdersToPdfFile(ReportBindingModel model)
         {
             SaveToPdf.CreateDoc(new PdfInfo
@@ -152,7 +145,6 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             });
         }
 
-        [Obsolete]
         public void SaveOrdersInfoToPdfFile(ReportBindingModel model)
         {
             SaveToPdf.CreateDocForStoreHouse(new PdfInfoForOrder

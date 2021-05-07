@@ -31,9 +31,9 @@ namespace SecuritySystemView
         {
             this.buttonSaveToExcel = new System.Windows.Forms.Button();
             this.dataGridViewReportSecureComponents = new System.Windows.Forms.DataGridView();
-            this.Secure = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Component = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnSecure = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnComponent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReportSecureComponents)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,30 +52,30 @@ namespace SecuritySystemView
             // 
             this.dataGridViewReportSecureComponents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewReportSecureComponents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Secure,
-            this.Component,
-            this.Count});
+            this.ColumnSecure,
+            this.ColumnComponent,
+            this.ColumnCount});
             this.dataGridViewReportSecureComponents.Location = new System.Drawing.Point(6, 55);
             this.dataGridViewReportSecureComponents.Name = "dataGridViewReportSecureComponents";
             this.dataGridViewReportSecureComponents.Size = new System.Drawing.Size(515, 412);
             this.dataGridViewReportSecureComponents.TabIndex = 1;
             // 
-            // Secure
+            // ColumnSecure
             // 
-            this.Secure.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Secure.HeaderText = "Комплектация";
-            this.Secure.Name = "Secure";
+            this.ColumnSecure.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnSecure.HeaderText = "Комплектация";
+            this.ColumnSecure.Name = "ColumnSecure";
             // 
-            // Component
+            // ColumnComponent
             // 
-            this.Component.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Component.HeaderText = "Компонент";
-            this.Component.Name = "Component";
+            this.ColumnComponent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnComponent.HeaderText = "Компонент";
+            this.ColumnComponent.Name = "ColumnComponent";
             // 
-            // Count
+            // ColumnCount
             // 
-            this.Count.HeaderText = "Количество";
-            this.Count.Name = "Count";
+            this.ColumnCount.HeaderText = "Количество";
+            this.ColumnCount.Name = "ColumnCount";
             // 
             // FormReportSecureComponents
             // 
@@ -85,7 +85,7 @@ namespace SecuritySystemView
             this.Controls.Add(this.dataGridViewReportSecureComponents);
             this.Controls.Add(this.buttonSaveToExcel);
             this.Name = "FormReportSecureComponents";
-            this.Text = "Компоненты по изделиям";
+            this.Text = "Компоненты по комплектациям";
             this.Load += new System.EventHandler(this.FormReportSecureComponents_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReportSecureComponents)).EndInit();
             this.ResumeLayout(false);
@@ -96,8 +96,8 @@ namespace SecuritySystemView
 
         private System.Windows.Forms.Button buttonSaveToExcel;
         private System.Windows.Forms.DataGridView dataGridViewReportSecureComponents;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Secure;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Component;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Count;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSecure;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnComponent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCount;
     }
 }
