@@ -37,7 +37,7 @@ namespace SecuritySystemListImplement.Implements
             List<OrderViewModel> result = new List<OrderViewModel>();
             foreach (var order in source.Orders)
             {
-                if ((!model.DateFrom.HasValue &&
+                if ((order.SecureId == model.SecureId) || (!model.DateFrom.HasValue &&
                 !model.DateTo.HasValue && order.DateCreate.Date == model.DateCreate.Date) ||
                 (model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate.Date >=
                 model.DateFrom.Value.Date && order.DateCreate.Date <= model.DateTo.Value.Date) ||
@@ -150,6 +150,7 @@ namespace SecuritySystemListImplement.Implements
                 ClientId = order.ClientId,
                 ImplementerId = (int)order.ImplementerId,
                 SecureName = secureName,
+                ClientId = order.ClientId,
                 ClientFIO = clientFIO,
                 ImplementerFIO = source.Implementers.FirstOrDefault(implementer => implementer.Id == order.ImplementerId)?.ImplementerFIO,
                 Count = order.Count,

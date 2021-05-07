@@ -167,7 +167,7 @@ namespace StoreHouseWebApp.Controllers
         {
             if (storeHouseId == 0 || componentId == 0 || count <= 0)
             {
-                throw new Exception("Склад не найден");
+                throw new Exception("Проверьте данные");
             }
 
             var storeHouse = APIClient.GetRequest<List<StoreHouseViewModel>>(
@@ -194,6 +194,5 @@ namespace StoreHouseWebApp.Controllers
             });
             return Redirect("~/Home/Index");
         }
-
     }
 }

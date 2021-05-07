@@ -232,13 +232,6 @@ namespace SecuritySystemView
             this.списокСкладовToolStripMenuItem.Text = "Список складов";
             this.списокСкладовToolStripMenuItem.Click += new System.EventHandler(this.списокСкладовToolStripMenuItem_Click);
 
-            // клиентыToolStripMenuItem
-            //
-            this.клиентыToolStripMenuItem.Name = "клиентыToolStripMenuItem";
-            this.клиентыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.клиентыToolStripMenuItem.Text = "Клиенты";
-            this.клиентыToolStripMenuItem.Click += new System.EventHandler(this.клиентыToolStripMenuItem_Click);
-            //
             //
             // запускРаботToolStripMenuItem
             //

@@ -14,6 +14,7 @@ namespace SecuritySystemListImplement
         public List<Secure> Secures { get; set; }
 
         public List<Client> Clients { get; set; }
+       
         public List<StoreHouse> Storehouses { get; set; }
 
         public List<Implementer> Implementers { get; set; }
