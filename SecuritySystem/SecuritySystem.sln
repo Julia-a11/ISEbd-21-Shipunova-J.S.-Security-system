@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecuritySystemRestApi", "Se
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecuritySystemClientApp", "SecuritySystemClientApp\SecuritySystemClientApp.csproj", "{201874EE-54DB-4DCB-886C-3CDF3AFBBF8F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreHouseWebApp", "StoreHouseWebApp\StoreHouseWebApp.csproj", "{3A43641C-526F-409A-8263-27BE4E0C0B82}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreHouseWebApp", "StoreHouseWebApp\StoreHouseWebApp.csproj", "{3A43641C-526F-409A-8263-27BE4E0C0B82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

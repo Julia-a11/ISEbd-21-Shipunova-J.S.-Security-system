@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SecuritySystemDatabaseImplement;
 
 namespace SecuritySystemDatabaseImplement.Migrations
 {
     [DbContext(typeof(SecuritySystemDatabase))]
-    partial class SecuritySystemDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20210418184119_Implementers")]
+    partial class Implementers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,7 +32,7 @@ namespace SecuritySystemDatabaseImplement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("Login")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -167,54 +169,6 @@ namespace SecuritySystemDatabaseImplement.Migrations
                     b.ToTable("SecureComponents");
                 });
 
-            modelBuilder.Entity("SecuritySystemDatabaseImplement.Models.StoreHouse", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateCreate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ResponsiblePersonFCS")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StoreHouseName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("StoreHouses");
-                });
-
-            modelBuilder.Entity("SecuritySystemDatabaseImplement.Models.StoreHouseComponent", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ComponentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StoreHouseId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ComponentId");
-
-                    b.HasIndex("StoreHouseId");
-
-                    b.ToTable("StoreHouseComponents");
-                });
-
             modelBuilder.Entity("SecuritySystemDatabaseImplement.Models.Order", b =>
                 {
                     b.HasOne("SecuritySystemDatabaseImplement.Models.Client", "Client")
@@ -245,21 +199,6 @@ namespace SecuritySystemDatabaseImplement.Migrations
                     b.HasOne("SecuritySystemDatabaseImplement.Models.Secure", "Secure")
                         .WithMany("SecureComponents")
                         .HasForeignKey("SecureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SecuritySystemDatabaseImplement.Models.StoreHouseComponent", b =>
-                {
-                    b.HasOne("SecuritySystemDatabaseImplement.Models.Component", "Component")
-                        .WithMany("StoreHouseComponents")
-                        .HasForeignKey("ComponentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SecuritySystemDatabaseImplement.Models.StoreHouse", "StoreHouse")
-                        .WithMany("StoreHouseComponents")
-                        .HasForeignKey("StoreHouseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

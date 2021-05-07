@@ -20,12 +20,19 @@ namespace SecuritySystemBusinessLogic.ViewModels
         public int SecureId { get; set; }
 
         [DataMember]
+        public int? ImplementerId { get; set; }
+
+        [DataMember]
         [DisplayName("Клиент")]
         public string ClientFIO { get; set; }
 
         [DataMember]
         [DisplayName("Комплектация охраны")]
         public string SecureName { get; set; }
+
+        [DataMember]
+        [DisplayName("Исполнитель")]
+        public string ImplementerFIO { get; set; }
 
         [DataMember]
         [DisplayName("Количество")]

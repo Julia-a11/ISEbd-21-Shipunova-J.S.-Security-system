@@ -17,12 +17,15 @@ namespace SecuritySystemListImplement
        
         public List<StoreHouse> Storehouses { get; set; }
 
+        public List<Implementer> Implementers { get; set; }
+
         private DataListSingleton()
         {
             Components = new List<Component>();
             Orders = new List<Order>();
             Secures = new List<Secure>();
             Clients = new List<Client>();
+            Implementers = new List<Implementer>();
             Storehouses = new List<StoreHouse>();
         }
 
