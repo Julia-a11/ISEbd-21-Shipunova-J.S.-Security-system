@@ -29,7 +29,7 @@ namespace SecuritySystemDatabaseImplement.Implements
             return new OrderViewModel
             {
                 Id = order.Id,
-                SecureId = order.Id,
+                SecureId = order.SecureId,
                 ClientId = order.ClientId,
                 ClientFIO = order.Client.ClientFIO,
                 SecureName = order.Secure.SecureName,
