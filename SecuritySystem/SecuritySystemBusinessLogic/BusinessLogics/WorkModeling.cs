@@ -1,4 +1,5 @@
 ﻿using SecuritySystemBusinessLogic.BindingModels;
+using SecuritySystemBusinessLogic.Enums;
 using SecuritySystemBusinessLogic.Interfaces;
 using SecuritySystemBusinessLogic.ViewModels;
 using System;
@@ -60,7 +61,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                 Thread.Sleep(implementer.PauseTime);
             }
 
-            var ordersRequiringMaterials = await Task.Run(() => _orderStorage.GetFullList().Where(rec => rec.Status == Enums.OrderStatus.ТребуютсяMатериалы).ToList());
+            var ordersRequiringMaterials = await Task.Run(() => _orderStorage.GetFullList().Where(rec => rec.Status == OrderStatus.ТребуютсяMатериалы).ToList());
             foreach (var order in ordersRequiringMaterials)
             {
                 try
@@ -70,6 +71,10 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                         OrderId = order.Id,
                         ImplementerId = implementer.Id
                     });
+                    if (_orderStorage.GetElement(new OrderBindingModel { Id = order.Id  }).Status == OrderStatus.ТребуютсяMатериалы)
+                    {
+                        continue;
+                    }
                     Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
                     _orderLogic.FinishOrder(new ChangeStatusBindingModel
                     {
@@ -91,6 +96,10 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                             OrderId = order.Id,
                             ImplementerId = implementer.Id
                         });
+                        if (_orderStorage.GetElement(new OrderBindingModel { Id = order.Id }).Status == OrderStatus.ТребуютсяMатериалы)
+                        {
+                            continue;
+                        }
                         Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
                         _orderLogic.FinishOrder(new ChangeStatusBindingModel
                         {
