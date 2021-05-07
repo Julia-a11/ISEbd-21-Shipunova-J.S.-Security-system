@@ -73,31 +73,29 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                 }
 
                 var components = _secureStorage.GetElement(new SecureBindingModel { Id = order.SecureId }).SecureComponents;
-                if (!_storeHouseStorage.CheckAndTake(order.Count, components))
+                
+                if (_storeHouseStorage.CheckAndTake(order.Count, components))
                 {
-                    _orderStorage.Update(new OrderBindingModel
-                    {
-                        Id = order.Id,
-                        ClientId = order.ClientId,
-                        SecureId = order.SecureId,
-                        Count = order.Count,
-                        Sum = order.Sum,
-                        DateCreate = order.DateCreate,
-                        Status = OrderStatus.ТребуютсяMатериалы
-                    });
-                    return;
+                    order.DateImplement = DateTime.Now;
+                    order.Status = OrderStatus.Выполняется;
+                    order.ImplementerId = model.ImplementerId;
                 }
+                else
+                {
+                    order.Status = OrderStatus.ТребуютсяMатериалы;
+                }
+                
                 _orderStorage.Update(new OrderBindingModel
                 {
                     Id = order.Id,
                     ClientId = order.ClientId,
-                    ImplementerId = model.ImplementerId,
                     SecureId = order.SecureId,
                     Count = order.Count,
                     Sum = order.Sum,
                     DateCreate = order.DateCreate,
-                    DateImplement = DateTime.Now,
-                    Status = OrderStatus.Выполняется
+                    DateImplement = order.DateImplement,
+                    Status = order.Status,
+                    ImplementerId = order.ImplementerId
                 });
             }
         }
