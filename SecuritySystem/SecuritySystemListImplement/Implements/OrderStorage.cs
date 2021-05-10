@@ -35,10 +35,11 @@ namespace SecuritySystemListImplement.Implements
             List<OrderViewModel> result = new List<OrderViewModel>();
             foreach (var order in source.Orders)
             {
-                if ((!model.DateFrom.HasValue && !model.DateTo.HasValue &&
-                        order.DateCreate.Date == model.DateCreate.Date) ||
-                        (model.DateFrom.HasValue && model.DateTo.HasValue &&
-                        order.DateCreate.Date >= model.DateFrom.Value.Date && order.DateCreate.Date <= model.DateTo.Value.Date))
+                if ((!model.DateFrom.HasValue &&
+                !model.DateTo.HasValue && order.DateCreate.Date == model.DateCreate.Date) ||
+                (model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate.Date >=
+                model.DateFrom.Value.Date && order.DateCreate.Date <= model.DateTo.Value.Date) ||
+                (model.ClientId.HasValue && order.ClientId == model.ClientId))
                 {
                     result.Add(CreateModel(order));
                 }
@@ -108,6 +109,7 @@ namespace SecuritySystemListImplement.Implements
         private Order CreateModel(OrderBindingModel model, Order order)
         {
             order.SecureId = model.SecureId;
+            order.ClientId = model.ClientId.Value;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -127,11 +129,22 @@ namespace SecuritySystemListImplement.Implements
                     break;
                 }
             }
+            string clientFIO = null;
+            foreach (Client client in source.Clients)
+            {
+                if (client.Id == order.ClientId)
+                {
+                    clientFIO = client.ClientFIO;
+                    break;
+                }
+            }
             return new OrderViewModel
             {
                 Id = order.Id,
                 SecureId = order.SecureId,
                 SecureName = secureName,
+                ClientId = order.ClientId,
+                ClientFIO = clientFIO,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,

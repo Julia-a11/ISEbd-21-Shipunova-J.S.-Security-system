@@ -33,7 +33,9 @@ namespace SecuritySystemView
             currentContainer.RegisterType<IOrderStorage, OrderStorage>(new HierarchicalLifetimeManager());
            
             currentContainer.RegisterType<ISecureStorage, SecureStorage>(new HierarchicalLifetimeManager());
-           
+
+            currentContainer.RegisterType<IClientStorage, ClientStorage>(new HierarchicalLifetimeManager());
+
             currentContainer.RegisterType<ComponentLogic>(new HierarchicalLifetimeManager());
             
             currentContainer.RegisterType<OrderLogic>(new HierarchicalLifetimeManager());
@@ -42,6 +44,7 @@ namespace SecuritySystemView
 
             currentContainer.RegisterType<ReportLogic>(new HierarchicalLifetimeManager());
 
+            currentContainer.RegisterType<ClientLogic>(new HierarchicalLifetimeManager());
 
             return currentContainer;
         }
