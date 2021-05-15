@@ -10,19 +10,14 @@ namespace SecuritySystemDatabaseImplement.Implements
 {
     public class MessageInfoStorage : IMessageInfoStorage
     {
+        private readonly int stringsOnPage = 7;
+
         public List<MessageInfoViewModel> GetFullList()
         {
             using (var context = new SecuritySystemDatabase())
             {
                 return context.MessageInfoes
-                    .Select(rec => new MessageInfoViewModel
-                    {
-                        MessageId = rec.MessageId,
-                        SenderName = rec.SenderName,
-                        DateDelivery = rec.DateDelivery,
-                        Subject = rec.Subject,
-                        Body = rec.Body
-                    })
+                    .Select(CreateModel)
                     .ToList();
             }
         }
@@ -36,18 +31,19 @@ namespace SecuritySystemDatabaseImplement.Implements
 
             using (var context = new SecuritySystemDatabase())
             {
-                return context.MessageInfoes
+                var messageInfoes = context.MessageInfoes
                     .Where(rec => (model.ClientId.HasValue && rec.ClientId == model.ClientId) ||
-                    (!model.ClientId.HasValue && rec.DateDelivery.Date == model.DateDelivery.Date))
-                    .Select(rec => new MessageInfoViewModel
-                    {
-                        MessageId = rec.MessageId,
-                        SenderName = rec.SenderName,
-                        DateDelivery = rec.DateDelivery,
-                        Subject = rec.Subject,
-                        Body = rec.Body
-                    })
-                    .ToList();
+                    (!model.ClientId.HasValue && rec.DateDelivery.Date == model.DateDelivery.Date) ||
+                    (!model.ClientId.HasValue && model.PageNumber.HasValue) || 
+                    (model.ClientId.HasValue && rec.ClientId == model.ClientId && model.PageNumber.HasValue));
+
+                if (model.PageNumber.HasValue)
+                {
+                    messageInfoes = messageInfoes.Skip(stringsOnPage * (model.PageNumber.Value - 1))
+                        .Take(stringsOnPage);
+                }
+               
+                return messageInfoes.Select(CreateModel).ToList();
             }
         }
 
@@ -72,6 +68,18 @@ namespace SecuritySystemDatabaseImplement.Implements
                 });
                 context.SaveChanges();
             }
+        }
+
+        public MessageInfoViewModel CreateModel(MessageInfo messageInfo)
+        {
+            return new MessageInfoViewModel
+            {
+                MessageId = messageInfo.MessageId,
+                SenderName = messageInfo.SenderName,
+                DateDelivery = messageInfo.DateDelivery,
+                Subject = messageInfo.Subject,
+                Body = messageInfo.Body
+            };
         }
     }
 }

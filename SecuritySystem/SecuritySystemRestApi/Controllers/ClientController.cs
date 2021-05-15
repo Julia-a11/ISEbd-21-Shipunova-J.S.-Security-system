@@ -37,9 +37,10 @@ namespace SecuritySystemRestApi.Controllers
         })?[0];
 
         [HttpGet]
-        public List<MessageInfoViewModel> GetMessages(int clientId) => _mailLogic.Read(new MessageInfoBindingModel
+        public List<MessageInfoViewModel> GetMessages(int clientId, int pageNumber) => _mailLogic.Read(new MessageInfoBindingModel
         {
-            ClientId = clientId
+            ClientId = clientId,
+            PageNumber = pageNumber
         });
 
         [HttpPost]

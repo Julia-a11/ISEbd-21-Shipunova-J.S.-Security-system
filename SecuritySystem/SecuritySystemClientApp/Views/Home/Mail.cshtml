@@ -12,7 +12,7 @@
                 <thead>
                         <tr>
                             <th>
-                                Отпарвитель
+                                Отправитель
                             </th>
                             <th>
                                 Дата письма
@@ -45,5 +45,10 @@
             }
             </tbody>
         </table>
+        <form>
+            <button asp-action="PrevMailPage" class="btn btn-primary">Назад</button>
+            <button asp-action="NextMailPage" class="btn btn-primary">Вперёд</button>
+        </form>
+
     }
 </div>
