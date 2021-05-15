@@ -3,7 +3,7 @@ using MigraDoc.DocumentObjectModel.Tables;
 
 namespace SecuritySystemBusinessLogic.HelperModels
 {
-    class PdfCellParameters
+    public class PdfCellParameters
     {
         public Cell Cell { get; set; }
 

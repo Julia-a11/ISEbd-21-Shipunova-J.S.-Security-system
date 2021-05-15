@@ -1,8 +1,7 @@
-﻿using SecuritySystemFileImplement.Models;
-using SecuritySystemListImplement.Models;
+﻿using SecuritySystemListImplement.Models;
 using System.Collections.Generic;
 
-namespace SecuritySystemFileImplement
+namespace SecuritySystemListImplement
 {
     public class DataListSingleton
     {
@@ -16,6 +15,8 @@ namespace SecuritySystemFileImplement
 
         public List<Client> Clients { get; set; }
 
+        public List<StoreHouse> Storehouses { get; set; }
+
         public List<Implementer> Implementers { get; set; }
 
         public List<MessageInfo> MessageInfoes { get; set; }
@@ -28,6 +29,7 @@ namespace SecuritySystemFileImplement
             Clients = new List<Client>();
             Implementers = new List<Implementer>();
             MessageInfoes = new List<MessageInfo>();
+            Storehouses = new List<StoreHouse>();
         }
 
         public static DataListSingleton GetInstance()

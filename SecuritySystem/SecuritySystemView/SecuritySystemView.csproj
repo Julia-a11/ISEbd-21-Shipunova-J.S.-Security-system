@@ -283,6 +283,24 @@
     <Compile Include="FormReportSecureComponents.Designer.cs">
       <DependentUpon>FormReportSecureComponents.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormReplenishmentStoreHouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReplenishmentStoreHouse.Designer.cs">
+      <DependentUpon>FormReplenishmentStoreHouse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormReportStoreHouseComponents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportStoreHouseComponents.Designer.cs">
+      <DependentUpon>FormReportStoreHouseComponents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormReportOrdersByDate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportOrdersByDate.Designer.cs">
+      <DependentUpon>FormReportOrdersByDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormSecure.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -300,6 +318,18 @@
     </Compile>
     <Compile Include="FormSecures.Designer.cs">
       <DependentUpon>FormSecures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStoreHouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStoreHouse.Designer.cs">
+      <DependentUpon>FormStoreHouse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStoreHouses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStoreHouses.Designer.cs">
+      <DependentUpon>FormStoreHouses.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -334,6 +364,15 @@
     <EmbeddedResource Include="FormReportSecureComponents.resx">
       <DependentUpon>FormReportSecureComponents.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormReplenishmentStoreHouse.resx">
+      <DependentUpon>FormReplenishmentStoreHouse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReportStoreHouseComponents.resx">
+      <DependentUpon>FormReportStoreHouseComponents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReportOrdersByDate.resx">
+      <DependentUpon>FormReportOrdersByDate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormSecure.resx">
       <DependentUpon>FormSecure.cs</DependentUpon>
     </EmbeddedResource>
@@ -342,6 +381,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormSecures.resx">
       <DependentUpon>FormSecures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStoreHouse.resx">
+      <DependentUpon>FormStoreHouse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStoreHouses.resx">
+      <DependentUpon>FormStoreHouses.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -353,8 +398,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Report.rdlc" />
+    <EmbeddedResource Include="ReportOrders.rdlc" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\SecuritySystemBusinessLogic.ViewModels.ReportOrderByDateViewModel.datasource" />
     <None Include="Properties\DataSources\SecuritySystemBusinessLogic.ViewModels.ReportOrdersViewModel.datasource" />
+    <None Include="Properties\DataSources\SecuritySystemBusinessLogic.ViewModels.ReportStoreHouseByDateViewModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

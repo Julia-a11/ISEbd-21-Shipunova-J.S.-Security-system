@@ -49,8 +49,7 @@ namespace SecuritySystemDatabaseImplement.Implements
             using (var context = new SecuritySystemDatabase())
             {
                 return context.Clients
-                    .Where(rec => rec.Email.Equals(model.Email) &&
-                    rec.Password.Equals(model.Password))
+                    .Where(rec => rec.Email == model.Email && rec.Password == model.Password)
                     .Select(CreateModel)
                     .ToList();
             }
@@ -66,8 +65,7 @@ namespace SecuritySystemDatabaseImplement.Implements
             using (var context = new SecuritySystemDatabase())
             {
                 var client = context.Clients
-                    .FirstOrDefault(rec => rec.Email.Equals(model.Email) ||
-                    rec.Id == model.Id);
+                    .FirstOrDefault(rec => rec.Email == model.Email || rec.Id == model.Id);
 
                 return client != null ?
                     CreateModel(client) :  null;

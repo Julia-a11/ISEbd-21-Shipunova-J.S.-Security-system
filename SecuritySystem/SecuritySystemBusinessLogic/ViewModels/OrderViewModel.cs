@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 
+
 namespace SecuritySystemBusinessLogic.ViewModels
 {
     // Заказ
@@ -40,15 +41,15 @@ namespace SecuritySystemBusinessLogic.ViewModels
         [DataMember]
         [DisplayName("Сумма")]
         public decimal Sum { get; set; }
-       
+
         [DataMember]
         [DisplayName("Статус")]
         public OrderStatus Status { get; set; }
-       
+
         [DataMember]
         [DisplayName("Дата создания")]
         public DateTime DateCreate { get; set; }
-       
+
         [DataMember]
         [DisplayName("Дата выполнения")]
         public DateTime? DateImplement { get; set; }

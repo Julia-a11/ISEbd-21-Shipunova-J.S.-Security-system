@@ -17,10 +17,15 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
 
         private readonly object locker = new object();
 
-        public OrderLogic(IOrderStorage orderStorage, IClientStorage clientStorage)
+        private readonly ISecureStorage _secureStorage;
+
+        private readonly IStoreHouseStorage _storeHouseStorage;
+
+        public OrderLogic(IOrderStorage orderStorage, ISecureStorage secureStorage, IStoreHouseStorage storeHouseStorage)
         {
             _orderStorage = orderStorage;
-            _clientStorage = clientStorage;
+            _secureStorage = secureStorage;
+            _storeHouseStorage = storeHouseStorage;
         }
 
         public List<OrderViewModel> Read(OrderBindingModel model)
@@ -71,7 +76,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                 {
                     throw new Exception("Заказ не найден");
                 }
-                if (order.Status != OrderStatus.Принят)
+                if (order.Status != OrderStatus.Принят && order.Status != OrderStatus.ТребуютсяMатериалы)
                 {
                     throw new Exception("Заказ ещё не принят");
                 }
@@ -79,17 +84,31 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                 {
                     throw new Exception("У заказа уже есть исполнитель");
                 }
+
+                var components = _secureStorage.GetElement(new SecureBindingModel { Id = order.SecureId }).SecureComponents;
+
+                if (_storeHouseStorage.CheckAndTake(order.Count, components))
+                {
+                    order.DateImplement = DateTime.Now;
+                    order.Status = OrderStatus.Выполняется;
+                    order.ImplementerId = model.ImplementerId;
+                }
+                else
+                {
+                    order.Status = OrderStatus.ТребуютсяMатериалы;
+                }
+
                 _orderStorage.Update(new OrderBindingModel
                 {
                     Id = order.Id,
                     ClientId = order.ClientId,
-                    ImplementerId = model.ImplementerId,
                     SecureId = order.SecureId,
                     Count = order.Count,
                     Sum = order.Sum,
                     DateCreate = order.DateCreate,
-                    DateImplement = DateTime.Now,
-                    Status = OrderStatus.Выполняется
+                    DateImplement = order.DateImplement,
+                    Status = order.Status,
+                    ImplementerId = order.ImplementerId
                 });
 
                 MailLogic.MailSendAsync(new MailSendInfo

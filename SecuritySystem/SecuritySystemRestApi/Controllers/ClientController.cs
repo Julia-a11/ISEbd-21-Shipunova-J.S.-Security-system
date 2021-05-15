@@ -41,14 +41,14 @@ namespace SecuritySystemRestApi.Controllers
         {
             ClientId = clientId
         });
-      
+
         [HttpPost]
         public void Register(ClientBindingModel model)
         {
             CheckData(model);
             _logic.CreateOrUpdate(model);
         }
-       
+
         [HttpPost]
         public void UpdateData(ClientBindingModel model)
         {

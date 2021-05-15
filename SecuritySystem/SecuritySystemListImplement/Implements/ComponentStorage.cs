@@ -1,16 +1,16 @@
 ﻿using SecuritySystemBusinessLogic.BindingModels;
 using SecuritySystemBusinessLogic.Interfaces;
 using SecuritySystemBusinessLogic.ViewModels;
-using SecuritySystemFileImplement.Models;
+using SecuritySystemListImplement.Models;
 using System;
 using System.Collections.Generic;
 
-namespace SecuritySystemFileImplement.Implements
+namespace SecuritySystemListImplement.Implements
 {
     public class ComponentStorage : IComponentStorage
     {
         private readonly DataListSingleton source;
-      
+
         public ComponentStorage()
         {
             source = DataListSingleton.GetInstance();

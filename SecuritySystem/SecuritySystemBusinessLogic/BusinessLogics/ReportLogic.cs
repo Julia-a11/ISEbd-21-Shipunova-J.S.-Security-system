@@ -5,51 +5,66 @@ using SecuritySystemBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SecuritySystemBusinessLogic.BusinessLogics
 {
     public class ReportLogic
     {
-        private readonly IComponentStorage _componentStorage;
-
         private readonly ISecureStorage _secureStorage;
 
         private readonly IOrderStorage _orderStorage;
 
-        public ReportLogic(ISecureStorage secureStorage, IComponentStorage componentStorage,
-            IOrderStorage orderStorage)
+        private readonly IStoreHouseStorage _storeHouseStorage;
+
+        public ReportLogic(ISecureStorage secureStorage, IOrderStorage orderStorage, IStoreHouseStorage storeHouseStorage)
         {
             _secureStorage = secureStorage;
-            _componentStorage = componentStorage;
             _orderStorage = orderStorage;
+            _storeHouseStorage = storeHouseStorage;
         }
 
-        //  Получение списка компонент с указанием, в каких изделиях используются
         public List<ReportSecureComponentViewModel> GetSecureComponent()
         {
-            var components = _componentStorage.GetFullList();
-
             var secures = _secureStorage.GetFullList();
 
             var list = new List<ReportSecureComponentViewModel>();
 
-            foreach (var component in components)
+            foreach (var secure in secures)
             {
                 var record = new ReportSecureComponentViewModel
                 {
-                    ComponentName = component.ComponentName,
-                    Secures = new List<Tuple<string, int>>(),
+                    SecureName = secure.SecureName,
+                    Components = new List<Tuple<string, int>>(),
                     TotalCount = 0
                 };
-                foreach (var secure in secures)
+                foreach (var component in secure.SecureComponents)
                 {
-                    if (secure.SecureComponents.ContainsKey(component.Id))
-                    {
-                        record.Secures.Add(new Tuple<string, int>(secure.SecureName,
-                            secure.SecureComponents[component.Id].Item2));
-                        record.TotalCount += secure.SecureComponents[component.Id].Item2;
-                    }
+                    record.Components.Add(new Tuple<string, int>(component.Value.Item1, component.Value.Item2));
+                    record.TotalCount += component.Value.Item2;
+                }
+                list.Add(record);
+            }
+            return list;
+        }
+
+        public List<ReportStoreHouseComponentsViewModel> GetStoreHouseComponent()
+        {
+            var storeHouses = _storeHouseStorage.GetFullList();
+
+            var list = new List<ReportStoreHouseComponentsViewModel>();
+
+            foreach (var storeHouse in storeHouses)
+            {
+                var record = new ReportStoreHouseComponentsViewModel
+                {
+                    StoreHouseName = storeHouse.StoreHouseName,
+                    Components = new List<Tuple<string, int>>(),
+                    TotalCount = 0
+                };
+                foreach (var component in storeHouse.StoreHouseComponents)
+                {
+                    record.Components.Add(new Tuple<string, int>(component.Value.Item1, component.Value.Item2));
+                    record.TotalCount += component.Value.Item2;
                 }
                 list.Add(record);
             }
@@ -63,15 +78,26 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             {
                 DateFrom = model.DateFrom,
                 DateTo = model.DateTo
-            })
-                .Select(x => new ReportOrdersViewModel
-                {
-                    DateCreate = x.DateCreate,
-                    SecureName = x.SecureName,
-                    Count = x.Count,
-                    Sum = x.Sum,
-                    Status = x.Status
+            }).Select(rec => new ReportOrdersViewModel
+            {
+                DateCreate = rec.DateCreate,
+                SecureName = rec.SecureName,
+                Count = rec.Count,
+                Sum = rec.Sum,
+                Status = rec.Status
+            }).ToList();
+        }
 
+        public List<ReportOrderByDateViewModel> GetOrdersInfo()
+        {
+            return _orderStorage.GetFullList()
+                .GroupBy(order => order.DateCreate
+                .ToShortDateString())
+                .Select(rec => new ReportOrderByDateViewModel
+                {
+                    Date = Convert.ToDateTime(rec.Key),
+                    Count = rec.Count(),
+                    Sum = rec.Sum(order => order.Sum)
                 })
                 .ToList();
         }
@@ -82,24 +108,21 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             SaveToWord.CreateDoc(new WordInfo
             {
                 FileName = model.FileName,
-                Title = "Список комп",
+                Title = "Список комплектаций",
                 Secures = _secureStorage.GetFullList()
             });
         }
 
-        // Сохранение компонент с указаеним продуктов в файл-Excel
         public void SaveSecureComponentToExcelFile(ReportBindingModel model)
         {
             SaveToExcel.CreateDoc(new ExcelInfo
             {
                 FileName = model.FileName,
-                Title = "Список компонентов",
+                Title = "Список комплектаций",
                 SecureComponents = GetSecureComponent()
             });
         }
 
-        // Сохранение заказов в файл-Pdf
-        [Obsolete]
         public void SaveOrdersToPdfFile(ReportBindingModel model)
         {
             SaveToPdf.CreateDoc(new PdfInfo
@@ -109,6 +132,36 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                 DateFrom = model.DateFrom.Value,
                 DateTo = model.DateTo.Value,
                 Orders = GetOrders(model)
+            });
+        }
+
+        public void SaveStoreHouseComponentsToExcel(ReportBindingModel model)
+        {
+            SaveToExcel.CreateDocForStoreHouse(new ExcelInfoForStoreHouse
+            {
+                FileName = model.FileName,
+                Title = "Список складов",
+                StoreHouseComponents = GetStoreHouseComponent()
+            });
+        }
+
+        public void SaveOrdersInfoToPdfFile(ReportBindingModel model)
+        {
+            SaveToPdf.CreateDocForStoreHouse(new PdfInfoForOrder
+            {
+                FileName = model.FileName,
+                Title = "Список заказов",
+                Orders = GetOrdersInfo()
+            });
+        }
+
+        public void SaveStoreHousesToWordFile(ReportBindingModel model)
+        {
+            SaveToWord.CreateDocForStoreHouse(new WordInfoForStoreHouse
+            {
+                FileName = model.FileName,
+                Title = "Список складов",
+                StoreHouses = _storeHouseStorage.GetFullList()
             });
         }
     }
