@@ -28,14 +28,7 @@ namespace SecuritySystemView
         {
             try
             {
-                var list = logic.Read(null);
-                if (list != null)
-                {
-                    dataGridViewSecures.DataSource = list;
-                    dataGridViewSecures.Columns[0].Visible = false;
-                    dataGridViewSecures.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dataGridViewSecures.Columns[3].Visible = false;
-                }
+                Program.ConfigGrid(logic.Read(null), dataGridViewSecures);
             }
             catch (Exception ex)
             {
