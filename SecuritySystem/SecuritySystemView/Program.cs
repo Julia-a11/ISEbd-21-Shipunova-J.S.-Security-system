@@ -40,7 +40,8 @@ namespace SecuritySystemView
                                 ReadOnly = true,
                                 HeaderText = columnAttribute.Title,
                                 Visible = columnAttribute.Visible,
-                                Width = columnAttribute.Width
+                                Width = columnAttribute.Width,
+                                DefaultCellStyle = new DataGridViewCellStyle { Format = columnAttribute.Format }
                             };
                             if (columnAttribute.GridViewAutoSize != GridViewAutoSize.None)
                             {

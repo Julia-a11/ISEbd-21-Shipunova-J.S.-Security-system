@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using SecuritySystemBusinessLogic.Attributes;
+using System.ComponentModel;
 
 namespace SecuritySystemBusinessLogic.ViewModels
 {

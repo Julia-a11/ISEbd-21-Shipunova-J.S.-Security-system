@@ -48,11 +48,11 @@ namespace SecuritySystemBusinessLogic.ViewModels
         [DataMember]
         public OrderStatus Status { get; set; }
 
-        [Column(title: "Дата создания", width: 100)]
+        [Column(title: "Дата создания", width: 100, format: "dd-MM-yyyy")]
         [DataMember]
         public DateTime DateCreate { get; set; }
 
-        [Column(title: "Дата выполнения", width: 100)]
+        [Column(title: "Дата выполнения", width: 100, format: "dd-MM-yyyy")]
         [DataMember]
         public DateTime? DateImplement { get; set; }
     }
