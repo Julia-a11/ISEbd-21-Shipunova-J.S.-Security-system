@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SecuritySystemBusinessLogic.HelperModels
 {
-    class PdfInfo
+    public class PdfInfo
     {
         public string FileName { get; set; }
 

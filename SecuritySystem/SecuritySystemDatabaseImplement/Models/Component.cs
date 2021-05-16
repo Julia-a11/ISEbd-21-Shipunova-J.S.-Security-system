@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace SecuritySystemDatabaseImplement.Models
 {
@@ -15,5 +13,8 @@ namespace SecuritySystemDatabaseImplement.Models
 
         [ForeignKey("ComponentId")]
         public virtual List<SecureComponent> SecureComponents { get; set; }
+
+        [ForeignKey("ComponentId")]
+        public virtual List<StoreHouseComponent> StoreHouseComponents { get; set; }
     }
 }

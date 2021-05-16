@@ -25,11 +25,15 @@ namespace SecuritySystemRestApi
             services.AddTransient<IClientStorage, ClientStorage>();
             services.AddTransient<IOrderStorage, OrderStorage>();
             services.AddTransient<ISecureStorage, SecureStorage>();
+            services.AddTransient<IComponentStorage, ComponentStorage>();
+            services.AddTransient<IStoreHouseStorage, StoreHouseStorage>();
             services.AddTransient<IMessageInfoStorage, MessageInfoStorage>();
             services.AddTransient<OrderLogic>();
             services.AddTransient<ClientLogic>();
             services.AddTransient<SecureLogic>();
+            services.AddTransient<ComponentLogic>();
             services.AddTransient<MailLogic>();
+            services.AddTransient<StoreHouseLogic>();
             MailLogic.MailConfig(new MailConfig
             {
                 SmtpClientHost = "smtp.yandex.ru",

@@ -5,7 +5,6 @@ using SecuritySystemFileImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SecuritySystemFileImplement.Implements
 {
@@ -39,8 +38,7 @@ namespace SecuritySystemFileImplement.Implements
 
         public void Delete(ClientBindingModel model)
         {
-            var client = source.Clients
-                .FirstOrDefault(rec => rec.Id == model.Id);
+            var client = source.Clients.FirstOrDefault(rec => rec.Id == model.Id);
             if (client == null)
             {
                 throw new Exception("Клиент не найден!");
@@ -66,8 +64,9 @@ namespace SecuritySystemFileImplement.Implements
                 return null;
             }
             return source.Clients
-                .Where(rec => rec.ClientFIO.Contains(model.ClientFIO))
-                .Select(CreateModel).ToList();
+                .Where(rec => rec.Email == model.Email && rec.Password == model.Password)
+                .Select(CreateModel)
+                .ToList();
         }
 
         public List<ClientViewModel> GetFullList()

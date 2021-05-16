@@ -38,7 +38,7 @@ namespace SecuritySystemListImplement.Implements
             }
             foreach (var implementer in source.Implementers)
             {
-                if (implementer.Id == model.Id)
+                if (implementer.Id == model.Id || implementer.ImplementerFIO == model.ImplementerFIO)
                 {
                     return CreateModel(implementer);
                 }
@@ -116,7 +116,5 @@ namespace SecuritySystemListImplement.Implements
                 PauseTime = implementer.PauseTime
             };
         }
-
     }
 }
-

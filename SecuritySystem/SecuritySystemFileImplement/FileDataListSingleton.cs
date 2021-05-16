@@ -20,6 +20,8 @@ namespace SecuritySystemFileImplement
 
         private readonly string ClientFileName = "Client.xml";
 
+        private readonly string StoreHouseFileName = "StoreHouse.xml";
+
         private readonly string ImplementerFileName = "Implementer.xml";
 
         private readonly string MessageInfoFileName = "MessageInfo.xml";
@@ -31,6 +33,7 @@ namespace SecuritySystemFileImplement
         public List<Secure> Secures { get; set; }
 
         public List<Client> Clients { get; set; }
+        public List<StoreHouse> StoreHouses { get; set; }
 
         public List<Implementer> Implementers { get; set; }
 
@@ -44,6 +47,7 @@ namespace SecuritySystemFileImplement
             Clients = LoadClients();
             Implementers = LoadImplementers();
             MessageInfoes = LoadMessageInfoes();
+            StoreHouses = LoadStoreHouses();
         }
 
         public static FileDataListSingleton GetInstance()
@@ -63,6 +67,7 @@ namespace SecuritySystemFileImplement
             SaveClients();
             SaveImplementers();
             SaveMessageInfoes();
+            SaveStoreHouses();
         }
 
         private List<Component> LoadComponents()
@@ -102,14 +107,15 @@ namespace SecuritySystemFileImplement
                     list.Add(new Order
                     {
                         Id = Convert.ToInt32(elem.Attribute("Id").Value),
-                        SecureId = Convert.ToInt32(elem.Element("SecureId").Value),
                         ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
+                        SecureId = Convert.ToInt32(elem.Element("SecureId").Value),
                         ImplementerId = Convert.ToInt32(elem.Element("ImplementerId").Value),
                         Count = Convert.ToInt32(elem.Element("Count").Value),
                         Sum = Convert.ToDecimal(elem.Element("Sum").Value),
                         Status = (OrderStatus)Convert.ToInt32(elem.Element("Status").Value),
                         DateCreate = Convert.ToDateTime(elem.Element("DateCreate").Value),
-                        DateImplement = !string.IsNullOrEmpty(elem.Element("DateImplement").Value) ? Convert.ToDateTime(elem.Element("DateImplement").Value) : DateTime.MinValue
+                        DateImplement = !string.IsNullOrEmpty(elem.Element("DateImplement").Value) ?
+                            Convert.ToDateTime(elem.Element("DateImplement").Value) : DateTime.MinValue
                     });
                 }
             }
@@ -146,6 +152,36 @@ namespace SecuritySystemFileImplement
             return list;
         }
 
+        private List<StoreHouse> LoadStoreHouses()
+        {
+            var list = new List<StoreHouse>();
+
+            if (File.Exists(StoreHouseFileName))
+            {
+                XDocument xDocument = XDocument.Load(StoreHouseFileName);
+
+                var xElements = xDocument.Root.Elements("StoreHouse").ToList();
+
+                foreach (var elem in xElements)
+                {
+                    var storeHouseComponents = new Dictionary<int, int>();
+                    foreach (var component in elem.Element("StoreHouseComponents").Elements("StoreHouseComponent").ToList())
+                    {
+                        storeHouseComponents.Add(Convert.ToInt32(component.Element("Key").Value),
+                            Convert.ToInt32(component.Element("Value").Value));
+                    }
+                    list.Add(new StoreHouse
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        StoreHouseName = elem.Element("StoreHouseName").Value,
+                        ResponsiblePersonFCS = elem.Element("ResponsiblePersonFCS").Value,
+                        StoreHouseComponents = storeHouseComponents,
+                        DateCreate = Convert.ToDateTime(elem.Element("DateCreate").Value)
+                        });
+                    }
+                }
+                return list;
+            }
         private List<Client> LoadClients()
         {
             var list = new List<Client>();
@@ -159,8 +195,9 @@ namespace SecuritySystemFileImplement
                     {
                         Id = Convert.ToInt32(elem.Attribute("Id").Value),
                         ClientFIO = elem.Element("ClietnFIO").Value,
-                        Login = elem.Element("Login").Value,
+                        Email = elem.Element("Email").Value,
                         Password = elem.Element("Password").Value
+
                     });
                 }
             }
@@ -238,8 +275,8 @@ namespace SecuritySystemFileImplement
                 {
                     xElement.Add(new XElement("Order",
                         new XAttribute("Id", order.Id),
-                        new XElement("SecureId", order.SecureId),
                         new XElement("ClientId", order.ClientId),
+                        new XElement("SecureId", order.SecureId),
                         new XElement("ImplementerId", order.ImplementerId),
                         new XElement("Count", order.Count),
                         new XElement("Sum", order.Sum),
@@ -278,6 +315,32 @@ namespace SecuritySystemFileImplement
             }
         }
 
+        private void SaveStoreHouses()
+        {
+            if (StoreHouses != null)
+            {
+                var xElement = new XElement("StoreHouses");
+
+                foreach (var storeHouse in StoreHouses)
+                {
+                    var compElement = new XElement("StoreHouseComponents");
+                    foreach (var component in storeHouse.StoreHouseComponents)
+                    {
+                        compElement.Add(new XElement("StoreHouseComponent",
+                            new XElement("Key", component.Key),
+                            new XElement("Value", component.Value)));
+                    }
+                    xElement.Add(new XElement("StoreHouse",
+                        new XAttribute("Id", storeHouse.Id),
+                        new XElement("StoreHouseName", storeHouse.StoreHouseName),
+                        new XElement("ResponsiblePersonFCS", storeHouse.ResponsiblePersonFCS),
+                        new XElement("DateCreate", storeHouse.DateCreate),
+                        compElement));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(StoreHouseFileName);
+              }
+            }
         private void SaveClients()
         {
             if (Clients != null)
@@ -288,7 +351,7 @@ namespace SecuritySystemFileImplement
                     xElement.Add(new XElement("Client",
                         new XAttribute("Id", client.Id),
                         new XElement("ClientFIO", client.ClientFIO),
-                        new XElement("Login", client.Login),
+                        new XElement("Email", client.Email),
                         new XElement("Password", client.Password)));
                 }
                 XDocument xDocument = new XDocument(xElement);

@@ -11,6 +11,9 @@ namespace SecuritySystemBusinessLogic.BindingModels
         public int? ClientId { get; set; }
 
         [DataMember]
+        public int? PageNumber { get; set; }
+
+        [DataMember]
         public string MessageId { get; set; }
 
         [DataMember]

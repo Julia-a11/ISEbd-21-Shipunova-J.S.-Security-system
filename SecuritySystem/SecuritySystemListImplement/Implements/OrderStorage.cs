@@ -2,12 +2,12 @@
 using SecuritySystemBusinessLogic.Enums;
 using SecuritySystemBusinessLogic.Interfaces;
 using SecuritySystemBusinessLogic.ViewModels;
-using SecuritySystemFileImplement.Models;
+using SecuritySystemListImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SecuritySystemFileImplement.Implements
+namespace SecuritySystemListImplement.Implements
 {
     public class OrderStorage : IOrderStorage
     {
@@ -34,13 +34,21 @@ namespace SecuritySystemFileImplement.Implements
             {
                 return null;
             }
-            return source.Orders
-                .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) ||
-                (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) ||
-                (model.ClientId.HasValue && rec.ClientId == model.ClientId) ||
-                (model.FreeOrders.HasValue && model.FreeOrders.Value && rec.Status == OrderStatus.Принят) ||
-                (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && rec.Status == OrderStatus.Выполняется))
-                .Select(CreateModel).ToList();
+            List<OrderViewModel> result = new List<OrderViewModel>();
+            foreach (var order in source.Orders)
+            {
+                if ((order.SecureId == model.SecureId) || (!model.DateFrom.HasValue &&
+                !model.DateTo.HasValue && order.DateCreate.Date == model.DateCreate.Date) ||
+                (model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate.Date >=
+                model.DateFrom.Value.Date && order.DateCreate.Date <= model.DateTo.Value.Date) ||
+                (model.ClientId.HasValue && order.ClientId == model.ClientId) ||
+                (model.FreeOrders.HasValue && model.FreeOrders.Value && order.Status == OrderStatus.Принят) ||
+                (model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId && order.Status == OrderStatus.Выполняется))
+                {
+                    result.Add(CreateModel(order));
+                }
+            }
+            return result;
         }
 
         public OrderViewModel GetElement(OrderBindingModel model)
@@ -105,7 +113,7 @@ namespace SecuritySystemFileImplement.Implements
         private Order CreateModel(OrderBindingModel model, Order order)
         {
             order.SecureId = model.SecureId;
-            order.ClientId = (int)model.ClientId;
+            order.ClientId = model.ClientId.Value;
             order.ImplementerId = model.ImplementerId;
             order.Count = model.Count;
             order.Sum = model.Sum;
@@ -117,20 +125,50 @@ namespace SecuritySystemFileImplement.Implements
 
         private OrderViewModel CreateModel(Order order)
         {
+            string secureName = null;
+            foreach (Secure secure in source.Secures)
+            {
+                if (secure.Id == order.SecureId)
+                {
+                    secureName = secure.SecureName;
+                    break;
+                }
+            }
+            string clientFIO = null;
+            foreach (Client client in source.Clients)
+            {
+                if (client.Id == order.ClientId)
+                {
+                    clientFIO = client.ClientFIO;
+                    break;
+                }
+            }
+            string implementerFIO = null;
+            if (order.ImplementerId.HasValue)
+            {
+                foreach (Implementer implementer in source.Implementers)
+                {
+                    if (implementer.Id == order.ImplementerId)
+                    {
+                        implementerFIO = implementer.ImplementerFIO;
+                        break;
+                    }
+                }
+            }
             return new OrderViewModel
             {
                 Id = order.Id,
                 SecureId = order.SecureId,
                 ClientId = order.ClientId,
-                ImplementerId = (int)order.ImplementerId,
-                ClientFIO = source.Clients.FirstOrDefault(client => client.Id == order.ClientId)?.ClientFIO,
-                SecureName = source.Secures.FirstOrDefault(car => car.Id == order.SecureId)?.SecureName,
-                ImplementerFIO = source.Implementers.FirstOrDefault(implementer => implementer.Id == order.ImplementerId)?.ImplementerFIO,
+                ImplementerId = order.ImplementerId,
+                SecureName = secureName,
+                ClientFIO = clientFIO,
+                ImplementerFIO = order.ImplementerId.HasValue ? implementerFIO : string.Empty,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,
                 DateCreate = order.DateCreate,
-                DateImplement = order?.DateImplement
+                DateImplement = order.DateImplement
             };
         }
     }

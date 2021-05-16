@@ -1,12 +1,6 @@
-﻿using SecuritySystemBusinessLogic.BusinessLogics;
+﻿using SecuritySystemBusinessLogic.BindingModels;
+using SecuritySystemBusinessLogic.BusinessLogics;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SecuritySystemView
@@ -14,6 +8,8 @@ namespace SecuritySystemView
     public partial class FormMails : Form
     {
         private readonly MailLogic _mailLogic;
+
+        private int pageNumber = 1;
 
         public FormMails(MailLogic mailLogic)
         {

@@ -2,14 +2,12 @@
 using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
 using SecuritySystemBusinessLogic.HelperModels;
-using System;
 using System.Collections.Generic;
 
 namespace SecuritySystemBusinessLogic.BusinessLogics
 {
-    class SaveToPdf
+    public static class SaveToPdf
     {
-        [Obsolete]
         public static void CreateDoc(PdfInfo info)
         {
             Document document = new Document();
@@ -62,6 +60,53 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             renderer.PdfDocument.Save(info.FileName);
         }
 
+        public static void CreateDocForStoreHouse(PdfInfoForOrder info)
+        {
+            Document document = new Document();
+            DefineStyles(document);
+
+            Section section = document.AddSection();
+            Paragraph paragraph = section.AddParagraph(info.Title);
+            paragraph.Format.SpaceAfter = "1cm";
+            paragraph.Format.Alignment = ParagraphAlignment.Center;
+            paragraph.Style = "NormalTitle";
+
+            var table = document.LastSection.AddTable();
+
+            List<string> columns = new List<string> { "6cm", "5cm", "5cm" };
+            foreach (var elem in columns)
+            {
+                table.AddColumn(elem);
+            }
+
+            CreateRow(new PdfRowParameters
+            {
+                Table = table,
+                Texts = new List<string> { "Дата", "Количество", "Сумма" },
+                Style = "NormalTitle",
+                ParagraphAlignment = ParagraphAlignment.Center
+            });
+
+            foreach (var storeHouse in info.Orders)
+            {
+                CreateRow(new PdfRowParameters
+                {
+                    Table = table,
+                    Texts = new List<string> { storeHouse.Date.ToShortDateString(),
+                     storeHouse.Count.ToString(), storeHouse.Sum.ToString() },
+                    Style = "Normal",
+                    ParagraphAlignment = ParagraphAlignment.Left
+                });
+            }
+
+            PdfDocumentRenderer renderer = new PdfDocumentRenderer(true, PdfSharp.Pdf.PdfFontEmbedding.Always)
+            {
+                Document = document
+            };
+            renderer.RenderDocument();
+            renderer.PdfDocument.Save(info.FileName);
+        }
+
         // Создание стилей для документа
         private static void DefineStyles(Document document)
         {
@@ -85,7 +130,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                     Text = rowParameters.Texts[i],
                     Style = rowParameters.Style,
                     BorderWidth = 0.5,
-                    ParagraphAlignment = rowParameters.ParagraphAligment
+                    ParagraphAlignment = rowParameters.ParagraphAlignment
                 });
             }
         }

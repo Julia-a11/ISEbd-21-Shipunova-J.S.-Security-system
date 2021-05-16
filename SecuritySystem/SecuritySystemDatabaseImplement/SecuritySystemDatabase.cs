@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SecuritySystemDatabaseImplement.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SecuritySystemDatabaseImplement
 {
@@ -22,10 +19,14 @@ namespace SecuritySystemDatabaseImplement
         public virtual DbSet<Secure> Secures { set; get; }
 
         public virtual DbSet<SecureComponent> SecureComponents { set; get; }
-        
+
         public virtual DbSet<Order> Orders { set; get; }
 
         public virtual DbSet<Client> Clients { set; get; }
+       
+        public virtual DbSet<StoreHouse> StoreHouses { set; get; }
+
+        public virtual DbSet<StoreHouseComponent> StoreHouseComponents { set; get; }
 
         public virtual DbSet<Implementer> Implementers { set; get; }
 
