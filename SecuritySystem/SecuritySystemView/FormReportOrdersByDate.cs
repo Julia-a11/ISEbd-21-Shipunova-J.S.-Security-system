@@ -1,7 +1,10 @@
 ﻿using Microsoft.Reporting.WinForms;
 using SecuritySystemBusinessLogic.BindingModels;
 using SecuritySystemBusinessLogic.BusinessLogics;
+using SecuritySystemBusinessLogic.ViewModels;
 using System;
+using System.Collections.Generic;
+using System.Reflection;
 using System.Windows.Forms;
 using Unity;
 
@@ -24,8 +27,9 @@ namespace SecuritySystemView
         {
             try
             {
-                var dataSource = logic.GetOrdersInfo();
-               
+                MethodInfo method = logic.GetType().GetMethod("GetOrdersInfo");
+                List<ReportOrderByDateViewModel> dataSource = (List<ReportOrderByDateViewModel>)method.Invoke(logic, null);
+
                 ReportDataSource source = new ReportDataSource("DataSetOrders", dataSource);
                 reportViewerOrders.LocalReport.DataSources.Add(source);
                 reportViewerOrders.RefreshReport();
@@ -45,9 +49,13 @@ namespace SecuritySystemView
                 {
                     try
                     {
-                        logic.SaveOrdersInfoToPdfFile(new ReportBindingModel
-                        {
-                            FileName = dialog.FileName
+                        MethodInfo method = logic.GetType().GetMethod("SaveOrdersInfoToPdfFile");
+                        method.Invoke(logic, new object[]
+                        { 
+                            new ReportBindingModel
+                            {
+                                FileName = dialog.FileName
+                            }
                         });
                         MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);

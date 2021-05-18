@@ -1,6 +1,9 @@
 ﻿using SecuritySystemBusinessLogic.BindingModels;
 using SecuritySystemBusinessLogic.BusinessLogics;
+using SecuritySystemBusinessLogic.ViewModels;
 using System;
+using System.Collections.Generic;
+using System.Reflection;
 using System.Windows.Forms;
 using Unity;
 
@@ -23,7 +26,8 @@ namespace SecuritySystemView
         {
             try
             {
-                var secureComponents = logic.GetSecureComponent();
+                MethodInfo method = logic.GetType().GetMethod("GetSecureComponent");
+                List<ReportSecureComponentViewModel> secureComponents = (List<ReportSecureComponentViewModel>)method.Invoke(logic, null);
                 if (secureComponents != null)
                 {
                     dataGridViewReportSecureComponents.Rows.Clear();
@@ -62,9 +66,13 @@ namespace SecuritySystemView
                 {
                     try
                     {
-                        logic.SaveSecureComponentToExcelFile(new ReportBindingModel
+                        MethodInfo method = logic.GetType().GetMethod("SaveSecureComponentToExcelFile");
+                        method.Invoke(logic, new object[]
+                        {
+                            new ReportBindingModel
                         {
                             FileName = dialog.FileName
+                        }
                         });
                         MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }

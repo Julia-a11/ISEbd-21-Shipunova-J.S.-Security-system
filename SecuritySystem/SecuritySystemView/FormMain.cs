@@ -3,6 +3,7 @@ using SecuritySystemBusinessLogic.BindingModels;
 using SecuritySystemBusinessLogic.BusinessLogics;
 using System.Windows.Forms;
 using Unity;
+using System.Reflection;
 
 namespace SecuritySystemView
 {
@@ -94,10 +95,14 @@ namespace SecuritySystemView
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    _reportLogic.SaveSecuresToWordFile(new ReportBindingModel
-                    {
-                        FileName = dialog.FileName
-                    });
+                    MethodInfo method = _reportLogic.GetType().GetMethod("SaveSecuresToWordFile");
+                    method.Invoke(_reportLogic, new object[]
+                        {
+                            new ReportBindingModel
+                            {
+                                FileName = dialog.FileName
+                            }
+                        });
                     MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
                    MessageBoxIcon.Information);
                 }
@@ -146,10 +151,11 @@ namespace SecuritySystemView
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    _reportLogic.SaveStoreHousesToWordFile(new ReportBindingModel
+                    MethodInfo method = _reportLogic.GetType().GetMethod("SaveStoreHousesToWordFile");
+                    method.Invoke(_reportLogic, new object[] { new ReportBindingModel
                     {
                         FileName = dialog.FileName
-                    });
+                    }});
                     MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
                    MessageBoxIcon.Information);
                 }
