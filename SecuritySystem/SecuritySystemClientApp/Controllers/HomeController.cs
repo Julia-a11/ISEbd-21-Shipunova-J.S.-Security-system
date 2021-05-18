@@ -12,8 +12,6 @@ namespace SecuritySistemClientApp.Controllers
 {
     public class HomeController : Controller
     {
-        private int pageNumber = 1;
-
         [HttpGet]
         public IActionResult Index()
         {
@@ -59,39 +57,45 @@ namespace SecuritySistemClientApp.Controllers
         [HttpGet]
         public IActionResult Mail(int pageNumber)
         {
+            Console.WriteLine(Program.PageNumber);
             if (Program.Client == null)
             {
                 return Redirect("~/Home/Enter");
             }
 
-            var model = APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/getmessages?clientId={Program.Client.Id}&pageNumber={pageNumber}");
+            List<MessageInfoViewModel> model = new List<MessageInfoViewModel>();
+            if (pageNumber > 0)
+            {
+                model = APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/getmessages?clientId={Program.Client.Id}&pageNumber={pageNumber}");
+            }
             
             if (model.Count == 0)
             {
-                model = APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/getmessages?clientId={Program.Client.Id}&pageNumber={this.pageNumber}");
+                model = APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/getmessages?clientId={Program.Client.Id}&pageNumber={Program.PageNumber}");
             }
             else
             {
-                this.pageNumber = pageNumber;
+                Program.PageNumber = pageNumber;
             }
+            ViewBag.Id = Program.PageNumber;
             return View(model);
         }
-
+        
         [HttpGet]
         public IActionResult NextMailPage()
         {
-            return Redirect($"~/Home/Mail?pageNumber={this.pageNumber + 1}");
+            return Redirect($"~/Home/Mail?pageNumber={Program.PageNumber + 1}");
         }
 
         [HttpGet]
         public IActionResult PrevMailPage()
         {
-            if (this.pageNumber > 1)
+            if (Program.PageNumber > 1)
             {
-                return Redirect($"~/Home/Mail?pageNumber={this.pageNumber - 1}");
+                return Redirect($"~/Home/Mail?pageNumber={Program.PageNumber - 1}");
             }
 
-             return Redirect($"~/Home/Mail?pageNumber={this.pageNumber}");
+             return Redirect($"~/Home/Mail?pageNumber={Program.PageNumber}");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

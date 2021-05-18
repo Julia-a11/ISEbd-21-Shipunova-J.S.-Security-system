@@ -12,6 +12,7 @@ namespace SecuritySistemClientApp
 {
     public class Program
     {
+        public static int PageNumber { get; set; }
         public static ClientViewModel Client { get; set; }
         public static void Main(string[] args) =>
         CreateHostBuilder(args).Build().Run();
