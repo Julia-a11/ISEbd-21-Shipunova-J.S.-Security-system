@@ -116,7 +116,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
 
         public void SaveSecureComponentToExcelFile(ReportBindingModel model)
         {
-            MethodInfo method = GetType().BaseType.GetTypeInfo().GetDeclaredMethod("GetSecureComponent");
+            MethodInfo method = GetType().GetMethod("GetSecureComponent");
             SaveToExcel.CreateDoc(new ExcelInfo
             {
                 FileName = model.FileName,
@@ -127,7 +127,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
 
         public void SaveOrdersToPdfFile(ReportBindingModel model)
         {
-            MethodInfo method = GetType().BaseType.GetTypeInfo().GetDeclaredMethod("GetOrders");
+            MethodInfo method = GetType().GetMethod("GetOrders");
             SaveToPdf.CreateDoc(new PdfInfo
             {
                 FileName = model.FileName,
@@ -140,7 +140,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
 
         public void SaveStoreHouseComponentsToExcel(ReportBindingModel model)
         {
-            MethodInfo method = GetType().BaseType.GetTypeInfo().GetDeclaredMethod("GetStoreHouseComponent");
+            MethodInfo method = GetType().GetMethod("GetStoreHouseComponent");
             SaveToExcel.CreateDocForStoreHouse(new ExcelInfoForStoreHouse
             {
                 FileName = model.FileName,
@@ -151,7 +151,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
 
         public void SaveOrdersInfoToPdfFile(ReportBindingModel model)
         {
-            MethodInfo method = GetType().BaseType.GetTypeInfo().GetDeclaredMethod("GetOrdersInfo");
+            MethodInfo method = GetType().GetMethod("GetOrdersInfo");
             SaveToPdf.CreateDocForStoreHouse(new PdfInfoForOrder
             {
                 FileName = model.FileName,
