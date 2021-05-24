@@ -5,7 +5,6 @@ using SecuritySystemFileImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SecuritySystemFileImplement.Implements
 {
@@ -21,7 +20,7 @@ namespace SecuritySystemFileImplement.Implements
         private Client CreateModel(ClientBindingModel model, Client client)
         {
             client.ClientFIO = model.ClientFIO;
-            client.Login = model.Email;
+            client.Email = model.Email;
             client.Password = model.Password;
             return client;
         }
@@ -32,15 +31,14 @@ namespace SecuritySystemFileImplement.Implements
             {
                 Id = client.Id,
                 ClientFIO = client.ClientFIO,
-                Email = client.Login,
+                Email = client.Email,
                 Password = client.Password
             };
         }
 
         public void Delete(ClientBindingModel model)
         {
-            var client = source.Clients
-                .FirstOrDefault(rec => rec.Id == model.Id);
+            var client = source.Clients.FirstOrDefault(rec => rec.Id == model.Id);
             if (client == null)
             {
                 throw new Exception("Клиент не найден!");
@@ -55,7 +53,7 @@ namespace SecuritySystemFileImplement.Implements
                 return null;
             }
             var client = source.Clients
-            .FirstOrDefault(rec => rec.Login == model.Email || rec.Id == model.Id);
+            .FirstOrDefault(rec => rec.Email == model.Email || rec.Id == model.Id);
             return client != null ? CreateModel(client) : null;
         }
 
@@ -66,8 +64,9 @@ namespace SecuritySystemFileImplement.Implements
                 return null;
             }
             return source.Clients
-                .Where(rec => rec.ClientFIO.Contains(model.ClientFIO))
-                .Select(CreateModel).ToList();
+                .Where(rec => rec.Email == model.Email && rec.Password == model.Password)
+                .Select(CreateModel)
+                .ToList();
         }
 
         public List<ClientViewModel> GetFullList()

@@ -102,8 +102,8 @@ namespace SecuritySystemFileImplement
                     list.Add(new Order
                     {
                         Id = Convert.ToInt32(elem.Attribute("Id").Value),
-                        SecureId = Convert.ToInt32(elem.Element("SecureId").Value),
                         ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
+                        SecureId = Convert.ToInt32(elem.Element("SecureId").Value),
                         ImplementerId = Convert.ToInt32(elem.Element("ImplementerId").Value),
                         Count = Convert.ToInt32(elem.Element("Count").Value),
                         Sum = Convert.ToDecimal(elem.Element("Sum").Value),
@@ -159,7 +159,7 @@ namespace SecuritySystemFileImplement
                     {
                         Id = Convert.ToInt32(elem.Attribute("Id").Value),
                         ClientFIO = elem.Element("ClietnFIO").Value,
-                        Login = elem.Element("Login").Value,
+                        Email = elem.Element("Email").Value,
                         Password = elem.Element("Password").Value
                     });
                 }
@@ -238,8 +238,8 @@ namespace SecuritySystemFileImplement
                 {
                     xElement.Add(new XElement("Order",
                         new XAttribute("Id", order.Id),
-                        new XElement("SecureId", order.SecureId),
                         new XElement("ClientId", order.ClientId),
+                        new XElement("SecureId", order.SecureId),
                         new XElement("ImplementerId", order.ImplementerId),
                         new XElement("Count", order.Count),
                         new XElement("Sum", order.Sum),
@@ -288,7 +288,7 @@ namespace SecuritySystemFileImplement
                     xElement.Add(new XElement("Client",
                         new XAttribute("Id", client.Id),
                         new XElement("ClientFIO", client.ClientFIO),
-                        new XElement("Login", client.Login),
+                        new XElement("Email", client.Email),
                         new XElement("Password", client.Password)));
                 }
                 XDocument xDocument = new XDocument(xElement);

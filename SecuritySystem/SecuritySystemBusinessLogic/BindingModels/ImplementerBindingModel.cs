@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SecuritySystemBusinessLogic.BindingModels
+﻿namespace SecuritySystemBusinessLogic.BindingModels
 {
-    // Исполнитель, выполняющий заказы
     public class ImplementerBindingModel
     {
         public int? Id { get; set; } 

@@ -1,4 +1,4 @@
-﻿namespace SecuritySystemFileImplement.Models
+﻿namespace SecuritySystemListImplement.Models
 {
     // Компонент, требуемый для изготовления изделия
     public class Component

@@ -2,7 +2,7 @@
 
 namespace SecuritySystemBusinessLogic.HelperModels
 {
-    class WordParagraphProperties
+    public class WordParagraphProperties
     {
         public string Size { get; set; }
 

@@ -2,11 +2,6 @@
 using SecuritySystemBusinessLogic.BindingModels;
 using SecuritySystemBusinessLogic.BusinessLogics;
 using SecuritySystemBusinessLogic.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace SecuritySystemRestApi.Controllers
 {
@@ -30,25 +25,28 @@ namespace SecuritySystemRestApi.Controllers
         }
 
         [HttpGet]
-        public ClientViewModel Login(string login, string password) => _logic.Read(new ClientBindingModel
+        public ClientViewModel Login(string login, string password)
         {
-            Email = login,
-            Password = password
-        })?[0];
+            return _logic.Read(new ClientBindingModel
+            {
+                Email = login,
+                Password = password
+            })?[0];
+        }
 
         [HttpGet]
         public List<MessageInfoViewModel> GetMessages(int clientId) => _mailLogic.Read(new MessageInfoBindingModel
         {
             ClientId = clientId
         });
-      
+
         [HttpPost]
         public void Register(ClientBindingModel model)
         {
             CheckData(model);
             _logic.CreateOrUpdate(model);
         }
-       
+
         [HttpPost]
         public void UpdateData(ClientBindingModel model)
         {

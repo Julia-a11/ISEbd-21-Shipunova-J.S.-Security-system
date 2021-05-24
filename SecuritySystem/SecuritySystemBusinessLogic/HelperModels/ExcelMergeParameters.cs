@@ -2,7 +2,7 @@
 
 namespace SecuritySystemBusinessLogic.HelperModels
 {
-    class ExcelMergeParameters
+    public class ExcelMergeParameters
     {
         public Worksheet Worksheet { get; set; }
 
