@@ -2,6 +2,9 @@
 using SecuritySystemBusinessLogic.BindingModels;
 using SecuritySystemBusinessLogic.BusinessLogics;
 using SecuritySystemBusinessLogic.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace SecuritySystemRestApi.Controllers
 {
@@ -9,7 +12,7 @@ namespace SecuritySystemRestApi.Controllers
     [ApiController]
     public class ClientController : ControllerBase
     {
-        private readonly ClientLogic _logic;
+        private readonly ClientLogic _clientLogic;
 
         private readonly MailLogic _mailLogic;
 
@@ -20,14 +23,14 @@ namespace SecuritySystemRestApi.Controllers
 
         public ClientController(ClientLogic logic, MailLogic mailLogic)
         {
-            _logic = logic;
+            _clientLogic = logic;
             _mailLogic = mailLogic;
         }
 
         [HttpGet]
         public ClientViewModel Login(string login, string password)
         {
-            return _logic.Read(new ClientBindingModel
+            return _clientLogic.Read(new ClientBindingModel
             {
                 Email = login,
                 Password = password
@@ -44,14 +47,14 @@ namespace SecuritySystemRestApi.Controllers
         public void Register(ClientBindingModel model)
         {
             CheckData(model);
-            _logic.CreateOrUpdate(model);
+            _clientLogic.CreateOrUpdate(model);
         }
 
         [HttpPost]
         public void UpdateData(ClientBindingModel model)
         {
             CheckData(model);
-            _logic.CreateOrUpdate(model);
+            _clientLogic.CreateOrUpdate(model);
         }
 
         private void CheckData(ClientBindingModel model)
