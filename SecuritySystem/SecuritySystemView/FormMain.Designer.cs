@@ -48,7 +48,7 @@ namespace SecuritySystemView
             this.buttonOrderPayed = new System.Windows.Forms.Button();
             this.buttonRefresh = new System.Windows.Forms.Button();
             this.создатьБекапToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.почтаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+
             this.списокКомпонентовВСкладахToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокИнформацииОЗаказахToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокСкладовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -220,13 +220,6 @@ namespace SecuritySystemView
             this.buttonRefresh.Text = "Обновить список";
             this.buttonRefresh.UseVisualStyleBackColor = true;
             this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
-            //
-            // почтаToolStripMenuItem
-            //
-            this.почтаToolStripMenuItem.Name = "почтаToolStripMenuItem";
-            this.почтаToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
-            this.почтаToolStripMenuItem.Text = "Почта";
-            this.почтаToolStripMenuItem.Click += new System.EventHandler(this.почтаToolStripMenuItem_Click);
             //
             //
             // списокКомпонентовВСкладахToolStripMenuItem

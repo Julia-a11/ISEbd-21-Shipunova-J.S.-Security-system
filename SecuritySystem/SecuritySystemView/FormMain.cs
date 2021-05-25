@@ -192,10 +192,10 @@ namespace SecuritySystemView
             {
                 if (_backUpAbstractLogic != null)
                 {
-                    var fbd = new FolderBrowserDialog();
-                    if (fbd.ShowDialog() == DialogResult.OK)
+                    var folderBrowserDialog = new FolderBrowserDialog();
+                    if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                     {
-                        _backUpAbstractLogic.CreateArchive(fbd.SelectedPath);
+                        _backUpAbstractLogic.CreateArchive(folderBrowserDialog.SelectedPath);
                         MessageBox.Show("Бекап создан", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }

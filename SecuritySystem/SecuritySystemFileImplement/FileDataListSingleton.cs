@@ -236,7 +236,7 @@ namespace SecuritySystemFileImplement
                 {
                     list.Add(new MessageInfo
                     {
-                        MessageId = elem.Attribute("Id").Value,
+                        MessageId = elem.Attribute("MessageId").Value,
                         ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
                         SenderName = elem.Element("SenderName").Value,
                         Subject = elem.Element("Subject").Value,
