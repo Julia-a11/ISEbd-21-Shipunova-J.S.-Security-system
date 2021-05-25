@@ -1,7 +1,6 @@
 ﻿using SecuritySystemBusinessLogic.BindingModels;
 using SecuritySystemBusinessLogic.Interfaces;
 using SecuritySystemBusinessLogic.ViewModels;
-using SecuritySystemFileImplement;
 using SecuritySystemListImplement.Models;
 using System;
 using System.Collections.Generic;
@@ -20,7 +19,7 @@ namespace SecuritySystemListImplement.Implements
         private Client CreateModel(ClientBindingModel model, Client client)
         {
             client.ClientFIO = model.ClientFIO;
-            client.Login = model.Email;
+            client.Email = model.Email;
             client.Password = model.Password;
             return client;
         }
@@ -31,7 +30,7 @@ namespace SecuritySystemListImplement.Implements
             {
                 Id = client.Id,
                 ClientFIO = client.ClientFIO,
-                Email = client.Login,
+                Email = client.Email,
                 Password = client.Password
             };
         }
@@ -74,7 +73,7 @@ namespace SecuritySystemListImplement.Implements
             List<ClientViewModel> result = new List<ClientViewModel>();
             foreach (var client in source.Clients)
             {
-                if (client.ClientFIO.Contains(model.ClientFIO))
+                if (client.Email == model.Email && client.Password == model.Password)
                 {
                     result.Add(CreateModel(client));
                 }

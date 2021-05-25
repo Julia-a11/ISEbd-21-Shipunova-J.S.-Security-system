@@ -1,7 +1,6 @@
 ﻿using SecuritySystemBusinessLogic.BindingModels;
 using SecuritySystemBusinessLogic.Interfaces;
 using SecuritySystemBusinessLogic.ViewModels;
-using SecuritySystemFileImplement;
 using SecuritySystemListImplement.Models;
 using System;
 using System.Collections.Generic;
@@ -21,6 +20,7 @@ namespace SecuritySystemListImplement.Implements
 
         private MessageInfo CreateModel(MessageInfoBindingModel model, MessageInfo messageInfo)
         {
+            messageInfo.MessageId = model.MessageId;
             messageInfo.ClientId = model.ClientId;
             messageInfo.Subject = model.Subject;
             messageInfo.Body = model.Body;
@@ -61,7 +61,8 @@ namespace SecuritySystemListImplement.Implements
             List<MessageInfoViewModel> result = new List<MessageInfoViewModel>();
             foreach (var messageInfo in source.MessageInfoes)
             {
-                if (messageInfo.Subject.Contains(model.Subject))
+                if ((model.ClientId.HasValue && messageInfo.ClientId == model.ClientId) ||
+                (!model.ClientId.HasValue && messageInfo.DateDelivery.Date == model.DateDelivery.Date))
                 {
                     result.Add(CreateModel(messageInfo));
                 }
@@ -71,18 +72,15 @@ namespace SecuritySystemListImplement.Implements
 
         public void Insert(MessageInfoBindingModel model)
         {
-            var tempMessageInfo = new MessageInfo
-            {
-                MessageId = "1"
-            };
             foreach (var messageInfo in source.MessageInfoes)
             {
-                if (Convert.ToInt32(messageInfo.MessageId) >= Convert.ToInt32(tempMessageInfo.MessageId))
+                if (messageInfo.MessageId == model.MessageId)
                 {
-                    tempMessageInfo.MessageId = messageInfo.MessageId + 1;
+                    throw new Exception("Уже есть письмо с таким идентификатором");
                 }
             }
-            source.MessageInfoes.Add(CreateModel(model, tempMessageInfo));
+
+            source.MessageInfoes.Add(CreateModel(model, new MessageInfo()));
         }
     }
 }

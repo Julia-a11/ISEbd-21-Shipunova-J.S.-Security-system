@@ -12,10 +12,7 @@ namespace SecuritySistemClientApp.Controllers
 {
     public class HomeController : Controller
     {
-       public HomeController()
-        {
-        }
-
+        [HttpGet]
         public IActionResult Index()
         {
             if (Program.Client == null)
@@ -140,7 +137,6 @@ namespace SecuritySistemClientApp.Controllers
             {
                 return;
             }
-            var str = Program.Client.Id;
             APIClient.PostRequest("api/main/createorder", new CreateOrderBindingModel
             {
                 SecureId = secure,

@@ -5,7 +5,6 @@ using SecuritySystemFileImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SecuritySystemFileImplement.Implements
 {
@@ -20,10 +19,10 @@ namespace SecuritySystemFileImplement.Implements
 
         public void Delete(ImplementerBindingModel model)
         {
-            Implementer element = source.Implementers.FirstOrDefault(rec => rec.Id == model.Id);
-            if (element != null)
+            Implementer implementer = source.Implementers.FirstOrDefault(rec => rec.Id == model.Id);
+            if (implementer != null)
             {
-                source.Implementers.Remove(element);
+                source.Implementers.Remove(implementer);
             }
             else
             {
@@ -38,7 +37,7 @@ namespace SecuritySystemFileImplement.Implements
                 return null;
             }
 
-            var implementer = source.Implementers.FirstOrDefault(rec => rec.Id == model.Id);
+            var implementer = source.Implementers.FirstOrDefault(rec => rec.Id == model.Id || rec.ImplementerFIO == model.ImplementerFIO);
 
             return implementer != null ? CreateModel(implementer) : null;
         }

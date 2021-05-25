@@ -5,7 +5,6 @@ using SecuritySystemDatabaseImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SecuritySystemDatabaseImplement.Implements
 {
@@ -15,10 +14,10 @@ namespace SecuritySystemDatabaseImplement.Implements
         {
             using (var context = new SecuritySystemDatabase())
             {
-                Implementer element = context.Implementers.FirstOrDefault(rec => rec.Id == model.Id);
-                if (element != null)
+                Implementer implementer = context.Implementers.FirstOrDefault(rec => rec.Id == model.Id);
+                if (implementer != null)
                 {
-                    context.Implementers.Remove(element);
+                    context.Implementers.Remove(implementer);
                     context.SaveChanges();
                 }
                 else
@@ -36,8 +35,8 @@ namespace SecuritySystemDatabaseImplement.Implements
             }
             using (var context = new SecuritySystemDatabase())
             {
-                var implementer = context.Implementers
-                .FirstOrDefault(rec => rec.Id == model.Id);
+                var implementer = context.Implementers.FirstOrDefault(rec => rec.Id == model.Id || 
+                    rec.ImplementerFIO == model.ImplementerFIO);
                 return implementer != null ? CreateModel(implementer) : null;
             }
         }
@@ -51,8 +50,7 @@ namespace SecuritySystemDatabaseImplement.Implements
             using (var context = new SecuritySystemDatabase())
             {
                 return context.Implementers
-                    .Where(rec =>
-                    rec.ImplementerFIO.Contains(model.ImplementerFIO))
+                    .Where(rec => rec.ImplementerFIO.Contains(model.ImplementerFIO))
                     .Select(CreateModel).ToList();
             }
         }
@@ -78,12 +76,12 @@ namespace SecuritySystemDatabaseImplement.Implements
         {
             using (var context = new SecuritySystemDatabase())
             {
-                var element = context.Implementers.FirstOrDefault(rec => rec.Id == model.Id);
-                if (element == null)
+                var implementer = context.Implementers.FirstOrDefault(rec => rec.Id == model.Id);
+                if (implementer == null)
                 {
                     throw new Exception("Исполнитель не найден");
                 }
-                CreateModel(model, element);
+                CreateModel(model, implementer);
                 context.SaveChanges();
             }
         }

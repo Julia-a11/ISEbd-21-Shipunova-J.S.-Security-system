@@ -3,7 +3,6 @@ using SecuritySystemBusinessLogic.Interfaces;
 using SecuritySystemBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -28,7 +27,6 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             rnd = new Random(1000);
         }
 
-        // Запуск работ
         public void DoWork()
         {
             var implementers = _implementerStorage.GetFullList();
@@ -41,11 +39,9 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             }
         }
 
-        // Имитация работы исполнителя
         private async void WorkerWorkAsync(ImplementerViewModel implementer, 
             List<OrderViewModel> orders)
         {
-            // Ищем заказы, которые уже в работе (вдруг исполнителя прервали)
             var runOrders = await Task.Run(() => _orderStorage.GetFilteredList(new OrderBindingModel
             {
                 ImplementerId = implementer.Id
@@ -53,7 +49,6 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
 
             foreach (var order in runOrders)
             {
-                // Делаем работу заново
                 Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
 
                 _orderLogic.FinishOrder(new ChangeStatusBindingModel
@@ -61,7 +56,6 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                     OrderId = order.Id
                 });
 
-                // Отдыхаем
                 Thread.Sleep(implementer.PauseTime);
             }
 
@@ -69,7 +63,6 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
             {
                 foreach (var order in orders)
                 {
-                    // Пытаемся назначить заказ на исполнителя
                     try
                     {
                         _orderLogic.TakeOrderInWork(new ChangeStatusBindingModel
@@ -77,13 +70,11 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                             OrderId = order.Id,
                             ImplementerId = implementer.Id
                         });
-                        // Делаем работу
                         Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
                         _orderLogic.FinishOrder(new ChangeStatusBindingModel
                         {
                             OrderId = order.Id
                         });
-                        // Отдыхаем
                         Thread.Sleep(implementer.PauseTime);
                     }
                     catch (Exception) { }

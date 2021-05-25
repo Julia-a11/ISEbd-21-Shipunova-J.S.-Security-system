@@ -2,7 +2,7 @@
 
 namespace SecuritySystemBusinessLogic.HelperModels
 {
-    class WordParagraph
+    public class WordParagraph
     {
         public List<(string, WordParagraphProperties)> Texts { get; set; }
 
