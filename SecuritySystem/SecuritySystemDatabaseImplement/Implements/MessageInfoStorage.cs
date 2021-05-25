@@ -10,8 +10,6 @@ namespace SecuritySystemDatabaseImplement.Implements
 {
     public class MessageInfoStorage : IMessageInfoStorage
     {
-        private readonly int stringsOnPage = 7;
-
         public List<MessageInfoViewModel> GetFullList()
         {
             using (var context = new SecuritySystemDatabase())
@@ -39,8 +37,8 @@ namespace SecuritySystemDatabaseImplement.Implements
 
                 if (model.PageNumber.HasValue)
                 {
-                    messageInfoes = messageInfoes.Skip(stringsOnPage * (model.PageNumber.Value - 1))
-                        .Take(stringsOnPage);
+                    messageInfoes = messageInfoes.Skip(model.StringsCountOnPage * (model.PageNumber.Value - 1))
+                        .Take(model.StringsCountOnPage);
                 }
                
                 return messageInfoes.Select(CreateModel).ToList();

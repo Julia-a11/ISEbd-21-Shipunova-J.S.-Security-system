@@ -27,5 +27,8 @@ namespace SecuritySystemBusinessLogic.BindingModels
 
         [DataMember]
         public DateTime DateDelivery { get; set; }
+
+        [DataMember]
+        public int StringsCountOnPage { get; set; }
     }
 }

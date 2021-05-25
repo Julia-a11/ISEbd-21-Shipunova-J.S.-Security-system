@@ -11,6 +11,8 @@ namespace SecuritySystemView
 
         private int pageNumber = 1;
 
+        private readonly int stringsCountOnPage = 7;
+
         public FormMails(MailLogic mailLogic)
         {
             InitializeComponent();
@@ -29,7 +31,8 @@ namespace SecuritySystemView
             {
                 Program.ConfigGrid(_mailLogic.Read(new MessageInfoBindingModel
                 {
-                    PageNumber = pageNumber
+                    PageNumber = pageNumber,
+                    StringsCountOnPage = stringsCountOnPage
                 }), dataGridViewMails);
                 textBoxPage.Text = pageNumber.ToString();
             }
