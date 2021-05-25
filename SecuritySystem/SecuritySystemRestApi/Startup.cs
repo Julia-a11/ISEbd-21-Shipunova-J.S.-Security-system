@@ -7,6 +7,7 @@ using SecuritySystemBusinessLogic.BusinessLogics;
 using SecuritySystemBusinessLogic.HelperModels;
 using SecuritySystemBusinessLogic.Interfaces;
 using SecuritySystemDatabaseImplement.Implements;
+using System;
 
 namespace SecuritySystemRestApi
 {
@@ -15,6 +16,13 @@ namespace SecuritySystemRestApi
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            MailLogic.MailConfig(new MailConfig
+            {
+                SmtpClientHost = configuration["SmtpClientHost"],
+                SmtpClientPort = Convert.ToInt32(configuration["SmtpClientPort"]),
+                MailLogin = configuration["MailLogin"],
+                MailPassword = configuration["MailPassword"],
+            });
         }
 
         public IConfiguration Configuration { get; }
@@ -30,13 +38,6 @@ namespace SecuritySystemRestApi
             services.AddTransient<ClientLogic>();
             services.AddTransient<SecureLogic>();
             services.AddTransient<MailLogic>();
-            MailLogic.MailConfig(new MailConfig
-            {
-                SmtpClientHost = "smtp.yandex.ru",
-                SmtpClientPort = 587,
-                MailLogin = "lettersforlaba@yandex.ru",
-                MailPassword = "yelgsuinhysyiyng",
-            });
             services.AddControllers().AddNewtonsoftJson();
         }
 
