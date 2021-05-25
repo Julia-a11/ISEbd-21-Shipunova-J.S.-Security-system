@@ -12,6 +12,8 @@ namespace SecuritySistemClientApp.Controllers
 {
     public class HomeController : Controller
     {
+        private int currentPageNumber = 1;
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -57,7 +59,7 @@ namespace SecuritySistemClientApp.Controllers
         [HttpGet]
         public IActionResult Mail(int pageNumber)
         {
-            Console.WriteLine(Program.PageNumber);
+            Console.WriteLine(currentPageNumber);
             if (Program.Client == null)
             {
                 return Redirect("~/Home/Enter");
@@ -71,31 +73,31 @@ namespace SecuritySistemClientApp.Controllers
             
             if (model.Count == 0)
             {
-                model = APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/getmessages?clientId={Program.Client.Id}&pageNumber={Program.PageNumber}");
+                model = APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/getmessages?clientId={Program.Client.Id}&pageNumber={currentPageNumber}");
             }
             else
             {
-                Program.PageNumber = pageNumber;
+                currentPageNumber = pageNumber;
             }
-            ViewBag.Id = Program.PageNumber;
+            ViewBag.Id = currentPageNumber;
             return View(model);
         }
         
         [HttpGet]
         public IActionResult NextMailPage()
         {
-            return Redirect($"~/Home/Mail?pageNumber={Program.PageNumber + 1}");
+            return Redirect($"~/Home/Mail?pageNumber={currentPageNumber + 1}");
         }
 
         [HttpGet]
         public IActionResult PrevMailPage()
         {
-            if (Program.PageNumber > 1)
+            if (currentPageNumber > 1)
             {
-                return Redirect($"~/Home/Mail?pageNumber={Program.PageNumber - 1}");
+                return Redirect($"~/Home/Mail?pageNumber={currentPageNumber - 1}");
             }
 
-             return Redirect($"~/Home/Mail?pageNumber={Program.PageNumber}");
+             return Redirect($"~/Home/Mail?pageNumber={currentPageNumber}");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
