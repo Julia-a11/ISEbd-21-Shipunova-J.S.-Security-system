@@ -59,7 +59,6 @@ namespace SecuritySistemClientApp.Controllers
         [HttpGet]
         public IActionResult Mail(int pageNumber)
         {
-            Console.WriteLine(currentPageNumber);
             if (Program.Client == null)
             {
                 return Redirect("~/Home/Enter");

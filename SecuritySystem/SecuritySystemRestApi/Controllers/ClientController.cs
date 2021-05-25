@@ -21,6 +21,8 @@ namespace SecuritySystemRestApi.Controllers
 
         private readonly int _passwordMinLength = 10;
 
+        private readonly int stringsCountOnPage = 7;
+
 
         public ClientController(ClientLogic logic, MailLogic mailLogic)
         {
@@ -42,7 +44,8 @@ namespace SecuritySystemRestApi.Controllers
         public List<MessageInfoViewModel> GetMessages(int clientId, int pageNumber) => _mailLogic.Read(new MessageInfoBindingModel
         {
             ClientId = clientId,
-            PageNumber = pageNumber
+            PageNumber = pageNumber,
+            StringsCountOnPage = stringsCountOnPage
         });
 
         [HttpPost]

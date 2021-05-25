@@ -118,7 +118,9 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                         Id = order.ClientId
                     })?.Email,
                     Subject = $"Заказ №{order.Id}",
-                    Text = $"Заказ №{order.Id} передан в работу."
+                    Text = order.Status == OrderStatus.Выполняется 
+                        ? $"Заказ №{order.Id} передан в работу." 
+                        : $"Заказу №{order.Id} требуются материалы."
                 });
             }
         }

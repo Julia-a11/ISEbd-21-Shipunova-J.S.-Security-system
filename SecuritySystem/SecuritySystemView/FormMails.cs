@@ -11,6 +11,8 @@ namespace SecuritySystemView
 
         private int pageNumber = 1;
 
+        private readonly int stringsCountOnPage = 7;
+
         public FormMails(MailLogic mailLogic)
         {
             InitializeComponent();
@@ -27,7 +29,8 @@ namespace SecuritySystemView
         {
             var list = _mailLogic.Read(new MessageInfoBindingModel
             {
-                PageNumber = pageNumber
+                PageNumber = pageNumber, 
+                StringsCountOnPage = stringsCountOnPage
             });
             if (list != null)
             {
