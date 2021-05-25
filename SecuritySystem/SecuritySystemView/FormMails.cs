@@ -57,7 +57,8 @@ namespace SecuritySystemView
         {
             int stringsCountOnPage = _mailLogic.Read(new MessageInfoBindingModel
             {
-                PageNumber = pageNumber + 1
+                PageNumber = pageNumber + 1,
+                StringsCountOnPage = this.stringsCountOnPage
             }).Count;
 
             if (stringsCountOnPage != 0)
@@ -82,7 +83,8 @@ namespace SecuritySystemView
 
                     int stringsCountOnPage = _mailLogic.Read(new MessageInfoBindingModel
                     {
-                        PageNumber = pageNumberValue
+                        PageNumber = pageNumberValue,
+                        StringsCountOnPage = this.stringsCountOnPage
                     }).Count;
 
                     if (stringsCountOnPage == 0)
