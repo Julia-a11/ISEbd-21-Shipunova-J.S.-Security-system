@@ -1,7 +1,6 @@
 ﻿using SecuritySystemBusinessLogic.Attributes;
 using SecuritySystemBusinessLogic.Enums;
 using System;
-using System.ComponentModel;
 using System.Runtime.Serialization;
 
 namespace SecuritySystemBusinessLogic.ViewModels
@@ -27,7 +26,7 @@ namespace SecuritySystemBusinessLogic.ViewModels
         [DataMember]
         public string ClientFIO { get; set; }
 
-        [Column(title: "Комплектация охраны", width: 100)]
+        [Column(title: "Комплектация охраны", gridViewAutoSize: GridViewAutoSize.Fill)]
         [DataMember]
         public string SecureName { get; set; }
 
