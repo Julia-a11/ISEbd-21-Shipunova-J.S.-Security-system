@@ -5,7 +5,6 @@ using SecuritySystemBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace SecuritySystemBusinessLogic.BusinessLogics
 {
@@ -116,47 +115,43 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
 
         public void SaveSecureComponentToExcelFile(ReportBindingModel model)
         {
-            MethodInfo method = GetType().GetMethod("GetSecureComponent");
             SaveToExcel.CreateDoc(new ExcelInfo
             {
                 FileName = model.FileName,
                 Title = "Список комплектаций",
-                SecureComponents = (List<ReportSecureComponentViewModel>)method.Invoke(this, null)
+                SecureComponents = GetSecureComponent()
             });
         }
 
         public void SaveOrdersToPdfFile(ReportBindingModel model)
         {
-            MethodInfo method = GetType().GetMethod("GetOrders");
             SaveToPdf.CreateDoc(new PdfInfo
             {
                 FileName = model.FileName,
                 Title = "Список заказов",
                 DateFrom = model.DateFrom.Value,
                 DateTo = model.DateTo.Value,
-                Orders = (List<ReportOrdersViewModel>)method.Invoke(this, new object[] { model })
+                Orders = GetOrders(model)
             });
         }
 
         public void SaveStoreHouseComponentsToExcel(ReportBindingModel model)
         {
-            MethodInfo method = GetType().GetMethod("GetStoreHouseComponent");
             SaveToExcel.CreateDocForStoreHouse(new ExcelInfoForStoreHouse
             {
                 FileName = model.FileName,
                 Title = "Список складов",
-                StoreHouseComponents = (List<ReportStoreHouseComponentsViewModel>)method.Invoke(this, null)
+                StoreHouseComponents = GetStoreHouseComponent()
             });
         }
 
         public void SaveOrdersInfoToPdfFile(ReportBindingModel model)
         {
-            MethodInfo method = GetType().GetMethod("GetOrdersInfo");
             SaveToPdf.CreateDocForStoreHouse(new PdfInfoForOrder
             {
                 FileName = model.FileName,
                 Title = "Список заказов",
-                Orders = (List<ReportOrderByDateViewModel>)method.Invoke(this, null)
+                Orders = GetOrdersInfo()
             });
         }
 
