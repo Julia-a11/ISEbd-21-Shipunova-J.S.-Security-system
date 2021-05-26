@@ -21,5 +21,8 @@ namespace SecuritySystemDatabaseImplement.Models
 
         [ForeignKey("ClientId")]
         public List<Order> Orders { get; set; }
+
+        [ForeignKey("ClientId")]
+        public virtual List<MessageInfo> MessageInfoes { get; set; }
     }
 }

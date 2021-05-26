@@ -29,5 +29,7 @@ namespace SecuritySystemDatabaseImplement
         public virtual DbSet<StoreHouseComponent> StoreHouseComponents { set; get; }
 
         public virtual DbSet<Implementer> Implementers { set; get; }
+
+        public virtual DbSet<MessageInfo> MessageInfoes { set; get; }
     }
 }

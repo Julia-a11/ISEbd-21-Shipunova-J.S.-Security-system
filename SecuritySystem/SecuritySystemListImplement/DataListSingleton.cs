@@ -14,10 +14,12 @@ namespace SecuritySystemListImplement
         public List<Secure> Secures { get; set; }
 
         public List<Client> Clients { get; set; }
-       
+
         public List<StoreHouse> Storehouses { get; set; }
 
         public List<Implementer> Implementers { get; set; }
+
+        public List<MessageInfo> MessageInfoes { get; set; }
 
         private DataListSingleton()
         {
@@ -26,6 +28,7 @@ namespace SecuritySystemListImplement
             Secures = new List<Secure>();
             Clients = new List<Client>();
             Implementers = new List<Implementer>();
+            MessageInfoes = new List<MessageInfo>();
             Storehouses = new List<StoreHouse>();
         }
 

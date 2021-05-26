@@ -12,6 +12,8 @@ namespace SecuritySistemClientApp.Controllers
 {
     public class HomeController : Controller
     {
+        private int currentPageNumber = 1;
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -54,6 +56,49 @@ namespace SecuritySistemClientApp.Controllers
             return View(Program.Client);
         }
 
+        [HttpGet]
+        public IActionResult Mail(int pageNumber)
+        {
+            if (Program.Client == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+
+            List<MessageInfoViewModel> model = new List<MessageInfoViewModel>();
+            if (pageNumber > 0)
+            {
+                model = APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/getmessages?clientId={Program.Client.Id}&pageNumber={pageNumber}");
+            }
+            
+            if (model.Count == 0)
+            {
+                model = APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/getmessages?clientId={Program.Client.Id}&pageNumber={currentPageNumber}");
+            }
+            else
+            {
+                currentPageNumber = pageNumber;
+            }
+            ViewBag.Id = currentPageNumber;
+            return View(model);
+        }
+        
+        [HttpGet]
+        public IActionResult NextMailPage()
+        {
+            return Redirect($"~/Home/Mail?pageNumber={currentPageNumber + 1}");
+        }
+
+        [HttpGet]
+        public IActionResult PrevMailPage()
+        {
+            if (currentPageNumber > 1)
+            {
+                return Redirect($"~/Home/Mail?pageNumber={currentPageNumber - 1}");
+            }
+
+             return Redirect($"~/Home/Mail?pageNumber={currentPageNumber}");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
@@ -74,8 +119,7 @@ namespace SecuritySistemClientApp.Controllers
         {
             if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password))
             {
-                Program.Client =
-                APIClient.GetRequest<ClientViewModel>($"api/client/login?login={login}&password={password}");
+                Program.Client = APIClient.GetRequest<ClientViewModel>($"api/client/login?login={login}&password={password}");
 
                 if (Program.Client == null)
                 {

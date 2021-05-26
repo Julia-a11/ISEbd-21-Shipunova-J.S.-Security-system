@@ -4,8 +4,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SecuritySystemBusinessLogic.BusinessLogics;
+using SecuritySystemBusinessLogic.HelperModels;
 using SecuritySystemBusinessLogic.Interfaces;
 using SecuritySystemDatabaseImplement.Implements;
+using System;
 
 namespace SecuritySystemRestApi
 {
@@ -14,6 +16,13 @@ namespace SecuritySystemRestApi
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            MailLogic.MailConfig(new MailConfig
+            {
+                SmtpClientHost = configuration["SmtpClientHost"],
+                SmtpClientPort = Convert.ToInt32(configuration["SmtpClientPort"]),
+                MailLogin = configuration["MailLogin"],
+                MailPassword = configuration["MailPassword"],
+            });
         }
 
         public IConfiguration Configuration { get; }
@@ -26,11 +35,13 @@ namespace SecuritySystemRestApi
             services.AddTransient<ISecureStorage, SecureStorage>();
             services.AddTransient<IComponentStorage, ComponentStorage>();
             services.AddTransient<IStoreHouseStorage, StoreHouseStorage>();
+            services.AddTransient<IMessageInfoStorage, MessageInfoStorage>();
             services.AddTransient<OrderLogic>();
             services.AddTransient<ClientLogic>();
             services.AddTransient<SecureLogic>();
-            services.AddTransient<StoreHouseLogic>();
             services.AddTransient<ComponentLogic>();
+            services.AddTransient<MailLogic>();
+            services.AddTransient<StoreHouseLogic>();
             services.AddControllers().AddNewtonsoftJson();
         }
 

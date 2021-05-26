@@ -1,5 +1,6 @@
 ﻿using SecuritySystemBusinessLogic.BindingModels;
 using SecuritySystemBusinessLogic.Enums;
+using SecuritySystemBusinessLogic.HelperModels;
 using SecuritySystemBusinessLogic.Interfaces;
 using SecuritySystemBusinessLogic.ViewModels;
 using System;
@@ -11,6 +12,8 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
     public class OrderLogic
     {
         private readonly IOrderStorage _orderStorage;
+
+        private readonly IClientStorage _clientStorage;
 
         private readonly object locker = new object();
 
@@ -49,6 +52,16 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                 DateCreate = DateTime.Now,
                 Status = OrderStatus.Принят
             });
+
+            MailLogic.MailSendAsync(new MailSendInfo
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel
+                {
+                    Id = model.ClientId
+                })?.Email,
+                Subject = $"Новый заказ",
+                Text = $"Заказ от {DateTime.Now} на сумму {model.Sum:N2} принят."
+            });
         }
 
         public void TakeOrderInWork(ChangeStatusBindingModel model)
@@ -73,7 +86,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                 }
 
                 var components = _secureStorage.GetElement(new SecureBindingModel { Id = order.SecureId }).SecureComponents;
-                
+
                 if (_storeHouseStorage.CheckAndTake(order.Count, components))
                 {
                     order.DateImplement = DateTime.Now;
@@ -84,7 +97,7 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                 {
                     order.Status = OrderStatus.ТребуютсяMатериалы;
                 }
-                
+
                 _orderStorage.Update(new OrderBindingModel
                 {
                     Id = order.Id,
@@ -96,6 +109,18 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                     DateImplement = order.DateImplement,
                     Status = order.Status,
                     ImplementerId = order.ImplementerId
+                });
+
+                MailLogic.MailSendAsync(new MailSendInfo
+                {
+                    MailAddress = _clientStorage.GetElement(new ClientBindingModel
+                    {
+                        Id = order.ClientId
+                    })?.Email,
+                    Subject = $"Заказ №{order.Id}",
+                    Text = order.Status == OrderStatus.Выполняется 
+                        ? $"Заказ №{order.Id} передан в работу." 
+                        : $"Заказу №{order.Id} требуются материалы."
                 });
             }
         }
@@ -126,6 +151,17 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Готов
             });
+
+            // Отправить письмо
+            MailLogic.MailSendAsync(new MailSendInfo
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel
+                {
+                    Id = order.ClientId
+                })?.Email,
+                Subject = $"Заказ №{order.Id}",
+                Text = $"Заказ №{order.Id} выполнен."
+            });
         }
 
         public void PayOrder(ChangeStatusBindingModel model)
@@ -153,6 +189,16 @@ namespace SecuritySystemBusinessLogic.BusinessLogics
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Оплачен
+            });
+
+            MailLogic.MailSendAsync(new MailSendInfo
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel
+                {
+                    Id = order.ClientId
+                })?.Email,
+                Subject = $"Заказ №{order.Id}",
+                Text = $"Заказ №{order.Id} оплачен."
             });
         }
     }
