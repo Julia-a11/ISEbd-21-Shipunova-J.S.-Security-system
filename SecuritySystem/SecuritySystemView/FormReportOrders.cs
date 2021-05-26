@@ -1,7 +1,10 @@
 ﻿using Microsoft.Reporting.WinForms;
 using SecuritySystemBusinessLogic.BindingModels;
 using SecuritySystemBusinessLogic.BusinessLogics;
+using SecuritySystemBusinessLogic.ViewModels;
 using System;
+using System.Collections.Generic;
+using System.Reflection;
 using System.Windows.Forms;
 using Unity;
 
@@ -42,10 +45,14 @@ namespace SecuritySystemView
                dateTimePickerTo.Value.ToShortDateString());
                 reportViewerOrders.LocalReport.SetParameters(parameter);
 
-                var dataSource = logic.GetOrders(new ReportBindingModel
+                MethodInfo method = logic.GetType().GetMethod("GetOrders");
+                var dataSource = method.Invoke(logic, new object[]
                 {
-                    DateFrom = dateTimePickerFrom.Value,
-                    DateTo = dateTimePickerTo.Value
+                    new ReportBindingModel
+                    {
+                        DateFrom = dateTimePickerFrom.Value,
+                        DateTo = dateTimePickerTo.Value
+                    }
                 });
                 ReportDataSource source = new ReportDataSource("DataSetOrders", dataSource);
                 reportViewerOrders.LocalReport.DataSources.Add(source);
@@ -72,12 +79,16 @@ namespace SecuritySystemView
                 {
                     try
                     {
-                        logic.SaveOrdersToPdfFile(new ReportBindingModel
-                        {
-                            FileName = dialog.FileName,
-                            DateFrom = dateTimePickerFrom.Value,
-                            DateTo = dateTimePickerTo.Value
-                        });
+                        MethodInfo method = GetType().GetMethod("SaveOrdersToPdfFile");
+                        method.Invoke(logic, new object[]
+                            {
+                                new ReportBindingModel
+                                {
+                                    FileName = dialog.FileName,
+                                    DateFrom = dateTimePickerFrom.Value,
+                                    DateTo = dateTimePickerTo.Value
+                                }
+                            });
                         MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
                     }

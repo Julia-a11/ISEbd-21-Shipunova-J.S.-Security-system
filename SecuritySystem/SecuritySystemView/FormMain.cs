@@ -3,6 +3,7 @@ using SecuritySystemBusinessLogic.BindingModels;
 using SecuritySystemBusinessLogic.BusinessLogics;
 using System.Windows.Forms;
 using Unity;
+using System.Reflection;
 
 namespace SecuritySystemView
 {
@@ -17,12 +18,15 @@ namespace SecuritySystemView
 
         private readonly WorkModeling _workModeling;
 
-        public FormMain(OrderLogic orderLogic, ReportLogic reportLogic, WorkModeling workModeling)
+        private readonly BackUpAbstractLogic _backUpAbstractLogic;
+
+        public FormMain(OrderLogic orderLogic, ReportLogic reportLogic, WorkModeling workModeling, BackUpAbstractLogic backUpAbstractLogic)
         {
             InitializeComponent();
             _orderLogic = orderLogic;
             _reportLogic = reportLogic;
             _workModeling = workModeling;
+            _backUpAbstractLogic = backUpAbstractLogic;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -34,16 +38,7 @@ namespace SecuritySystemView
         {
             try
             {
-                var list = _orderLogic.Read(null);
-                if (list != null)
-                {
-                    dataGridViewOrders.DataSource = list;
-                    dataGridViewOrders.Columns[0].Visible = false;
-                    dataGridViewOrders.Columns[1].Visible = false;
-                    dataGridViewOrders.Columns[2].Visible = false;
-                    dataGridViewOrders.Columns[3].Visible = false;
-                    dataGridViewOrders.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                }
+                Program.ConfigGrid(_orderLogic.Read(null), dataGridViewOrders);
             }
             catch (Exception ex)
             {
@@ -100,10 +95,14 @@ namespace SecuritySystemView
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    _reportLogic.SaveSecuresToWordFile(new ReportBindingModel
-                    {
-                        FileName = dialog.FileName
-                    });
+                    MethodInfo method = _reportLogic.GetType().GetMethod("SaveSecuresToWordFile");
+                    method.Invoke(_reportLogic, new object[]
+                        {
+                            new ReportBindingModel
+                            {
+                                FileName = dialog.FileName
+                            }
+                        });
                     MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
                    MessageBoxIcon.Information);
                 }
@@ -152,10 +151,11 @@ namespace SecuritySystemView
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    _reportLogic.SaveStoreHousesToWordFile(new ReportBindingModel
+                    MethodInfo method = _reportLogic.GetType().GetMethod("SaveStoreHousesToWordFile");
+                    method.Invoke(_reportLogic, new object[] { new ReportBindingModel
                     {
                         FileName = dialog.FileName
-                    });
+                    }});
                     MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
                    MessageBoxIcon.Information);
                 }
@@ -184,6 +184,27 @@ namespace SecuritySystemView
         {
             var form = Container.Resolve<FormMails>();
             form.ShowDialog();
+        }
+
+        private void создатьБекапToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_backUpAbstractLogic != null)
+                {
+                    var folderBrowserDialog = new FolderBrowserDialog();
+                    if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        _backUpAbstractLogic.CreateArchive(folderBrowserDialog.SelectedPath);
+                        MessageBox.Show("Бекап создан", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
     }
 }

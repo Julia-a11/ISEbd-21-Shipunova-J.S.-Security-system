@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SecuritySystemBusinessLogic.Attributes;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 
@@ -8,17 +9,19 @@ namespace SecuritySystemBusinessLogic.ViewModels
     [DataContract]
     public class SecureViewModel
     {
+        [Column(title: "Номер", width: 100)]
         [DataMember]
         public int Id { get; set; }
-       
+
+        [Column(title: "Название комплектации",gridViewAutoSize: GridViewAutoSize.Fill)]
         [DataMember]
-        [DisplayName("Название комплектации")]
         public string SecureName { get; set; }
-        
+
+        [Column(title: "Цена", width: 100)]
         [DataMember]
-        [DisplayName("Цена")]
         public decimal Price { get; set; }
-       
+
+        [Column(visible: false)]
         [DataMember]
         public Dictionary<int, (string, int)> SecureComponents { get; set; }
     }

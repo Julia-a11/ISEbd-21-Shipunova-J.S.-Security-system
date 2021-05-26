@@ -35,13 +35,7 @@ namespace SecuritySystemView
         {
             try
             {
-                var list = _logic.Read(null);
-                if (list != null)
-                {
-                    dataGridViewImplementers.DataSource = list;
-                    dataGridViewImplementers.Columns[0].Visible = false;
-                    dataGridViewImplementers.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                }
+                Program.ConfigGrid(_logic.Read(null), dataGridViewImplementers);
             }
             catch (Exception ex)
             {

@@ -1,19 +1,72 @@
-﻿using SecuritySystemBusinessLogic.BusinessLogics;
+﻿using SecuritySystemBusinessLogic.Attributes;
+using SecuritySystemBusinessLogic.BusinessLogics;
 using SecuritySystemBusinessLogic.HelperModels;
 using SecuritySystemBusinessLogic.Interfaces;
 using SecuritySystemDatabaseImplement.Implements;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Threading;
 using System.Windows.Forms;
 using Unity;
 using Unity.Lifetime;
 
-
 namespace SecuritySystemView
 {
     static class Program
     {
+        public static void ConfigGrid<T>(List<T> data, DataGridView grid)
+        {
+            var type = typeof(T);
+
+            var config = new List<string>();
+            grid.Columns.Clear();
+            grid.AllowUserToAddRows = false;
+            foreach ( var prop in type.GetProperties())
+            {
+                // Получаем список атрибутов
+                var attributes = prop.GetCustomAttributes(typeof(ColumnAttribute), true);
+                if (attributes != null && attributes.Length > 0)
+                {
+                    foreach (var attr in attributes)
+                    {
+                        // Ищем нужный нам атрибут
+                        if (attr is ColumnAttribute columnAttribute)
+                        {
+                            config.Add(prop.Name);
+                            var column = new DataGridViewTextBoxColumn
+                            {
+                                Name = prop.Name,
+                                ReadOnly = true,
+                                HeaderText = columnAttribute.Title,
+                                Visible = columnAttribute.Visible,
+                                Width = columnAttribute.Width,
+                                DefaultCellStyle = new DataGridViewCellStyle { Format = columnAttribute.Format }
+                            };
+                            if (columnAttribute.GridViewAutoSize != GridViewAutoSize.None)
+                            {
+                                column.AutoSizeMode = (DataGridViewAutoSizeColumnMode)Enum.Parse(typeof(DataGridViewAutoSizeColumnMode),
+                                    columnAttribute.GridViewAutoSize.ToString());
+                            }
+                            grid.Columns.Add(column);
+                        }
+                    }
+                }
+            }
+
+            // Добавляем строки
+            foreach (var elem in data)
+            {
+                List<object> objs = new List<object>();
+                foreach (var conf in config)
+                {
+                    var value = elem.GetType().GetProperty(conf).GetValue(elem);
+                    objs.Add(value);
+                }
+                grid.Rows.Add(objs.ToArray());
+            }
+        }
+
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
@@ -78,7 +131,9 @@ namespace SecuritySystemView
 
             currentContainer.RegisterType<MailLogic>(new HierarchicalLifetimeManager());
 
-            currentContainer.RegisterType<ImplementerLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<BackUpAbstractLogic, BackUpLogic>(new HierarchicalLifetimeManager());
+
+              currentContainer.RegisterType<ImplementerLogic>(new HierarchicalLifetimeManager());
 
             return currentContainer;
         }

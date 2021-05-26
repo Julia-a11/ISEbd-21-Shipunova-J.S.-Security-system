@@ -42,11 +42,13 @@ namespace SecuritySystemView
             this.списокЗаказовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.пополнениеСкладаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.запускРаботToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.почтаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridViewOrders = new System.Windows.Forms.DataGridView();
             this.buttonCreateOrder = new System.Windows.Forms.Button();
             this.buttonOrderPayed = new System.Windows.Forms.Button();
             this.buttonRefresh = new System.Windows.Forms.Button();
-            this.почтаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.создатьБекапToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+
             this.списокКомпонентовВСкладахToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокИнформацииОЗаказахToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокСкладовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,6 +63,7 @@ namespace SecuritySystemView
             this.отчётыToolStripMenuItem,
             this.запускРаботToolStripMenuItem,
             this.почтаToolStripMenuItem,
+            this.создатьБекапToolStripMenuItem,
             this.пополнениеСкладаToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
@@ -158,6 +161,14 @@ namespace SecuritySystemView
             this.запускРаботToolStripMenuItem.Text = "Запуск работ";
             this.запускРаботToolStripMenuItem.Click += new System.EventHandler(this.запускРаботToolStripMenuItem_Click);
             //
+            // почтаToolStripMenuItem
+            //
+            this.почтаToolStripMenuItem.Name = "почтаToolStripMenuItem";
+            this.почтаToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
+            this.почтаToolStripMenuItem.Text = "Почта";
+            this.почтаToolStripMenuItem.Click += new System.EventHandler(this.почтаToolStripMenuItem_Click);
+            //
+            //
             // пополнениеСкладаToolStripMenuItem
             //
             this.пополнениеСкладаToolStripMenuItem.Name = "пополнениеСкладаToolStripMenuItem";
@@ -210,13 +221,6 @@ namespace SecuritySystemView
             this.buttonRefresh.UseVisualStyleBackColor = true;
             this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
             //
-            // почтаToolStripMenuItem
-            //
-            this.почтаToolStripMenuItem.Name = "почтаToolStripMenuItem";
-            this.почтаToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
-            this.почтаToolStripMenuItem.Text = "Почта";
-            this.почтаToolStripMenuItem.Click += new System.EventHandler(this.почтаToolStripMenuItem_Click);
-            //
             //
             // списокКомпонентовВСкладахToolStripMenuItem
             //
@@ -238,6 +242,14 @@ namespace SecuritySystemView
             this.списокСкладовToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
             this.списокСкладовToolStripMenuItem.Text = "Список складов";
             this.списокСкладовToolStripMenuItem.Click += new System.EventHandler(this.списокСкладовToolStripMenuItem_Click);
+            //
+            //
+            // создатьБекапToolStripMenuItem
+            //
+            this.создатьБекапToolStripMenuItem.Name = "создатьБекапToolStripMenuItem";
+            this.создатьБекапToolStripMenuItem.Size = new System.Drawing.Size(97, 20);
+            this.создатьБекапToolStripMenuItem.Text = "Создать бекап";
+            this.создатьБекапToolStripMenuItem.Click += new System.EventHandler(this.создатьБекапToolStripMenuItem_Click);
             //
             // FormMain
             //
@@ -284,5 +296,6 @@ namespace SecuritySystemView
         private System.Windows.Forms.ToolStripMenuItem исполнителиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem запускРаботToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem почтаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem создатьБекапToolStripMenuItem;
     }
 }

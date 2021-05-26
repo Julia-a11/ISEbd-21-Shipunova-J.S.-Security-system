@@ -27,19 +27,19 @@ namespace SecuritySystemView
 
         private void LoadData()
         {
-            var list = _mailLogic.Read(new MessageInfoBindingModel
+            try
             {
-                PageNumber = pageNumber, 
-                StringsCountOnPage = stringsCountOnPage
-            });
-            if (list != null)
-            {
-                dataGridViewMails.DataSource = list;
-                dataGridViewMails.Columns[0].Visible = false;
-                dataGridViewMails.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                dataGridViewMails.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                dataGridViewMails.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                Program.ConfigGrid(_mailLogic.Read(new MessageInfoBindingModel
+                {
+                    PageNumber = pageNumber,
+                    StringsCountOnPage = stringsCountOnPage
+                }), dataGridViewMails);
                 textBoxPage.Text = pageNumber.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
