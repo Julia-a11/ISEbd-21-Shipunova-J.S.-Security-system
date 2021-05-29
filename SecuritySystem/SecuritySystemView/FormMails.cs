@@ -23,14 +23,14 @@ namespace SecuritySystemView
 
         private void FormMails_Load(object sender, EventArgs e)
         {
-            var list = _mailLogic.Read(null);
-            if (list != null)
+            try
             {
-                dataGridViewMails.DataSource = list;
-                dataGridViewMails.Columns[0].Visible = false;
-                dataGridViewMails.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                dataGridViewMails.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                dataGridViewMails.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                Program.ConfigGrid(_mailLogic.Read(null), dataGridViewMails);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
     }
